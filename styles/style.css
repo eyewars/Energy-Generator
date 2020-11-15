@@ -1,0 +1,893 @@
+@charset "utf-8";
+
+*{
+	border: hidden;
+	border-color: blue;
+	border-width: 1px;
+	
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+html{
+	/*background-color: #303841;*/
+	background-color: #252B31;
+	color: #B8B8B8;
+}
+
+/*HEADER *********************************************************************** */
+/*#emptyHeader {grid-area: emptyHead}*/
+#expansionContainer {grid-area: expCon;}
+#currency {grid-area: currency;}
+
+#header{
+	width: 100%;
+	height: 212px;
+	display: flex;
+	/*align-content: center;*/
+	/*display: grid;
+	grid-template-areas: "expCon currency";*/
+}
+
+#currency{
+	height: 100%;
+	width: 50%;
+	/*align-self: center;*/
+}
+
+#total{
+	width: 100%;
+	height: 100px;
+	display: flex; 
+	justify-content: center;
+	display: grid;
+	grid-template-columns: auto;
+}
+
+#gold{
+	display: flex;
+	align-self: center;
+	font-size: 40px;
+}
+
+#perSec{
+	width: 100%;
+	height: 30px;
+	display: flex; 
+	justify-content: center;
+	display: grid;
+	grid-template-columns: auto;
+}
+
+#allMult{
+	display: flex;
+	align-self: center;
+	justify-content: center;
+}
+
+#goldPerSec{
+	display: flex;
+	align-self: center;
+	justify-content: center;
+}
+
+.buttonContainer{
+	height: 50px;
+	width: 100%;
+}
+
+.buttonContainer div{
+	display: flex;
+	justify-content: center;
+	height: 100%;
+	margin: 6px 0 0 0;
+}
+
+.buttonContainer button{
+	width: 25%;
+	height: 100%;
+	float: left;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	padding: 10px;
+	background-color: #5E1645;
+	margin: 0px 3px;
+	color: #B8B8B8;
+}
+
+#tab3.preExpand{
+	display: none;
+}
+
+#tab4.locked{
+	display: none;
+}
+
+#tab5.locked{
+	display: none;
+}
+
+#tab6.locked{
+	display: none;
+}
+
+#tab7.locked{
+	display: none;
+}
+
+#tab8.locked{
+	display: none;
+}
+
+#tab9.locked{
+	display: none;
+}
+
+#tab10.locked{
+	display: none;
+}
+
+.buttonContainer button:hover{
+	background-color: #51153C;
+}
+
+.tabPanel{
+	display: none;
+}
+
+#expansionContainer{
+	height: 75%;
+	width: 25%;
+}
+
+#expansionButton{
+	height: 80%;
+	width: 50%;
+	margin: 1.5% 0 0 5%;
+	background-color: #CBCA00;
+	text-align: center;
+	display: table;
+}
+
+#expansionButtonText{
+	color: #232323;
+	font-size: 20px;
+	font-weight: bold;
+	vertical-align: middle;
+	display: table-cell;
+}
+
+#expansionButton.hidden{
+	display: none;
+}
+
+#expansionAmountText{
+	width: 55%;
+	text-align: center;
+	margin: 0 0 0 2.5%;
+}
+
+#expansionAmountText.locked{
+	display: none;
+}
+
+#omegaContainer{
+	height: 75%;
+	width: 25%;
+}
+
+#omegaButton{
+	height: 80%;
+	width: 50%;
+	margin: 1.5% 0 0 45%;
+	background-color: #4B2F00;
+	text-align: center;
+	display: table;
+}
+
+#omegaButtonText{
+	color: #B8B8B8;
+	font-size: 20px;
+	font-weight: bold;
+	vertical-align: middle;
+	display: table-cell;
+}
+
+#omegaButton.locked{
+	display: none;
+}
+
+#omegaAmountText{
+	width: 50%;
+	text-align: center;
+	margin: 0 0 0 45%;
+}
+
+#omegaAmountText.locked{
+	display: none;
+}
+
+/*WRAPPER *********************************************************************** */
+
+
+
+#wrapper{
+	width: 100%;
+	height: 100%;
+	display: flex; 
+	justify-content: center;
+}
+
+#allMultButton {grid-area: allMult;}
+
+#firstGenerator {grid-area: firstGen;}
+#secondGenerator {grid-area: secondGen;}
+#thirdGenerator {grid-area: thirdGen;}
+#fourthGenerator {grid-area: fourthGen;}
+#fifthGenerator {grid-area: fifthGen;}
+#sixthGenerator {grid-area: sixthGen;}
+#seventhGenerator {grid-area: seventhGen;}
+#eighthGenerator {grid-area: eighthGen;}
+
+#firstGeneratorPrestige {grid-area: firstGenPres;}
+#secondGeneratorPrestige {grid-area: secondGenPres;}
+#thirdGeneratorPrestige {grid-area: thirdGenPres;}
+#fourthGeneratorPrestige {grid-area: fourthGenPres;}
+#fifthGeneratorPrestige {grid-area: fifthGenPres;}
+#sixthGeneratorPrestige {grid-area: sixthGenPres;}
+#seventhGeneratorPrestige {grid-area: seventhGenPres;}
+#eighthGeneratorPrestige {grid-area: eighthGenPres;}
+
+#firstExpansionGenerator {grid-area: firstExpGen;}
+#secondExpansionGenerator {grid-area: secondExpGen;}
+#thirdExpansionGenerator {grid-area: thirdExpGen;}
+#fourthExpansionGenerator {grid-area: fourthExpGen;}
+#fifthExpansionGenerator {grid-area: fifthExpGen;}
+#sixthExpansionGenerator {grid-area: sixthExpGen;}
+#seventhExpansionGenerator {grid-area: seventhExpGen;}
+#eighthExpansionGenerator {grid-area: eighthExpGen;}
+
+#firstOmegaGenerator {grid-area: firstOmgGen;}
+#secondOmegaGenerator {grid-area: secondOmgGen;}
+#thirdOmegaGenerator {grid-area: thirdOmgGen;}
+#fourthOmegaGenerator {grid-area: fourthOmgGen;}
+#fifthOmegaGenerator {grid-area: fifthOmgGen;}
+#sixthOmegaGenerator {grid-area: sixthOmgGen;}
+#seventhOmegaGenerator {grid-area: seventhOmgGen;}
+#eighthOmegaGenerator {grid-area: eighthOmgGen;}
+
+#expansionPointMult {grid-area: expPointMult;}
+
+#expansionTextContainer {grid-area: expTextCon;}
+
+#omegaTextContainer {grid-area: omgTextCon;}
+
+#allMultButton{
+	background-color: #547480;
+	padding: 30px 0px 30px 0px;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+}
+
+#allMultButton.locked{
+	background-color: #5F0001;
+}
+
+.grid-container{
+	display: grid;
+	grid-template-areas: 
+		"allMult allMult allMult allMult"
+		"firstGen secondGen thirdGen fourthGen"
+		"fifthGen sixthGen seventhGen eighthGen"
+		"firstGenPres secondGenPres thirdGenPres fourthGenPres"
+		"fifthGenPres sixthGenPres seventhGenPres eighthGenPres";
+	width: 60%;
+}
+
+.grid-item{
+	background-color: #547480;
+	padding: 40px;
+	margin: 5px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.grid-item.locked{
+	background-color: #5F0001;
+}
+
+.prestige{
+	background-color: #5A7E6F;
+	padding: 15px;
+}
+
+.prestige.locked{
+	background-color: #5F0001;
+}
+
+.grid-container-expand{
+	display: grid;
+	grid-template-areas: 
+		"expTextCon expTextCon expTextCon expTextCon"
+		"expPointMult expPointMult expPointMult expPointMult"
+		"firstExpGen secondExpGen thirdExpGen fourthExpGen"
+		"fifthExpGen sixthExpGen seventhExpGen eighthExpGen";
+	width: 100%;
+}
+
+.grid-container-expand.preExpand{
+	display: none;
+}
+
+.grid-item-expand{
+	background-color: #547480;
+	padding: 40px;
+	margin: 5px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.grid-item-expand.locked{
+	background-color: #5F0001;
+}
+
+#expansionPointMult.locked {
+	background-color: #5F0001;
+}
+
+#expansionTextContainer{
+	height: 150px;
+	background-color: #252B31;
+	padding: 0;
+	cursor: default;
+}
+
+#electricityText{
+	height: 100%;
+	width: 100%;
+	text-align: center;
+	display: grid;
+	grid-template-columns: auto;
+	
+}
+
+#electricity{
+	vertical-align: middle;
+	display: table-cell;
+	font-size: 30px;
+}
+
+#electricityPerSec{
+	vertical-align: middle;
+	display: table-cell;
+	font-size: 15px;
+}
+
+#electricityEffect{
+	vertical-align: middle;
+	display: table-cell;
+	font-size: 15px;
+}
+
+#preExpansionText{
+	display: none;
+}
+
+#preExpansionText.preExpand{
+	display: flex;
+	font-size: 25px;
+}
+
+#expansionUpgradeContainer{
+	display: grid;
+	grid-template-columns: auto auto auto auto auto;
+	width: 100%;
+}
+
+.expansionUpgrade{
+	background-color: #547480;
+	padding: 40px;
+	margin: 5px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.expansionUpgrade.locked{
+	background-color: #5F0001;
+}
+
+#autobuyerContainer{
+	display: grid;
+	grid-template-columns: auto auto;
+	width: 100%;
+}
+
+.autobuyer{
+	background-color: #547480;
+	width: 400px;
+	height: 100px;
+	margin: 5px 5px 5px 5px;
+	text-align: center;
+	font-size: 25px;
+}
+
+.autobuyer.locked{
+	display: none;
+}
+
+.autoCheck{
+	float: right;
+	margin: 40px 20px;
+}
+
+#autoExpansionText{
+	float: left;
+	margin: 38px 20px;
+}
+
+#abgContainer{
+	display: grid;
+	grid-template-columns: auto auto auto;
+	width: 100%;
+	height: 95%;
+	margin: 5px 0px 0px 0px;
+	text-align: center;
+}
+
+#alpha{
+	height: 1000px;
+	width: 300px;
+}
+
+#alpha .abgUpgrades{
+	background-color: #411213;
+	border: solid #411213 1px;
+	cursor: pointer;
+}
+
+#alphaText{
+	margin: 40px 0px 0px 0px;
+	font-size: 25px;
+}
+
+#beta{
+	height: 1000px;
+	width: 300px;
+	margin: 0px 30px 0px 30px;
+}
+
+#beta .abgUpgrades{
+	background-color: #1F4F3C;
+	border: solid #1F4F3C 1px;
+	cursor: pointer;
+}
+
+#betaText{
+	margin: 40px 0px 0px 0px;
+	font-size: 25px;
+}
+
+#gamma{
+	height: 1000px;
+	width: 300px;
+}
+
+#gamma .abgUpgrades{
+	background-color: #2F456A;
+	border: solid #2F456A 1px;
+	cursor: pointer;
+}
+
+#gammaText{
+	margin: 40px 0px 0px 0px;
+	font-size: 25px;
+}
+
+.abgUpgrades{
+	width: 100%;
+	height: 15%;
+	margin: 10px 0px 0px 0px;
+	
+}
+
+.abgUpgrades div{
+	margin: 35px 0px 0px 0px;
+}
+
+.abgUpgrades.locked{
+	display: none;
+}
+
+.grid-container-omega{
+	display: grid;
+	grid-template-areas: 
+		"omgTextCon omgTextCon omgTextCon omgTextCon"
+		"firstOmgGen secondOmgGen thirdOmgGen fourthOmgGen"
+		"fifthOmgGen sixthOmgGen seventhOmgGen eighthOmgGen";
+	width: 100%;
+}
+
+.grid-container-omega.preExpand{
+	display: none;
+}
+
+.grid-item-omega{
+	background-color: #790098;
+	padding: 40px;
+	margin: 5px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.grid-item-omega.locked{
+	background-color: #4C005F;
+}
+
+#omegaTextContainer{
+	height: 150px;
+	background-color: #252B31;
+	padding: 0;
+	cursor: default;
+}
+
+#omegaText{
+	height: 100%;
+	width: 100%;
+	text-align: center;
+	display: grid;
+	grid-template-columns: auto;
+	
+}
+
+#omega{
+	vertical-align: middle;
+	display: table-cell;
+	font-size: 30px;
+}
+
+#omegaPerSec{
+	vertical-align: middle;
+	display: table-cell;
+	font-size: 15px;
+}
+
+#omegaUpgradeContainer{
+	display: grid;
+	grid-template-columns: auto auto auto auto;
+	width: 100%;
+	height: 100%;
+	margin: 5px 0px 0px 0px;
+	text-align: center;
+}
+
+.omegaUpgrades{
+	width: 350px;
+	height: 150px;
+	margin: 5px;
+	background-color: #790098;
+}
+
+.omegaUpgrades div{
+	margin: 35px 0px 0px 0px;
+}
+
+.omegaUpgrades.locked{
+	background-color: #4C005F;
+}
+
+#omegaUpgradeResetContainer{
+	width: 100%;
+	height: 150px;
+	margin: 10px 0px 0px 0px;
+	display: flex;
+	justify-content: center;
+}
+
+#omegaUpgradeReset{
+	width: 300px;
+	height: 100%;
+	/*background-color: #380082;*/
+	background-color: #313233;
+}
+
+#omegaUpgradeReset.activated{
+	background-color: #29015E;
+}
+
+#omegaUpgradeResetText{
+	font-size: 20px;
+	text-align: center;
+	margin: 50px 0px 0px 0px;
+}
+
+#simText{
+	width: 1000px;
+	display: grid;
+	grid-template-columns: auto auto auto;
+	text-align: center;
+	font-size: 40px;
+}
+
+#simGoldPerSec{
+	font-size: 20px;
+}
+
+#hpBar{
+	width: 600px;
+	height: 50px;
+	background-color: lightgray;
+	/*border-radius: 25px;*/
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 30px;
+	color: #424242;
+	justify-self: center;
+	margin: 10px 0 0 0;
+	position: relative;
+}
+
+#hpBar::before{
+	content: attr(data-label);
+	display: flex;
+	align-items: center;
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: calc(var(--width, 0) * 1%);
+	min-width: 0;
+	max-width: 100%;
+	background-color: #D04043;
+	/*border-radius: 1em;*/
+	z-index: 1;
+}
+
+#hpBarText{
+	z-index: 2;
+}
+
+#modes{
+	display: flex;
+	justify-content: center;
+}
+
+#goldMode{
+	background-color: #F3E95E;
+	width: 300px;
+	height: 150px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 40px;
+	color: darkslategray;
+	margin: 10px 100px 0 0;
+	cursor: pointer;
+}
+
+#goldMode:hover{
+	background-color: #F4E73B;
+}
+
+#goldMode.inside{
+	background-color: #73838C;
+}
+
+#goldMode.inside:hover{
+	background-color: #4E575C;
+}
+
+#fightingMode{
+	background-color: #D43739;
+	width: 300px;
+	height: 150px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 40px;
+	color: darkslategray;
+	margin: 10px 0 0 100px;
+	cursor: pointer;
+}
+
+#fightingMode:hover{
+	background-color: #B52022;
+}
+
+#fightingMode.inside{
+	background-color: #73838C;
+}
+
+#fightingMode.inside:hover{
+	background-color: #4E575C;
+}
+
+#heroes{
+	display: flex;
+	justify-content: center;
+}
+
+#goldFarmer{
+	background-color: #F3E95E;
+	width: 200px;
+	height: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 15px;
+	color: darkslategray;
+	margin: 10px 50px 0 50px;
+	cursor: pointer;
+	text-align: center;
+}
+
+#goldFarmer:hover{
+	background-color: #F4E73B;
+}
+
+#hybrid{
+	background-color: #e3904b;
+	width: 200px;
+	height: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 15px;
+	color: darkslategray;
+	margin: 10px 50px 0 50px;
+	cursor: pointer;
+	text-align: center;
+}
+
+#hybrid:hover{
+	background-color: #D47A2F;
+}
+
+#PVPLegend{
+	background-color: #D43739;
+	width: 200px;
+	height: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 15px;
+	color: darkslategray;
+	margin: 10px 50px 0 50px;
+	cursor: pointer;
+	text-align: center;
+}
+
+#PVPLegend:hover{
+	background-color: #B52022;
+}
+
+#resimulateContainer{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+#resimulate{
+	background-color: #52EBA6;
+	width: 300px;
+	height: 150px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 20px;
+	color: #222222;
+	margin: 10px 0 0 0;
+	cursor: pointer;
+	text-align: center;
+}
+
+#resimulate:hover{
+	background-color: #33C482;
+}
+
+#resimulate.locked{
+	display: none;
+}
+
+#resimulationTextContainer{
+	width: 100%;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	margin: 10px 0 0 0;
+}
+
+#resimulationText{
+	font-size: 25px;
+}
+
+#resimulationText.locked{
+	display: none;
+}
+
+#simUpgradesContainer{
+	width: 100%;
+	display: grid;
+	grid-template-columns: auto auto auto auto;
+}
+
+.simUpgrade{
+	width: 200px;
+	height: 150px;
+	background-color: #3A4B4B;
+	margin: 10px 5px 0 5px;
+	display: flex; 
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	font-size: 18px;
+}
+
+.simUpgrade.bought{
+	background-color: #2E8383;
+}
+
+#electronTextContainer{
+	width: 100%;
+}
+
+.electronText{
+	text-align: center;
+}
+
+#electrons{
+	font-size: 40px;
+}
+
+#electronEffect{
+	font-size: 20px;
+}
+
+#electronUpgradeContainer{
+	width: 100%;
+	display: grid;
+	grid-template-columns: auto auto auto;
+}
+
+.electronUpgrade{
+	width: 300px;
+	height: 150px;
+	background-color: #8273E3;
+	margin: 50px 15px 0 15px;
+	color: black;
+	display: flex; 
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+
+#atomUpgradeContainer{
+	width: 100%;
+	display: grid;
+	grid-template-columns: auto auto auto;
+}
+
+.atomUpgrade{
+	width: 300px;
+	height: 150px;
+	background-color: #A096DF;
+	margin: 50px 15px 0 15px;
+	color: black;
+	display: flex; 
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+
+#atomText{
+	text-align: center;
+	font-size: 40px;
+	margin-top: 20px;
+}
+
+
+
