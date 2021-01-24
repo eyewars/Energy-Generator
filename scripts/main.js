@@ -3227,7 +3227,12 @@ function updateGUI(){
 	
 	let simulationText = "<p><b>SIMULATION:</b><br>In the simulation you have to fight your way through hordes of monsters, and infinite floors. <br>There are two different modes you can be in: Gold Mode and Fighting Mode. <br>In Gold Mode you will earn gold, and in Fighting Mode you will fight (duh). <br>Use your gold to upgrade your three heroes. You also get a multiplier to your gold income based on <br>what stage you're at. Later you will be able to Resimulate, resetting your simulation back to the beginning. <br>But like with all the other prestige mechanics, you get stronger.";
 	
-	if (player.hasUnlockedSim == true){
+	let electronText= "<p><b>ELECTRONS:</b><br>Every second you will multiply your current amount of electrons by your electron gain.<br>This can be upgraded by spending OP. You get a multiplier to how much your all mult multiplies, based on your electrons.<br>However there is a cap. At some point you will stop gaining electrons. This cap can be increased by spending OP.<br>You can choose to reset your electrons and gain an atom. You can use your atoms to buy several upgrades.";
+	
+	if (player.hasUnlockedElectrons == true){
+		document.getElementById("infoTab").innerHTML = hotkeyText + generatorText + prestigeText + expansionText + autobuyerText + ABGText + omegaText + simulationText + electronText;
+	}
+	else if (player.hasUnlockedSim == true){
 		document.getElementById("infoTab").innerHTML = hotkeyText + generatorText + prestigeText + expansionText + autobuyerText + ABGText + omegaText + simulationText;
 	}
 	else if (player.hasUnlockedOmega == true){
