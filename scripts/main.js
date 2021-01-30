@@ -1895,6 +1895,15 @@ function getLoop(){
 	player.electronGain = player.electronGainGain.pow(player.electronGainBought.plus(1));
 	
 	player.electronGainFinal = player.electronGain.times(player.electronGainFromOmegaUpgrade3x3y);
+	
+	
+	// REMOVE THIS, IT'S JUST A FIX FOR NOW, NOT NEEDED
+	
+	if (player.resimulateStageExponentMult.lt(1)){
+		player.resimulateStageExponentMult = new Decimal(1);
+	}
+	
+	// REMOVE THIS, IT'S JUST A FIX FOR NOW, NOT NEEDED
 }
 
 document.getElementById("autoPrestigeCheck").checked = player.prestigeAutobuyerChecked;
@@ -3406,7 +3415,7 @@ function updateGUI(){
 	
 	document.getElementById("PVPLegend").innerHTML = "PVP Legend" + "<br>Level: " + format(player.PVPLegendLevel, 0) + "<br>DPS Multiplier: " + format(player.PVPLegendMult, 2) + "x<br>Cost: " + format(player.PVPLegendCost, 2);
 	
-	document.getElementById("resimulate").innerHTML = "RESIMULATION<br>Resimulate for " + format(Decimal.sqrt(player.simGold.pow(player.eighthSimUpgrade)).div(100), 2) + " <br>Multiplier to DPS and " + format(new Decimal(1).plus(Decimal.log10(player.simGold.pow(player.eighthSimUpgrade))).div(60), 2) + "<br>Multiplier to stage gold exponent";
+	document.getElementById("resimulate").innerHTML = "RESIMULATION<br>Resimulate for " + format(Decimal.sqrt(player.simGold.pow(player.eighthSimUpgrade)).div(100), 2) + " <br>Multiplier to DPS and " + format(new Decimal(1).plus(Decimal.log10(player.simGold.pow(player.eighthSimUpgrade)).div(60)), 2) + "<br>Multiplier to stage gold exponent";
 	
 	document.getElementById("resimulationText").innerHTML = "DPS Multiplier: " + format(player.resimulateDPSMult, 2) + "x<br>Stage Gold Exponent Multiplier: " + format(player.resimulateStageExponentMult, 2) + "x";
 	
@@ -3610,7 +3619,7 @@ function resimulate(){
 	if (player.simGold.gte(new Decimal(1e6))){
 		if (((Decimal.sqrt(player.simGold.pow(player.eighthSimUpgrade))).div(100)).gt(player.resimulateDPSMult)){
 			player.resimulateDPSMult = Decimal.sqrt(player.simGold.pow(player.eighthSimUpgrade)).div(100);
-			player.resimulateStageExponentMult = new Decimal(1).plus(Decimal.log10(player.simGold.pow(player.eighthSimUpgrade))).div(60);
+			player.resimulateStageExponentMult = new Decimal(1).plus(Decimal.log10(player.simGold.pow(player.eighthSimUpgrade)).div(60));
 			
 			player.stage = new Decimal(1);
 			player.DPS = new Decimal(1);
