@@ -2961,6 +2961,7 @@ function buyElectronUpgrades(x) {
 			player.omegaPoints = player.omegaPoints.minus(player.firstElectronUpgradeCost);
 			player.maxElectrons = player.maxElectrons.pow(1.6);
 			player.firstElectronUpgradeCost = player.firstElectronUpgradeCost.times(6);
+			player.firstElectronUpgradeFix = true;
 		}
 	}
 	if (x == 2){
@@ -2992,7 +2993,6 @@ function buyAtomUpgrades(x){
 				player.atoms = player.atoms.minus(player.firstAtomUpgradeCost);
 				player.firstAtomUpgradeCost = player.firstAtomUpgradeCost.plus(1);
 				player.firstAtomUpgradeBought = player.firstAtomUpgradeBought.plus(1);
-				player.firstElectronUpgradeFix = true;
 				
 			}
 			else if (player.firstAtomUpgradeBought.eq(1)){
