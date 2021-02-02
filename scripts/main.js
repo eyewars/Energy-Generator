@@ -488,6 +488,7 @@ var player = {
 	totalAtomResets: new Decimal(0),
 	
 	firstElectronUpgradeCost: new Decimal(1e5),
+	firstElectronUpgradeFix: false,
 	secondElectronUpgradeCost: new Decimal(1e5),
 	thirdElectronUpgradeCost: new Decimal(1000),
 	thirdElectronUpgradeCost4x3y: new Decimal(1),
@@ -1003,6 +1004,7 @@ function hardReset(){
 		totalAtomResets: new Decimal(0),
 		
 		firstElectronUpgradeCost: new Decimal(1e5),
+		firstElectronUpgradeFix: false,
 		secondElectronUpgradeCost: new Decimal(1e5),
 		thirdElectronUpgradeCost: new Decimal(1000),
 		thirdElectronUpgradeCost4x3y: new Decimal(1),
@@ -1899,7 +1901,7 @@ function getLoop(){
 	
 	// REMOVE THIS, IT'S JUST A FIX FOR NOW, NOT NEEDED
 	
-	
+	/*
 	if (player.resimulateStageExponentMult.lt(1)){
 		player.resimulateStageExponentMult = new Decimal(1);
 	}
@@ -1931,14 +1933,16 @@ function getLoop(){
 	if (player.gammaUpgrade3.eq(5)){
 		player.prestigeEffectFromThirdGammaUpgrade = new Decimal(3.71293);
 	}
-	
+	*/
 	
 	// REMOVE THIS, IT'S JUST A FIX FOR NOW, NOT NEEDED
 }
 
 //IKKE NØDVENDING, BARE EN FIKS
-player.maxElectrons = new Decimal(1e10);
-player.firstElectronUpgradeCost = new Decimal(1e5);
+if (player.firstElectronUpgradeFix == false){
+	player.maxElectrons = new Decimal(1e10);
+	player.firstElectronUpgradeCost = new Decimal(1e5);
+}
 
 document.getElementById("autoPrestigeCheck").checked = player.prestigeAutobuyerChecked;
 document.getElementById("autoGeneratorCheck").checked = player.generatorAutobuyerChecked;
@@ -2988,6 +2992,7 @@ function buyAtomUpgrades(x){
 				player.atoms = player.atoms.minus(player.firstAtomUpgradeCost);
 				player.firstAtomUpgradeCost = player.firstAtomUpgradeCost.plus(1);
 				player.firstAtomUpgradeBought = player.firstAtomUpgradeBought.plus(1);
+				player.firstElectronUpgradeFix = true;
 				
 			}
 			else if (player.firstAtomUpgradeBought.eq(1)){
