@@ -1163,7 +1163,7 @@ function getFinalGenMult(){
 
 		player[name + "FinalMult"] = player[name + "Mult"].times(player.allMultFinal);
 		
-		player[name + "ExpansionGeneratorFinalMult"] = (player[name + "ExpansionGeneratorMult"].times(player.expansionGeneratorAllMultFromEleventhExpansionUpgrade).times(player.expansionGeneratorAllMultFromFirstBetaUpgrade).times(player.expansionGeneratorAllMultFromFifthBetaUpgrade).times(((player.omega).plus(1)).pow(3))).pow(player.allExpansionGeneratorPow);
+		player[name + "ExpansionGeneratorFinalMult"] = (player[name + "ExpansionGeneratorMult"].times(player.expansionGeneratorAllMultFromEleventhExpansionUpgrade).times(player.expansionGeneratorAllMultFromFirstBetaUpgrade).times(player.expansionGeneratorAllMultFromFifthBetaUpgrade)).pow(player.allExpansionGeneratorPow);
 		if (tier === 1){
 			player.firstExpansionGeneratorFinalMult = (player.firstExpansionGeneratorMult.times(player.firstExpansionMultFromUpgrades).times(player.expansionGeneratorAllMultFromEleventhExpansionUpgrade).times(player.expansionGeneratorAllMultFromFirstBetaUpgrade).times(player.firstExpansionGeneratorMultFromSecondBetaUpgrade).times(player.expansionGeneratorAllMultFromFifthBetaUpgrade)).pow(player.allExpansionGeneratorPow);
 			
