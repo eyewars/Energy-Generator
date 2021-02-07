@@ -5,10 +5,10 @@
 	border-color: blue;
 	border-width: 1px;
 	
-	/*-moz-user-select: none;
+	-moz-user-select: none;
 	-webkit-user-select: none;
 	-ms-user-select: none;
-	user-select: none;*/
+	user-select: none;
 }
 
 html{
@@ -917,10 +917,10 @@ html{
 	height: 250px;
 	margin-top: 10px;
 	
-	/*-moz-user-select: text;
+	-moz-user-select: text;
 	-webkit-user-select: text;
 	-ms-user-select: text;
-	user-select: text;*/
+	user-select: text;
 }
 
 
