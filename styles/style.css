@@ -5,10 +5,10 @@
 	border-color: blue;
 	border-width: 1px;
 	
-	-moz-user-select: none;
+	/*-moz-user-select: none;
 	-webkit-user-select: none;
 	-ms-user-select: none;
-	user-select: none;
+	user-select: none;*/
 }
 
 html{
@@ -118,15 +118,15 @@ html{
 	display: none;
 }
 
-#tab8.locked{
-	display: none;
-}
-
 #tab9.locked{
 	display: none;
 }
 
 #tab10.locked{
+	display: none;
+}
+
+#tab11.locked{
 	display: none;
 }
 
@@ -398,6 +398,13 @@ html{
 
 .expansionUpgrade.locked{
 	background-color: #5F0001;
+}
+
+#nextExpansionUpgradeText{
+	margin: 10px 0 10px 0;
+	display: flex;
+	justify-content: center;
+	font-size: 22px;
 }
 
 #autobuyerContainer{
@@ -888,6 +895,45 @@ html{
 	font-size: 40px;
 	margin-top: 20px;
 }
+
+#exportImportContainer{
+	display: flex;
+	justify-content: center;
+}
+
+.exportImport{
+	width: 250px;
+	height: 100px;
+	background-color: #5B5B5B;
+	margin: 10px;
+	font-size: 25px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+
+#importExportText{
+	height: 250px;
+	margin-top: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

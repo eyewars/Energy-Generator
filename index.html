@@ -28,11 +28,12 @@
 						<button onclick="showPanel(5, '#547480')" id="tab6">Omega Generators</button>
 						<button onclick="showPanel(6, '#547480')" id="tab7">Omega Upgrades</button>
 						<button onclick="showPanel(7, '#547480')">Info</button>
+						<button onclick="showPanel(8, '#547480')">Export/Import</button>
 					</div>
 					<div>
-						<button onclick="showPanel(8, '#547480')" id="tab8">Simulation</button>
-						<button onclick="showPanel(9, '#547480')" id="tab9">Simulation Upgrades</button>
-						<button onclick="showPanel(10, '#547480')" id="tab10">Electrons</button>
+						<button onclick="showPanel(9, '#547480')" id="tab9">Simulation</button>
+						<button onclick="showPanel(10, '#547480')" id="tab10">Simulation Upgrades</button>
+						<button onclick="showPanel(11, '#547480')" id="tab11">Electrons</button>
 					</div>
 				</div>
 			</div>
@@ -90,6 +91,7 @@
 				</div>
 			</div>
 			<div id="expandUpgrade" class="tabPanel">
+				<div id="nextExpansionUpgradeText">Next Expansion Upgrade at XeY Electricity!</div>
 				<div id="expansionUpgradeContainer">
 					<div class="expansionUpgrade" id="expUp1"></div>
 					<div class="expansionUpgrade" id="expUp2"></div>
@@ -299,6 +301,14 @@
 			</div>
 			
 			<div class="tabPanel" id="infoTab"></div>
+			
+			<div class="tabPanel" id="exportImportTab">
+				<textarea id="importExportText"></textarea>
+				<div id="exportImportContainer">
+					<div class="exportImport" onclick="exportSave()">EXPORT SAVEFILE</div>
+					<div class="exportImport" onclick="importSave()">IMPORT SAVEFILE</div>
+				</div>
+			</div>
 			
 			<div class="tabPanel" id="simulationTab">
 				<div id="simText">

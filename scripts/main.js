@@ -58,8 +58,8 @@ var player = {
 	seventhBought: new Decimal(0),
 	eighthBought: new Decimal(0),
 	
-	firstMult: new Decimal(2),
-    secondMult: new Decimal(1.5),
+	firstMult: new Decimal(4),
+    secondMult: new Decimal(2),
     thirdMult: new Decimal(1),
     fourthMult: new Decimal(1),
     fifthMult: new Decimal(1),
@@ -574,8 +574,8 @@ function hardReset(){
 		seventhBought: new Decimal(0),
 		eighthBought: new Decimal(0),
 
-		firstMult: new Decimal(2),
-		secondMult: new Decimal(1.5),
+		firstMult: new Decimal(4),
+		secondMult: new Decimal(2),
 		thirdMult: new Decimal(1),
 		fourthMult: new Decimal(1),
 		fifthMult: new Decimal(1),
@@ -1046,6 +1046,21 @@ function load() {
     transformToDecimal(player)
 }
 
+function exportSave(){
+	save();
+	var output = document.getElementById("importExportText");
+	
+	output.value = btoa(JSON.stringify(player));
+}
+
+function importSave(){
+	var input = document.getElementById("importExportText");
+	
+	input = JSON.parse(atob(input.value));
+	player = input;
+	transformToDecimal(player)
+}
+
 function transformToDecimal(object) { 
     for (i in object) {
         if (typeof(object[i]) == "string" && !isNaN(new Decimal(object[i]).mag)) object[i] = new Decimal(object[i]); 
@@ -1391,6 +1406,22 @@ document.onkeydown = function(e){
 	if (e.which == 77){
 		maxAll();
 	}
+	
+	if (e.which == 80){
+		for (let i = 1; i < 101; i++){
+			for (let y = 1; y < 9; y++){
+				prestige(y);
+			}
+		}
+	}
+	
+	if (e.which == 69){
+		expand();
+	}
+	
+	if (e.which == 79){
+		becomeOmega();
+	}
 }
 
 function expand(){
@@ -1622,25 +1653,28 @@ function getExpansionUpgradeText(){
 	if (player.expansionUpgrade1 == true){
 		document.getElementById("expUp1").classList.remove("locked");
 		document.getElementById("expUp1").innerHTML = "Gain a 20x multiplier<br>to every generator";
+		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 100 Electricity";
 	}
 	else {
 		document.getElementById("expUp1").innerHTML = "Gain a 20x multiplier<br>to every generator"
 		document.getElementById("expUp1").classList.add("locked");
+		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1 Electricity";
 	};
 	
 	if (player.expansionUpgrade2 == true){
 		document.getElementById("expUp2").classList.remove("locked");
 		document.getElementById("expUp2").innerHTML = "Multiply your all<br>mult gain by 1.1x";
+		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e4 Electricity";
 	}
 	else {
 		document.getElementById("expUp2").innerHTML = "Multiply your all<br>mult gain by 1.1x";
 		document.getElementById("expUp2").classList.add("locked");
 	}
 
-		
 	if (player.expansionUpgrade3 == true){
 		document.getElementById("expUp3").classList.remove("locked");
 		document.getElementById("expUp3").innerHTML = "Increase max prestige<br>by 35<br>Current: " + format(player.maxPrestige, 0);
+		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e6 Electricity";
 	}
 	else {
 		document.getElementById("expUp3").innerHTML = "Increase max prestige<br>by 35<br>Current: 15";
@@ -1650,6 +1684,7 @@ function getExpansionUpgradeText(){
 	if (player.expansionUpgrade4 == true){
 		document.getElementById("expUp4").classList.remove("locked");
 		document.getElementById("expUp4").innerHTML = "Gain a multiplier to<br>all generators based<br>on current Energy <br>Current: " + format(player.allMultFromFourthExpansionUpgrade, 2) + "x";
+		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e8 Electricity";
 	}
 	else {
 		document.getElementById("expUp4").innerHTML = "Gain a multiplier to<br>all generators based<br>on current Energy <br>Current: 1x";
@@ -1659,6 +1694,7 @@ function getExpansionUpgradeText(){
 	if (player.expansionUpgrade5 == true){
 		document.getElementById("expUp5").classList.remove("locked");
 		document.getElementById("expUp5").innerHTML = "Unlock automatic<br>prestige autobuyer.<br>Prestige doesn't<br>reset.";
+		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e10 Electricity";
 	}
 	else {
 		document.getElementById("expUp5").innerHTML = "Unlock automatic<br>prestige autobuyer.<br>Prestige doesn't<br>reset.";
@@ -1669,6 +1705,7 @@ function getExpansionUpgradeText(){
 		document.getElementById("expUp6").classList.remove("locked");
 		document.getElementById("expUp6").innerHTML = "Remove the max<br>prestige limit.";
 		document.getElementById("expUp3").innerHTML = "Increase max prestige<br>by 35<br>Current: Infinite";
+		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e12 Electricity";
 	}
 	else {
 		document.getElementById("expUp6").innerHTML = "Remove the max<br>prestige limit.";
@@ -1678,6 +1715,7 @@ function getExpansionUpgradeText(){
 	if (player.expansionUpgrade7 == true){
 		document.getElementById("expUp7").classList.remove("locked");
 		document.getElementById("expUp7").innerHTML = "Unlock generator<br>and all mult<br>autobuyers";
+		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e14 Electricity";
 	}
 	else {
 		document.getElementById("expUp7").innerHTML = "Unlock generator<br>and all mult<br>autobuyers";
@@ -1687,6 +1725,7 @@ function getExpansionUpgradeText(){
 	if (player.expansionUpgrade8 == true){
 		document.getElementById("expUp8").classList.remove("locked");
 		document.getElementById("expUp8").innerHTML = "Gain a multiplier<br>to all generators<br>based on EP<br>Current: " + format(player.allMultFromEighthExpansionUpgrade, 2) + "x";
+		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e16 Electricity";
 	}
 	else {
 		document.getElementById("expUp8").innerHTML = "Gain a multiplier<br>to all generators<br>based on EP<br>Current: " + format(player.allMultFromEighthExpansionUpgrade, 2) + "x";
@@ -1696,6 +1735,7 @@ function getExpansionUpgradeText(){
 	if (player.expansionUpgrade9 == true){
 		document.getElementById("expUp9").classList.remove("locked");
 		document.getElementById("expUp9").innerHTML = "Gain a multiplier<br>to EP gain<br>based on first<br>generator prestiges<br>Current: " + format(player.expansionPointMultFromNinthExpansionUpgrade, 0) + "x";
+		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e18 Electricity";
 	}
 	else {
 		document.getElementById("expUp9").innerHTML = "Gain a multiplier<br>to EP gain<br>based on first<br>generator prestiges<br>Current: 1x";
@@ -1705,6 +1745,7 @@ function getExpansionUpgradeText(){
 	if (player.expansionUpgrade10 == true){
 		document.getElementById("expUp10").classList.remove("locked");
 		document.getElementById("expUp10").innerHTML = "Gain a multiplier<br>to all generators<br>based on electricity<br>Current: " + format(player.allMultFromTenthExpansionUpgrade, 2) + "x";
+		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e20 Electricity";
 	}
 	else {
 		document.getElementById("expUp10").innerHTML = "Gain a multiplier<br>to all generators<br>based on electricity<br>Current: 1x";
@@ -1714,6 +1755,7 @@ function getExpansionUpgradeText(){
 	if (player.expansionUpgrade11 == true){
 		document.getElementById("expUp11").classList.remove("locked");
 		document.getElementById("expUp11").innerHTML = "Gain a multiplier<br>to all<br>expansion generators<br>based on EP<br>Current: " + format(player.expansionGeneratorAllMultFromEleventhExpansionUpgrade, 2) + "x";
+		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e22 Electricity";
 	}
 	else {
 		document.getElementById("expUp11").innerHTML = "Gain a multiplier<br>to all<br>expansion generators<br>based on EP<br>Current: 1x";
@@ -1723,6 +1765,7 @@ function getExpansionUpgradeText(){
 	if (player.expansionUpgrade12 == true){
 		document.getElementById("expUp12").classList.remove("locked");
 		document.getElementById("expUp12").innerHTML = "Increase your all<br>mult gain based<br>on highest ever EP<br>Current: " + format(player.allMultGainFromTwelfthExpansionUpgrade, 2) + "x";
+		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e24 Electricity";
 	}
 	else {
 		document.getElementById("expUp12").innerHTML = "Increase your all<br>mult gain based<br>on EP<br>Current: " + format(player.allMultGainFromTwelfthExpansionUpgrade, 2) + "x";
@@ -1732,6 +1775,7 @@ function getExpansionUpgradeText(){
 	if (player.expansionUpgrade13 == true){
 		document.getElementById("expUp13").classList.remove("locked");
 		document.getElementById("expUp13").innerHTML = "Gain a multiplier<br>to EP gain<br>based on expansions<br>Current: " + format(player.expansionPointMultFromThirteenthExpansionUpgrade, 0) + "x";
+		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e26 Electricity";
 	}
 	else {
 		document.getElementById("expUp13").innerHTML = "Gain a multiplier<br>to EP gain<br>based on expansions<br>Current: 1x";
@@ -1741,6 +1785,7 @@ function getExpansionUpgradeText(){
 	if (player.expansionUpgrade14 == true){
 		document.getElementById("expUp14").classList.remove("locked");
 		document.getElementById("expUp14").innerHTML = "Unlock expansion<br>autobuyer";
+		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e28 Electricity";
 	}
 	else {
 		document.getElementById("expUp14").innerHTML = "Unlock expansion<br>autobuyer";
@@ -1750,6 +1795,7 @@ function getExpansionUpgradeText(){
 	if (player.expansionUpgrade15 == true){
 		document.getElementById("expUp15").classList.remove("locked");
 		document.getElementById("expUp15").innerHTML = "Alpha, Beta and<br>Gamma unlocked!";
+		document.getElementById("nextExpansionUpgradeText").innerText = "All Expansion Upgrades are unlocked";
 	}
 	else {
 		document.getElementById("expUp15").innerHTML = "Unlock ???";
@@ -3272,7 +3318,11 @@ function updateGUI(){
 	
 	// INFO TAB *****************
 	
-	let hotkeyText = "<p><b>HOTKEYS:</b><br>M: Buys all generators and all mult</p>";
+	let hotkeyText = "<p><b>HOTKEYS:</b><br>M: Buys all generators and all mult<br>P: Prestige</p>";
+	
+	let hotkeyTextExpansion = "<p><b>HOTKEYS:</b><br>M: Buys all generators and all mult<br>P: Prestige<br>E: Expand</p>";
+	
+	let hotkeyTextOmega = "<p><b>HOTKEYS:</b><br>M: Buys all generators and all mult<br>P: Prestige<br>E: Expand<br>O: Become Omega</p>";
 	
 	let generatorText = "<p><b>GENERATORS:</b><br>The first generator makes energy. Energy is the main currency you use to upgrade your generators <br>and your all mult. The second generator creates the first, the third creates the second and so on.</p>";
 	
@@ -3291,22 +3341,22 @@ function updateGUI(){
 	let electronText= "<p><b>ELECTRONS:</b><br>Every second you will multiply your current amount of electrons by your electron gain.<br>This can be upgraded by spending OP. You get a multiplier to how much your all mult multiplies, based on your electrons.<br>However there is a cap. At some point you will stop gaining electrons. This cap can be increased by spending OP.<br>You can choose to reset your electrons and gain an atom. You can use your atoms to buy several upgrades.";
 	
 	if (player.hasUnlockedElectrons == true){
-		document.getElementById("infoTab").innerHTML = hotkeyText + generatorText + prestigeText + expansionText + autobuyerText + ABGText + omegaText + simulationText + electronText;
+		document.getElementById("infoTab").innerHTML = hotkeyTextOmega + generatorText + prestigeText + expansionText + autobuyerText + ABGText + omegaText + simulationText + electronText;
 	}
 	else if (player.hasUnlockedSim == true){
-		document.getElementById("infoTab").innerHTML = hotkeyText + generatorText + prestigeText + expansionText + autobuyerText + ABGText + omegaText + simulationText;
+		document.getElementById("infoTab").innerHTML = hotkeyTextOmega + generatorText + prestigeText + expansionText + autobuyerText + ABGText + omegaText + simulationText;
 	}
 	else if (player.hasUnlockedOmega == true){
-		document.getElementById("infoTab").innerHTML = hotkeyText + generatorText + prestigeText + expansionText + autobuyerText + ABGText + omegaText;
+		document.getElementById("infoTab").innerHTML = hotkeyTextOmega + generatorText + prestigeText + expansionText + autobuyerText + ABGText + omegaText;
 	}
 	else if (player.hasUnlockedABG == true){
-		document.getElementById("infoTab").innerHTML = hotkeyText + generatorText + prestigeText + expansionText + autobuyerText + ABGText;
+		document.getElementById("infoTab").innerHTML = hotkeyTextExpansion + generatorText + prestigeText + expansionText + autobuyerText + ABGText;
 	}
 	else if (player.expansionUpgrade5 == true){
-		document.getElementById("infoTab").innerHTML = hotkeyText + generatorText + prestigeText + expansionText + autobuyerText;
+		document.getElementById("infoTab").innerHTML = hotkeyTextExpansion + generatorText + prestigeText + expansionText + autobuyerText;
 	}
 	else if (player.hasUnlockedExpansion == true){
-		document.getElementById("infoTab").innerHTML = hotkeyText + generatorText + prestigeText + expansionText;
+		document.getElementById("infoTab").innerHTML = hotkeyTextExpansion + generatorText + prestigeText + expansionText;
 	}
 	else{
 		document.getElementById("infoTab").innerHTML = hotkeyText + generatorText + prestigeText;
@@ -3445,14 +3495,14 @@ function updateGUI(){
 	}
 	
 	if (player.hasUnlockedSim == false){
-		document.getElementById("tab8").classList.add("locked");
-	}
-	else document.getElementById("tab8").classList.remove("locked");
-	
-	if (player.hasUnlockedSimUps == false){
 		document.getElementById("tab9").classList.add("locked");
 	}
 	else document.getElementById("tab9").classList.remove("locked");
+	
+	if (player.hasUnlockedSimUps == false){
+		document.getElementById("tab10").classList.add("locked");
+	}
+	else document.getElementById("tab10").classList.remove("locked");
 	
 	document.getElementById("simGoldTotal").innerText = "Gold: " + format(player.simGold, 2);
 	document.getElementById("simGoldPerSec").innerText = "Gold Per Second: " + format(player.finalGPS, 2);
@@ -3570,9 +3620,9 @@ function updateGUI(){
 	}
 	
 	if (player.hasUnlockedElectrons == true){
-		document.getElementById("tab10").classList.remove("locked");
+		document.getElementById("tab11").classList.remove("locked");
 	}
-	else document.getElementById("tab10").classList.add("locked");
+	else document.getElementById("tab11").classList.add("locked");
 	
 	document.getElementById("electrons").innerText = "You have " + format(player.electrons, 2) + " Electrons";
 	document.getElementById("electronEffect").innerText = "They multiply all mult gain by " + format(player.electronEffect, 2) + "x";
