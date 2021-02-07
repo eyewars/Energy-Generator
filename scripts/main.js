@@ -1301,8 +1301,8 @@ function prestige(tier){
 		player.seventhBought = new Decimal(0);
 		player.eighthBought = new Decimal(0);
 
-		player.firstMult = new Decimal(2);
-		player.secondMult = new Decimal(1.5);
+		player.firstMult = new Decimal(4);
+		player.secondMult = new Decimal(2);
 		player.thirdMult = new Decimal(1);
 		player.fourthMult = new Decimal(1);
 		player.fifthMult = new Decimal(1);
@@ -1486,8 +1486,8 @@ function expand(){
 			player.seventhBought = new Decimal(0);
 			player.eighthBought = new Decimal(0);
 
-			player.firstMult = new Decimal(2);
-			player.secondMult = new Decimal(1.5);
+			player.firstMult = new Decimal(4);
+			player.secondMult = new Decimal(2);
 			player.thirdMult = new Decimal(1);
 			player.fourthMult = new Decimal(1);
 			player.fifthMult = new Decimal(1);
@@ -2378,8 +2378,8 @@ function becomeOmega(){
 		player.seventhBought = new Decimal(0);
 		player.eighthBought = new Decimal(0);
 
-		player.firstMult = new Decimal(2);
-		player.secondMult = new Decimal(1.5);
+		player.firstMult = new Decimal(4);
+		player.secondMult = new Decimal(2);
 		player.thirdMult = new Decimal(1);
 		player.fourthMult = new Decimal(1);
 		player.fifthMult = new Decimal(1);
