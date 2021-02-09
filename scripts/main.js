@@ -1415,7 +1415,7 @@ document.onkeydown = function(e){
 		}
 	}
 	
-	if (e.which == 69){
+	if (e.which == 88){
 		expand();
 	}
 	
@@ -3320,9 +3320,9 @@ function updateGUI(){
 	
 	let hotkeyText = "<p><b>HOTKEYS:</b><br>M: Buys all generators and all mult<br>P: Prestige</p>";
 	
-	let hotkeyTextExpansion = "<p><b>HOTKEYS:</b><br>M: Buys all generators and all mult<br>P: Prestige<br>E: Expand</p>";
+	let hotkeyTextExpansion = "<p><b>HOTKEYS:</b><br>M: Buys all generators and all mult<br>P: Prestige<br>X: Expand</p>";
 	
-	let hotkeyTextOmega = "<p><b>HOTKEYS:</b><br>M: Buys all generators and all mult<br>P: Prestige<br>E: Expand<br>O: Become Omega</p>";
+	let hotkeyTextOmega = "<p><b>HOTKEYS:</b><br>M: Buys all generators and all mult<br>P: Prestige<br>X: Expand<br>O: Become Omega</p>";
 	
 	let generatorText = "<p><b>GENERATORS:</b><br>The first generator makes energy. Energy is the main currency you use to upgrade your generators <br>and your all mult. The second generator creates the first, the third creates the second and so on.</p>";
 	
