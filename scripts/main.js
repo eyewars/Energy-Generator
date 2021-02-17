@@ -1985,10 +1985,10 @@ function getLoop(){
 }
 
 //IKKE NØDVENDING, BARE EN FIKS
-if (player.firstElectronUpgradeFix == false){
+/*if (player.firstElectronUpgradeFix == false){
 	player.maxElectrons = new Decimal(1e10);
 	player.firstElectronUpgradeCost = new Decimal(1e5);
-}
+}*/
 
 document.getElementById("autoPrestigeCheck").checked = player.prestigeAutobuyerChecked;
 document.getElementById("autoGeneratorCheck").checked = player.generatorAutobuyerChecked;
@@ -3007,7 +3007,7 @@ function buyElectronUpgrades(x) {
 			player.omegaPoints = player.omegaPoints.minus(player.firstElectronUpgradeCost);
 			player.maxElectrons = player.maxElectrons.pow(1.6);
 			player.firstElectronUpgradeCost = player.firstElectronUpgradeCost.times(6);
-			player.firstElectronUpgradeFix = true;
+			//player.firstElectronUpgradeFix = true; -- BARE EN FIX
 		}
 	}
 	if (x == 2){
