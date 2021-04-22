@@ -1,4 +1,5 @@
 var lastUpdate = Date.now();
+//var diff = (Date.now() - lastUpdate) / 1000;
 var TIER_NAMES = [ null, "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth" ];
 var DISPLAY_NAMES = [ null, "First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Seventh", "Eighth" ];
 var player = {
@@ -1030,6 +1031,7 @@ function test(){
 	//player.gold = player.gold.pow(10);
 	//player.omega = player.omega.pow(10);
 	//player.simGold = player.simGold.times(10);
+	//player.simGold = new Decimal(0);
 	//player.atoms = new Decimal(1000);
 	//player.omegaPoints = player.omegaPoints.pow(10);
 	//player.expansionPoints = player.expansionPoints.times("1e1000");
@@ -1218,8 +1220,8 @@ function getFinalOmegaPointMult(){
 function passiveExpansionPoints(){
 	if (player.firstAtomUpgradeBought.gte(1)){
 		if (((Decimal.floor(Decimal.log10(player.gold).div(((new Decimal(300)).div(player.expansionPointMultFinal)).times((new Decimal(1)).div((Decimal.log10(player.gold).div(300)).pow(3)))))).div(33)).gt(0)){
-		player.expansionPoints = player.expansionPoints.plus((Decimal.floor(Decimal.log10(player.gold).div(((new Decimal(300)).div(player.expansionPointMultFinal)).times((new Decimal(1)).div((Decimal.log10(player.gold).div(300)).pow(3)))))).div(33));
-	}
+			player.expansionPoints = player.expansionPoints.plus((Decimal.floor(Decimal.log10(player.gold).div(((new Decimal(300)).div(player.expansionPointMultFinal)).times((new Decimal(1)).div((Decimal.log10(player.gold).div(300)).pow(3)))))).div(33));
+		}
 	}
 	//Det står if FORMULAEN > 0 så gjør den det. Hvis ikke blir det NaN -- SJEKK AT DET ER RIKTIG FORMULA!!!!!!!!!
 }
@@ -3835,7 +3837,11 @@ function productionLoop(diff){
 		player.eighthAmount = player.eighthAmount.plus((player.firstAmount.times(player.firstFinalMult)).pow(0.1).times(diff));
 	}
 	
-	
+	if (player.firstAtomUpgradeBought.gte(1)){
+		if (((Decimal.floor(Decimal.log10(player.gold).div(((new Decimal(300)).div(player.expansionPointMultFinal)).times((new Decimal(1)).div((Decimal.log10(player.gold).div(300)).pow(3)))))).div(33)).gt(0)){
+			player.expansionPoints = player.expansionPoints.plus(((Decimal.floor(Decimal.log10(player.gold).div(((new Decimal(300)).div(player.expansionPointMultFinal)).times((new Decimal(1)).div((Decimal.log10(player.gold).div(300)).pow(3))))))).times(diff));
+		}
+	}
 }
 
 var tabButtons = document.querySelectorAll(".buttonContainer button");
@@ -3859,7 +3865,9 @@ function showPanel(panelIndex, colorCode){
 showPanel(0, '#547480');
 
 function mainLoop(){
-	var diff = (Date.now() - lastUpdate) / 1000;
+	diff = (Date.now() - lastUpdate) / 1000;
+	lastUpdate = Date.now(); 
+	
 	getFinalAllMult();
 	getFinalGenMult();
 	getFinalMultPerBuy();
@@ -3877,11 +3885,10 @@ function mainLoop(){
 	autobuy();
 	fight();
 	getHpBar();
-	passiveExpansionPoints();
-	lastUpdate = Date.now(); 
+	//passiveExpansionPoints(); 
 }
 
-setInterval(mainLoop, 30);
+setInterval(mainLoop, 50);
 
 setInterval(save, 10000);
 
