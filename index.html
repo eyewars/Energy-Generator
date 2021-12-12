@@ -12,6 +12,10 @@
 				<div id="expansionButton" class="" onclick="expand()">
 					<div id="expansionButtonText"></div>
 				</div>
+				<div id="realityAmountText">You have x Reality Points</div>
+				<div id="realityButton" class="" onclick="reachReality()">
+					<div id="realityButtonText"></div>
+				</div>
 			</div>
 			<div id="currency">
 				<div id="total">
@@ -20,20 +24,24 @@
 				</div>
 				<div class="buttonContainer">
 					<div>
-						<button onclick="showPanel(0, '#547480')">Generators</button>
-						<button onclick="showPanel(1, '#547480')">Expansion</button>
-						<button onclick="showPanel(2, '#547480')" id="tab3">Expansion Upgrades</button>
-						<button onclick="showPanel(3, '#547480')" id="tab4">Autobuyers</button>
-						<button onclick="showPanel(4, '#547480')" id="tab5">Alpha Beta Gamma</button>
-						<button onclick="showPanel(5, '#547480')" id="tab6">Omega Generators</button>
-						<button onclick="showPanel(6, '#547480')" id="tab7">Omega Upgrades</button>
-						<button onclick="showPanel(7, '#547480')">Info</button>
-						<button onclick="showPanel(8, '#547480')">Export/Import</button>
+						<button onclick="showPanel(0, '#3f5a4f')" id="tab1" class="baseTabs">Generators</button>
+						<button onclick="showPanel(1, '#a1a102')" id="tab2" class="expansionTabs">Expansion Generators</button>
+						<button onclick="showPanel(2, '#a1a102')" id="tab3" class="expansionTabs">Expansion Upgrades</button>
+						<button onclick="showPanel(3, '#3f5a4f')" id="tab4" class="baseTabs">Autobuyers</button>
+						<button onclick="showPanel(4, '#a1a102')" id="tab5" class="expansionTabs">Alpha Beta Gamma</button>
+						<button onclick="showPanel(5, '#362301')" id="tab6" class="omegaTabs">Omega Generators</button>
+						<button onclick="showPanel(6, '#362301')" id="tab7" class="omegaTabs">Omega Upgrades</button>
+						<button onclick="showPanel(7, '#3f5a4f')" id="tabInfo" class="baseTabs">Info</button>
+						<button onclick="showPanel(8, '#3f5a4f')" id="tabExport" class="baseTabs">Export/Import</button>
 					</div>
 					<div>
-						<button onclick="showPanel(9, '#547480')" id="tab9">Simulation</button>
-						<button onclick="showPanel(10, '#547480')" id="tab10">Simulation Upgrades</button>
-						<button onclick="showPanel(11, '#547480')" id="tab11">Electrons</button>
+						<button onclick="showPanel(9, '#362301')" id="tab9" class="omegaTabs">Simulation</button>
+						<button onclick="showPanel(10, '#362301')" id="tab10" class="omegaTabs">Simulation Upgrades</button>
+						<button onclick="showPanel(11, '#362301')" id="tab11" class="omegaTabs">Electrons</button>
+						<button onclick="showPanel(12, '#4b6eb1')" id="tab12" class="realityTabs">Reality Generators</button>
+						<button onclick="showPanel(13, '#4b6eb1')" id="tab13" class="realityTabs">Battle Tower</button>
+						<button onclick="showPanel(14, '#4b6eb1')" id="tab14" class="realityTabs">Talents</button>
+						<button onclick="showPanel(15, '#4b6eb1')" id="tab15" class="realityTabs">Atom Shop</button>
 					</div>
 				</div>
 			</div>
@@ -154,6 +162,47 @@
 						<div>Automatically Fight</div>
 						<input type="checkbox" id="autoFightCheck" class="autoCheck">
 					</div>
+					<div class="autobuyer" id="autoBattleTower">
+						<div>Automatically Battle</div>
+						<input type="checkbox" id="autoBattleTowerCheck" class="autoCheck">
+					</div>
+					<div class="autobuyer" id="autoBuild">
+						<div>Automatically Load Builds</div>
+						<div id="autoBuildInputs">
+							<div class="buildCheckBoxes">
+								<div>1</div>
+								<div>
+									<input type="checkbox" id="autoBuild1Check" class="autoCheck buildCheck" onclick="buildCheckSync(1, 1)">
+								</div>
+							</div>
+							<div class="buildCheckBoxes">
+								<div>2</div>
+								<div>
+									<input type="checkbox" id="autoBuild2Check" class="autoCheck buildCheck" onclick="buildCheckSync(1, 2)">
+								</div>
+							</div>
+							<div class="buildCheckBoxes">
+								<div>3</div>
+								<div>
+									<input type="checkbox" id="autoBuild3Check" class="autoCheck buildCheck" onclick="buildCheckSync(1, 3)">
+								</div>
+							</div>
+							<div class="buildCheckBoxes">
+								<div>4</div>
+								<div>
+									<input type="checkbox" id="autoBuild4Check" class="autoCheck buildCheck" onclick="buildCheckSync(1, 4)">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="autobuyer" id="autoElectronUpgrades">
+						<div>Electron Upgrades Autobuyer</div>
+						<input type="checkbox" id="autoElectronUpgradesCheck" class="autoCheck">
+					</div>
+					<div class="autobuyer" id="autoOmegaGenerator">
+						<div>Omega Generator Autobuyer</div>
+						<input type="checkbox" id="autoOmegaGeneratorCheck" class="autoCheck">
+					</div>
 				</div>
 			</div>
 			
@@ -231,6 +280,7 @@
 							<div id="omegaEffect">It multiplies your expansion generator by xx</div>
 						</div>
 					</div>
+					<div class="grid-item-omega" id="omegaPointMult" onclick="opMult()"></div>
 					<div class="grid-item-omega" id="firstOmegaGenerator" onclick="buyOmegaGenerator(1)"></div>
 					<div class="grid-item-omega" id="secondOmegaGenerator" onclick="buyOmegaGenerator(2)"></div>
 					<div class="grid-item-omega" id="thirdOmegaGenerator" onclick="buyOmegaGenerator(3)"></div>
@@ -300,13 +350,18 @@
 				</div>
 			</div>
 			
-			<div class="tabPanel" id="infoTab"></div>
+			<div class="tabPanel" id="infoTab">
+				<a href="https://discord.gg/6JHHQAQCGn" target="_blank">
+					<img src="assets/discordLogo.svg" id="discordLogo">
+				</a>
+				<div id="infoText"></div>
+			</div>
 			
 			<div class="tabPanel" id="exportImportTab">
 				<textarea id="importExportText"></textarea>
 				<div id="exportImportContainer">
-					<div class="exportImport" onclick="exportSave()">EXPORT SAVEFILE</div>
-					<div class="exportImport" onclick="importSave()">IMPORT SAVEFILE</div>
+					<div id="exportSave" class="exportImport" onclick="exportSave()">EXPORT SAVEFILE</div>
+					<div id="importSave" class="exportImport" onclick="importSave()">IMPORT SAVEFILE</div>
 				</div>
 			</div>
 			
@@ -369,7 +424,267 @@
 					<div class="atomUpgrade" id="atomUpgrade3" onclick="buyAtomUpgrades(3)"></div>
 				</div>
 			</div>
-			
+			<div class="tabPanel" id="realityGeneratorTab">
+				<div class="grid-container-reality" id="realityGenerators">
+					<div class="grid-item-reality" id="realityTextContainer">
+						<div id="realityText">
+							<div id="realityEnergy">You have x Reality Energy</div>
+							<div id="realityEnergyPerSec">You're getting x Reality Energy per second</div>
+							<div id="realityBonusContainer">
+								<div class="realityBonusContainer">
+									<div id="realityBonus1">1e10x to all Generators</div>
+									<input type="checkbox" id="realityBonus1Check" class="realityBonusCheck" onclick="realityBonusCheck()">
+								</div>
+								<div class="realityBonusContainer">
+									<div id="realityBonus2">100x to all Expansion Generators</div>
+									<input type="checkbox" id="realityBonus2Check" class="realityBonusCheck" onclick="realityBonusCheck()">
+								</div>
+								<div class="realityBonusContainer">
+									<div id="realityBonus3">10x to all Omega Generators</div>
+									<input type="checkbox" id="realityBonus3Check" class="realityBonusCheck" onclick="realityBonusCheck()">
+								</div>
+								<div class="realityBonusContainer">
+									<div id="realityBonus4">10x to Expansion Points</div>
+									<input type="checkbox" id="realityBonus4Check" class="realityBonusCheck" onclick="realityBonusCheck()">
+								</div>
+								<div class="realityBonusContainer">
+									<div id="realityBonus5">2x to Omega Points</div>
+									<input type="checkbox" id="realityBonus5Check" class="realityBonusCheck" onclick="realityBonusCheck()">
+								</div>
+								<div class="realityBonusContainer">
+									<div id="realityBonus6">1000x to DPS and GPS</div>
+									<input type="checkbox" id="realityBonus6Check" class="realityBonusCheck" onclick="realityBonusCheck()">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="grid-item-reality" id="firstRealityGenerator" onclick="buyRealityGenerator(1)"></div>
+					<div class="grid-item-reality" id="secondRealityGenerator" onclick="buyRealityGenerator(2)"></div>
+					<div class="grid-item-reality" id="thirdRealityGenerator" onclick="buyRealityGenerator(3)"></div>
+					<div class="grid-item-reality" id="fourthRealityGenerator" onclick="buyRealityGenerator(4)"></div>
+					<div class="grid-item-reality" id="fifthRealityGenerator" onclick="buyRealityGenerator(5)"></div>
+					<div class="grid-item-reality" id="sixthRealityGenerator" onclick="buyRealityGenerator(6)"></div>
+					<div class="grid-item-reality" id="seventhRealityGenerator" onclick="buyRealityGenerator(7)"></div>
+					<div class="grid-item-reality" id="eighthRealityGenerator" onclick="buyRealityGenerator(8)"></div>
+				</div>
+			</div>
+			<div class="tabPanel" id="battleTowerTab">
+				<div id="battleTextContainer" class="battleTowerContainers">
+					<div id="levelTexts">
+						<div id="friendlyLevel" class="battleTowerFloatLeft">
+							<div id="friendlyLevelText" class="battleTowerFloatLeft">Level:</div>
+							<div id="friendlyLevelNumber" class="battleTowerFloatRight">3</div>
+						</div>
+						<div id="enemyLevel" class="battleTowerFloatRight">
+							<div id="enemyLevelText" class="battleTowerFloatLeft">Level:</div>
+							<div id="enemyLevelNumber" class="battleTowerFloatRight">3</div>
+						</div>
+					</div>
+					<div id="skillAndRarity">
+						<div id="skillpoints" class="battleTowerFloatLeft">
+							<div id="skillpointsText" class="battleTowerFloatLeft">Skillpoints:</div>
+							<div id="skillpointsNumber" class="battleTowerFloatRight">2</div>
+						</div>
+						<div id="rarity" class="battleTowerFloatRight">
+							<div id="rarityText" class="battleTowerFloatLeft">Legendary:</div>
+							<div id="rarityNumber" class="battleTowerFloatRight">1 Atom</div>
+						</div>
+					</div>
+					<div id="stats">
+						<div id="friendlyStats" class="battleTowerFloatLeft">
+							<div id="friendlyStatsText" class="battleTowerFloatLeft">
+								<div class="battleTowerFloatLeft">Stamina:</div>
+								<div class="battleTowerFloatLeft">Strength:</div>
+								<div class="battleTowerFloatLeft">Armor:</div>
+								<div class="battleTowerFloatLeft">Regeneration:</div>
+								<div class="battleTowerFloatLeft">Agility:</div>
+							</div>
+							<div id="friendlyStatsContainer" class="battleTowerFloatRight">
+								<div class="friendlyStatsContainerInside">
+									<div class="battleTowerFloatRight plusAndMinus" onclick="changeStats('stamina', 'minus')">-</div>
+									<div class="battleTowerFloatRight plusAndMinus" onclick="changeStats('strength', 'minus')">-</div>
+									<div class="battleTowerFloatRight plusAndMinus" onclick="changeStats('armor', 'minus')">-</div>
+									<div class="battleTowerFloatRight plusAndMinus" onclick="changeStats('regeneration', 'minus')">-</div>
+									<div class="battleTowerFloatRight plusAndMinus" onclick="changeStats('agility', 'minus')">-</div>
+								</div>
+								<div class="friendlyStatsContainerInside">
+									<div id="friendlyStaminaStat" class="battleTowerFloatRight statNum">5</div>
+									<div id="friendlyStrengthStat" class="battleTowerFloatRight statNum">3</div>
+									<div id="friendlyArmorStat" class="battleTowerFloatRight statNum">1</div>
+									<div id="friendlyRegenerationStat" class="battleTowerFloatRight statNum">1</div>
+									<div id="friendlyAgilityStat" class="battleTowerFloatRight statNum">1</div>
+								</div>
+								<div class="friendlyStatsContainerInside">
+									<div class="battleTowerFloatRight plusAndMinus" onclick="changeStats('stamina', 'plus')">+</div>
+									<div class="battleTowerFloatRight plusAndMinus" onclick="changeStats('strength', 'plus')">+</div>
+									<div class="battleTowerFloatRight plusAndMinus" onclick="changeStats('armor', 'plus')">+</div>
+									<div class="battleTowerFloatRight plusAndMinus" onclick="changeStats('regeneration', 'plus')">+</div>
+									<div class="battleTowerFloatRight plusAndMinus" onclick="changeStats('agility', 'plus')">+</div>
+								</div>
+							</div>
+						</div>
+						<div id="enemyStats" class="battleTowerFloatRight">
+							<div id="enemyStatsText" class="battleTowerFloatLeft">
+								<div class="battleTowerFloatLeft">Stamina:</div>
+								<div class="battleTowerFloatLeft">Strength:</div>
+								<div class="battleTowerFloatLeft">Armor:</div>
+								<div class="battleTowerFloatLeft">Regeneration:</div>
+								<div class="battleTowerFloatLeft">Agility:</div>
+							</div>
+							<div id="enemyStatsContainer" class="battleTowerFloatRight">
+								<div id="enemyStaminaStat" class="battleTowerFloatRight">5</div>
+								<div id="enemyStrengthStat" class="battleTowerFloatRight">3</div>
+								<div id="enemyArmorStat" class="battleTowerFloatRight">1</div>
+								<div id="enemyRegenerationStat" class="battleTowerFloatRight">1</div>
+								<div id="enemyAgilityStat" class="battleTowerFloatRight">1</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="battleBarContainer" class="battleTowerContainers">
+					<div id="friendlyBars" class="battleTowerFloatLeft">
+						<div id="friendlyHPBar" class="battleTowerBarButtonText" style="--width: 100" data-label="">
+							<div id="friendlyHPBarText">80 / 100</div>
+						</div>
+						<div id="friendlyRest" class="battleTowerBarButtonText battleTowerFloatLeft" onclick="restOrFight(1)">Rest</div>
+						<div id="friendlyFight" class="battleTowerBarButtonText battleTowerFloatRight" onclick="restOrFight(2)">Fight</div>
+					</div>
+					<div id="enemyBars" class="battleTowerFloatRight">
+						<div id="enemyHPBar" class="battleTowerBarButtonText" style="--width: 100" data-label="">
+							<div id="enemyHPBarText">80 / 100</div>
+						</div>
+						<div id="enemyPrevious" class="battleTowerBarButtonText battleTowerFloatLeft" onclick="prevNext(1)">Previous</div>
+						<div id="enemyNext" class="battleTowerBarButtonText battleTowerFloatRight" onclick="prevNext(2)">Next</div>
+					</div>
+				</div>
+				<div id="xpBar" style="--width: 100" data-label="">
+					<div id="xpBarText">80 / 100</div>
+				</div>
+				<div id="retireContainer">
+					<div id="superStatsAndTextContainer">
+						<div id="superSkillpointsContainer">
+							<div id="superSkillpoints">You have x Super Skillpoints</div>
+						</div>
+						<div id="trainingContainer">
+							<div id="trainingStatsTextContainer" class="battleTowerFloatLeft">
+								<div class="trainingStatsText battleTowerFloatLeft">Super Stamina:</div>
+								<div class="trainingStatsText battleTowerFloatLeft">Super Strength:</div>
+								<div class="trainingStatsText battleTowerFloatLeft">Super Armor:</div>
+								<div class="trainingStatsText battleTowerFloatLeft">Super Regeneration:</div>
+								<div class="trainingStatsText battleTowerFloatLeft">Super Agility:</div>
+							</div>
+							<div id="superStatsContainer" class="battleTowerFloatRight">
+								<div class="superStatsContainerInside">
+									<div class="trainingStats plusAndMinus battleTowerFloatRight" onclick="changeSuperStats('stamina', 'minus')">-</div>
+									<div class="trainingStats plusAndMinus battleTowerFloatRight" onclick="changeSuperStats('strength', 'minus')">-</div>
+									<div class="trainingStats plusAndMinus battleTowerFloatRight" onclick="changeSuperStats('armor', 'minus')">-</div>
+									<div class="trainingStats plusAndMinus battleTowerFloatRight" onclick="changeSuperStats('regeneration', 'minus')">-</div>
+									<div class="trainingStats plusAndMinus battleTowerFloatRight" onclick="changeSuperStats('agility', 'minus')">-</div>
+								</div>
+								<div class="superStatsContainerInside">
+									<div id="superStaminaStat" class="statNum trainingStats">5</div>
+									<div id="superStrengthStat" class="statNum trainingStats">3</div>
+									<div id="superArmorStat" class="statNum trainingStats">1</div>
+									<div id="superRegenerationStat" class="statNum trainingStats">1</div>
+									<div id="superAgilityStat" class="statNum trainingStats">1</div>
+								</div>
+								<div class="superStatsContainerInside">
+									<div class="trainingStats plusAndMinus battleTowerFloatRight" onclick="changeSuperStats('stamina', 'plus')">+</div>
+									<div class="trainingStats plusAndMinus battleTowerFloatRight" onclick="changeSuperStats('strength', 'plus')">+</div>
+									<div class="trainingStats plusAndMinus battleTowerFloatRight" onclick="changeSuperStats('armor', 'plus')">+</div>
+									<div class="trainingStats plusAndMinus battleTowerFloatRight" onclick="changeSuperStats('regeneration', 'plus')">+</div>
+									<div class="trainingStats plusAndMinus battleTowerFloatRight" onclick="changeSuperStats('agility', 'plus')">+</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="buildContainer">
+						<div class="build" id="build1">
+							<input type="checkbox" id="autoBuild1Check2" class="buildCheck2" onclick="buildCheckSync(2, 1)">
+							<div class="saveLoadBuild">
+								<div class="saveBuild" id="saveBuild1" onclick="saveBuild(1)">Save</div>
+								<div class="loadBuild" id="loadBuild1" onclick="loadBuild(1)">Load</div>
+							</div>
+						</div>
+						<div class="build" id="build2">
+							<input type="checkbox" id="autoBuild2Check2" class="buildCheck2" onclick="buildCheckSync(2, 2)">
+							<div class="saveLoadBuild">
+								<div class="saveBuild" id="saveBuild2" onclick="saveBuild(2)">Save</div>
+								<div class="loadBuild" id="loadBuild2" onclick="loadBuild(2)">Load</div>
+							</div>
+						</div>
+						<div class="build" id="build3">
+							<input type="checkbox" id="autoBuild3Check2" class="buildCheck2" onclick="buildCheckSync(2, 3)">
+							<div class="saveLoadBuild">
+								<div class="saveBuild" id="saveBuild3" onclick="saveBuild(3)">Save</div>
+								<div class="loadBuild" id="loadBuild3" onclick="loadBuild(3)">Load</div>
+							</div>
+						</div>
+						<div class="build" id="build4">
+							<input type="checkbox" id="autoBuild4Check2" class="buildCheck2" onclick="buildCheckSync(2, 4)">
+							<div class="saveLoadBuild">
+								<div class="saveBuild" id="saveBuild4" onclick="saveBuild(4)">Save</div>
+								<div class="loadBuild" id="loadBuild4" onclick="loadBuild(4)">Load</div>
+							</div>
+						</div>
+					</div>
+					<div id="retire" onclick="retire()">Retire</div>
+				</div>
+			</div>
+			<div class="tabPanel" id="talentsTab">
+				<div class="talentRow">
+					<div class="talent" id="talent1" onclick="selectTalent(1)"></div>
+					<div class="talent" id="talent2" onclick="selectTalent(2)"></div>
+					<div class="talent" id="talent3" onclick="selectTalent(3)"></div>
+				</div>
+				<div class="talentRow">
+					<div class="talent" id="talent4" onclick="selectTalent(4)"></div>
+					<div class="talent" id="talent5" onclick="selectTalent(5)"></div>
+					<div class="talent" id="talent6" onclick="selectTalent(6)"></div>
+				</div>
+				<div class="talentRow">
+					<div class="talent" id="talent7" onclick="selectTalent(7)"></div>
+					<div class="talent" id="talent8" onclick="selectTalent(8)"></div>
+					<div class="talent" id="talent9" onclick="selectTalent(9)"></div>
+				</div>
+				<div class="talentRow">
+					<div class="talent" id="talent10" onclick="selectTalent(10)"></div>
+					<div class="talent" id="talent11" onclick="selectTalent(11)"></div>
+					<div class="talent" id="talent12" onclick="selectTalent(12)"></div>
+				</div>
+				<div class="talentRow">
+					<div class="talent" id="talent13" onclick="selectTalent(13)"></div>
+					<div class="talent" id="talent14" onclick="selectTalent(14)"></div>
+					<div class="talent" id="talent15" onclick="selectTalent(15)"></div>
+				</div>
+			</div>
+			<div class="tabPanel" id="atomShopTab">
+				<div id="atomShopTextContainer">
+					<div id="atomShopText">You have x Atoms</div>
+				</div>
+				<div id="atomShopContainer">
+					<div id="atomShopItem1" class="atomShopItem" onclick="buyAtomShopItem(1)"></div>
+					<div id="atomShopItem2" class="atomShopItem" onclick="buyAtomShopItem(2)"></div>
+					<div id="atomShopItem3" class="atomShopItem" onclick="buyAtomShopItem(3)"></div>
+					<div id="atomShopItem4" class="atomShopItem" onclick="buyAtomShopItem(4)"></div>
+					<div id="atomShopItem5" class="atomShopItem" onclick="buyAtomShopItem(5)"></div>
+					<div id="atomShopItem6" class="atomShopItem" onclick="buyAtomShopItem(6)"></div>
+					<div id="atomShopItem7" class="atomShopItem" onclick="buyAtomShopItem(7)"></div>
+					<div id="atomShopItem8" class="atomShopItem" onclick="buyAtomShopItem(8)"></div>
+					<div id="atomShopItem9" class="atomShopItem" onclick="buyAtomShopItem(9)"></div>
+					<div id="atomShopItem10" class="atomShopItem" onclick="buyAtomShopItem(10)"></div>
+					<div id="atomShopItem11" class="atomShopItem" onclick="buyAtomShopItem(11)"></div>
+					<div id="atomShopItem12" class="atomShopItem" onclick="buyAtomShopItem(12)"></div>
+					<div id="atomShopItem13" class="atomShopItem" onclick="buyAtomShopItem(13)"></div>
+					<div id="atomShopItem14" class="atomShopItem" onclick="buyAtomShopItem(14)"></div>
+					<div id="atomShopItem15" class="atomShopItem" onclick="buyAtomShopItem(15)"></div>
+					<div id="atomShopItem16" class="atomShopItem" onclick="buyAtomShopItem(16)"></div>
+					<div id="atomShopItem17" class="atomShopItem" onclick="buyAtomShopItem(17)"></div>
+					<div id="atomShopItem18" class="atomShopItem" onclick="buyAtomShopItem(18)"></div>
+					<div id="atomShopItem19" class="atomShopItem" onclick="buyAtomShopItem(19)"></div>
+					<div id="atomShopItem20" class="atomShopItem" onclick="buyAtomShopItem(20)"></div>
+				</div>
+			</div>
 		</div>
 
 			
