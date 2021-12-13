@@ -5338,10 +5338,10 @@ function updateGUI(){
 		else document.getElementById(name + "GeneratorPrestige").classList.remove("locked");
 		
 		if ((player.maxPrestige.layer == player[name + "Prestige"].layer) && (player.maxPrestige.mag == player[name + "Prestige"].mag)) {
-			document.getElementById(name + "GeneratorPrestige").innerHTML = display + " Generator Prestige" + "<br>Amount: " + "MAX" + " (" + format(player[name + "Prestige"], 0) + ")" + "<br>Cost: " + format(prestigeCost, 0) + " " + display + " Generators Bought";
+			document.getElementById(name + "GeneratorPrestige").innerHTML = display + " Generator Prestige" + "<br>Amount: " + "MAX" + " (" + format(player[name + "Prestige"], 0) + ")" + "<br>Requires: " + format(prestigeCost, 0) + " " + display + " Generators Bought";
 			document.getElementById(name + "GeneratorPrestige").classList.add("locked");
 		}
-		else document.getElementById(name + "GeneratorPrestige").innerHTML = display + " Generator Prestige" + "<br>Amount: " + format(prestigeAmount, 0) + "<br>Cost: " + format(prestigeCost, 0) + " " + display + " Generators Bought";
+		else document.getElementById(name + "GeneratorPrestige").innerHTML = display + " Generator Prestige" + "<br>Amount: " + format(prestigeAmount, 0) + "<br>Requires: " + format(prestigeCost, 0) + " " + display + " Generators Bought";
 	}
 	
 	if (player.gold.lt(player.allMultFinalCost)){
