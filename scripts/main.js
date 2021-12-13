@@ -5310,7 +5310,7 @@ function updateGUI(){
 		
 		document.getElementById(name + "OmegaGenerator").innerHTML = display + " Omega Generator" + "<br>Amount: " + format(omgAmount, 0) + "<br>Bought: " + format(omgBought, 0) + "<br>Mult: " + format(omgMult, 2) + "x<br>Cost: " + format(omgCost, 0) + " OP";
 		
-		document.getElementById(name + "RealityGenerator").innerHTML = display + " Reality Generator" + "<br>Amount: " + format(realAmount, 0) + "<br>Bought: " + format(realBought, 0) + "<br>Mult: " + format(realMult, 2) + "x<br>Cost: " + format(realCost, 0) + " OP";
+		document.getElementById(name + "RealityGenerator").innerHTML = display + " Reality Generator" + "<br>Amount: " + format(realAmount, 0) + "<br>Bought: " + format(realBought, 0) + "<br>Mult: " + format(realMult, 2) + "x<br>Cost: " + format(realCost, 0) + " RP";
 		
 		if (player.gold.layer < player[name + "Cost"].layer  || ((player.gold.layer == player[name + "Cost"].layer) && player.gold.mag < player[name + "Cost"].mag)) {
 			document.getElementById(name + "Generator").classList.add("locked");
