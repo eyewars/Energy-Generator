@@ -841,6 +841,14 @@ function importSave(){
 	}
 }
 
+function trueHardReset(){
+	let confirmation = confirm("Are you sure you want to Hard Reset?");
+
+	if (confirmation){
+		hardReset();
+	}
+}
+
 function transformToDecimal(object) { 
     for (i in object) {
         if (typeof(object[i]) == "string" && !isNaN(new Decimal(object[i]).mag)) object[i] = new Decimal(object[i]); 
@@ -1133,6 +1141,12 @@ function prestige(tier){
 		player.expansionPointMultFromThirteenthExpansionUpgrade = new Decimal(1);
 		
 		buyGenerator(1);
+	}
+}
+
+function prestigeAll(){
+	for (let i = 1; i < 9; i++){
+		prestige(i);
 	}
 }
 
@@ -5499,6 +5513,8 @@ function updateGUI(){
 	
 	// INFO TAB *****************
 	
+	let baseText = "<p><b>NOTE:</b><br>The info tab will update as you unlock more of the game.<br>If you're confused about something then check the Info tab first and see if that helps.<br>If it doesn't, then you can get help by joining the Discord and asking other players or the Dev.</p>";
+
 	let hotkeyText = "<p><b>HOTKEYS:</b><br>M: Buys all generators and all mult<br>P: Prestige</p>";
 	
 	let hotkeyTextExpansion = "<p><b>HOTKEYS:</b><br>M: Buys all generators and all mult<br>P: Prestige<br>X: Expand</p>";
@@ -5517,7 +5533,7 @@ function updateGUI(){
 	
 	let autobuyerText = "<p><b>AUTOBUYERS:</b><br>Autobuyers do things for you automatically! They can automatically prestige, buy generators,<br>or even expand. To activate them just check the box. You can decide how much EP you wanna get<br>when you expand with the expansion autobuyer. Just type in however much you want.</p>"
 	
-	let ABGText = "<p><b>ALPHA BETA GAMMA:</b><br>You can purchase three different currencies; Alpha, Beta and Gamma. Alpha costs energy, <br>Beta costs EP and Gamma costs electricity. You can use them to buy different upgrades!";
+	let ABGText = "<p><b>ALPHA BETA GAMMA:</b><br>You can purchase three different currencies; Alpha, Beta and Gamma. Alpha costs energy,<br>Beta costs EP, and Gamma costs electricity. You can use them to buy different upgrades.<br>The next mechanic is unlocked at 1e75 EP.<br>Tip: Farm Expansions for a little while to increase the Expansion Upgrade 13 multiplier.";
 	
 	let omegaText = "<p><b>OMEGA:</b><br>Becoming Omega resets everything you've done so far, but with some big rewards. <br>You unlock a new set of generators, and upgrades. Omega Generators produce Omega.<br>Omega makes electricity stronger.<br>The upgrades costs Omega, and it goes up every time you buy another upgrade. <br>Omega upgrades is kind of like a skill tree. You need to buy every previous upgrade to be able to purchase <br>the next. If you're unhappy with a choice you made, or want to try a different build, you can reset for free!";
 	
@@ -5532,34 +5548,34 @@ function updateGUI(){
 	let retireText = "<p><b>RETIRE:</b><br>You just Retired from the Battle Tower, resetting your character. However, you just gained some fancy new Super Skillpoints!<br>These Skillpoints will stay with you forever, even after Retiring. Super Skillpoints work differently from your normal Skillpoints.<br>Instead of directly making you strong, they make your Skillpoints more effective. The max amount of Super Skillpoints you can have<br>is equal to the highest level Enemy you have ever killed. When you retire you keep the permanent Skillpoints you gained from some of the Atom Shop items.";
 	
 	if (player.hasUnlockedTraining == true){
-		document.getElementById("infoText").innerHTML = hotkeyTextBattleTower + generatorText + prestigeText + expansionText + autobuyerText + ABGText + omegaText + simulationText + electronText + realityText + battleTowerText + retireText;
+		document.getElementById("infoText").innerHTML = baseText + hotkeyTextBattleTower + generatorText + prestigeText + expansionText + autobuyerText + ABGText + omegaText + simulationText + electronText + realityText + battleTowerText + retireText;
 	}
 	else if (player.hasUnlockedBattleTower == true){
-		document.getElementById("infoText").innerHTML = hotkeyTextBattleTower + generatorText + prestigeText + expansionText + autobuyerText + ABGText + omegaText + simulationText + electronText + realityText + battleTowerText;
+		document.getElementById("infoText").innerHTML = baseText + hotkeyTextBattleTower + generatorText + prestigeText + expansionText + autobuyerText + ABGText + omegaText + simulationText + electronText + realityText + battleTowerText;
 	}
 	else if (player.hasUnlockedReality == true){
-		document.getElementById("infoText").innerHTML = hotkeyTextReality + generatorText + prestigeText + expansionText + autobuyerText + ABGText + omegaText + simulationText + electronText + realityText;
+		document.getElementById("infoText").innerHTML = baseText + hotkeyTextReality + generatorText + prestigeText + expansionText + autobuyerText + ABGText + omegaText + simulationText + electronText + realityText;
 	}
 	else if (player.hasUnlockedElectrons == true){
-		document.getElementById("infoText").innerHTML = hotkeyTextOmega + generatorText + prestigeText + expansionText + autobuyerText + ABGText + omegaText + simulationText + electronText;
+		document.getElementById("infoText").innerHTML = baseText + hotkeyTextOmega + generatorText + prestigeText + expansionText + autobuyerText + ABGText + omegaText + simulationText + electronText;
 	}
 	else if (player.hasUnlockedSim == true){
-		document.getElementById("infoText").innerHTML = hotkeyTextOmega + generatorText + prestigeText + expansionText + autobuyerText + ABGText + omegaText + simulationText;
+		document.getElementById("infoText").innerHTML = baseText + hotkeyTextOmega + generatorText + prestigeText + expansionText + autobuyerText + ABGText + omegaText + simulationText;
 	}
 	else if (player.hasUnlockedOmega == true){
-		document.getElementById("infoText").innerHTML = hotkeyTextOmega + generatorText + prestigeText + expansionText + autobuyerText + ABGText + omegaText;
+		document.getElementById("infoText").innerHTML = baseText + hotkeyTextOmega + generatorText + prestigeText + expansionText + autobuyerText + ABGText + omegaText;
 	}
 	else if (player.hasUnlockedABG == true){
-		document.getElementById("infoText").innerHTML = hotkeyTextExpansion + generatorText + prestigeText + expansionText + autobuyerText + ABGText;
+		document.getElementById("infoText").innerHTML = baseText + hotkeyTextExpansion + generatorText + prestigeText + expansionText + autobuyerText + ABGText;
 	}
 	else if (player.expansionUpgrade5 == true){
-		document.getElementById("infoText").innerHTML = hotkeyTextExpansion + generatorText + prestigeText + expansionText + autobuyerText;
+		document.getElementById("infoText").innerHTML = baseText + hotkeyTextExpansion + generatorText + prestigeText + expansionText + autobuyerText;
 	}
 	else if (player.hasUnlockedExpansion == true){
-		document.getElementById("infoText").innerHTML = hotkeyTextExpansion + generatorText + prestigeText + expansionText;
+		document.getElementById("infoText").innerHTML = baseText + hotkeyTextExpansion + generatorText + prestigeText + expansionText;
 	}
 	else{
-		document.getElementById("infoText").innerHTML = hotkeyText + generatorText + prestigeText;
+		document.getElementById("infoText").innerHTML = baseText + hotkeyText + generatorText + prestigeText;
 	}
 	
 	// ALPHA BETA GAMMA TAB *********************
@@ -6596,7 +6612,6 @@ setInterval(mainLoop, 50);
 setInterval(save, 10000);
 
 updateGUI();
-
 
 
 
