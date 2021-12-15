@@ -324,6 +324,9 @@ html{
 #seventhGeneratorPrestige {grid-area: seventhGenPres;}
 #eighthGeneratorPrestige {grid-area: eighthGenPres;}
 
+#maxAll {grid-area: maxAll;}
+#prestigeAll {grid-area: prestigeAll;}
+
 #firstExpansionGenerator {grid-area: firstExpGen;}
 #secondExpansionGenerator {grid-area: secondExpGen;}
 #thirdExpansionGenerator {grid-area: thirdExpGen;}
@@ -380,7 +383,8 @@ html{
 		"firstGen secondGen thirdGen fourthGen"
 		"fifthGen sixthGen seventhGen eighthGen"
 		"firstGenPres secondGenPres thirdGenPres fourthGenPres"
-		"fifthGenPres sixthGenPres seventhGenPres eighthGenPres";
+		"fifthGenPres sixthGenPres seventhGenPres eighthGenPres"
+		"maxAll maxAll prestigeAll prestigeAll";
 	width: 60%;
 }
 
@@ -403,6 +407,16 @@ html{
 
 .prestige.locked{
 	background-color: #5F0001;
+}
+
+#maxAll{
+	background-color: #5A7E6F;
+	font-size: 25px;
+}
+
+#prestigeAll{
+	background-color: #5A7E6F;
+	font-size: 25px;
 }
 
 .grid-container-expand{
@@ -1072,6 +1086,18 @@ html{
 	-webkit-user-select: text;
 	-ms-user-select: text;
 	user-select: text;
+}
+
+#hardReset{
+	width: 520px;
+	height: 100px;
+	background-color: black;
+	margin: 10px 0 0 10px;
+	font-size: 25px;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .grid-container-reality{
