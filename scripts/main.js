@@ -1725,7 +1725,7 @@ function getLoop(){
 	if (player.alphaUpgrade2 == 0){
 		player.expansionPointMultFromSecondAlphaUpgrade == new Decimal(1);
 	}
-	else player.expansionPointMultFromSecondAlphaUpgrade = ((player.secondsInExpansion.div(5)).pow(player.alphaUpgrade2)).plus(1);
+	else player.expansionPointMultFromSecondAlphaUpgrade = ((player.secondsInExpansion.div(new Decimal(6).minus(player.alphaUpgrade2))).pow(player.alphaUpgrade2)).plus(1);
 	
 	player.alphaUpgrade5FinalMult = player.alphaUpgrade5MultIncreaseFromOmegaUpgrade1x2y.times(2.5);
 	player.expansionPointMultFromFifthAlphaUpgrade = player.alphaUpgrade5FinalMult.pow(player.alphaUpgrade5);
