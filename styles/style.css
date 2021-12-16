@@ -336,6 +336,8 @@ html{
 #seventhExpansionGenerator {grid-area: seventhExpGen;}
 #eighthExpansionGenerator {grid-area: eighthExpGen;}
 
+#maxAllExpansion {grid-area: maxAllExp;}
+
 #firstOmegaGenerator {grid-area: firstOmgGen;}
 #secondOmegaGenerator {grid-area: secondOmgGen;}
 #thirdOmegaGenerator {grid-area: thirdOmgGen;}
@@ -425,7 +427,8 @@ html{
 		"expTextCon expTextCon expTextCon expTextCon"
 		"expPointMult expPointMult expPointMult expPointMult"
 		"firstExpGen secondExpGen thirdExpGen fourthExpGen"
-		"fifthExpGen sixthExpGen seventhExpGen eighthExpGen";
+		"fifthExpGen sixthExpGen seventhExpGen eighthExpGen"
+		"maxAllExp maxAllExp maxAllExp maxAllExp";
 	width: 100%;
 }
 
@@ -447,6 +450,10 @@ html{
 
 #expansionPointMult.locked {
 	background-color: #5F0001;
+}
+
+#maxAllExpansion{
+	font-size: 25px;
 }
 
 #expansionTextContainer{
