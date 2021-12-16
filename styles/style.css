@@ -764,6 +764,9 @@ html{
 	height: 100%;
 	/*background-color: #380082;*/
 	background-color: #313233;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 #omegaUpgradeReset.activated{
@@ -773,7 +776,6 @@ html{
 #omegaUpgradeResetText{
 	font-size: 20px;
 	text-align: center;
-	margin: 50px 0px 0px 0px;
 }
 
 #simText{
