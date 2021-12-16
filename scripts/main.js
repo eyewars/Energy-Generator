@@ -2808,11 +2808,24 @@ function becomeOmega(){
 		player.betaUpgrade5 = new Decimal(0);
 		player.gammaUpgrade5 = new Decimal(0);
 		
-		player.omegaUpgradeReset = false;
-		
 		if (player.thirdAtomUpgradeBought.lt(2)){
 			player.electrons = new Decimal(1);
 		}
+
+		if (player.omegaUpgradeReset == true){
+			console.log("yo");
+			for (x = 1; x < 5; x++){
+				for (y = 1; y < 5; y++){
+					player["omegaUpgrade" + x + "x" + y + "y"] = false;
+					player["omegaUpgrade" + x + "x" + y + "y" + "Bought"] = new Decimal(0);
+				}
+			}
+			
+			player.omegaUpgradeCost = new Decimal(1);
+			player.omegaUpgradeReset = false;
+			document.getElementById("omegaUpgradeReset").classList.remove("activated");
+		}
+
 	}
 }
 
