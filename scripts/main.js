@@ -1210,6 +1210,17 @@ function maxAll(){
 	}
 }
 
+function maxAllExpansion(){
+	for (let tier = 1; tier < 9; tier++){
+		for (let i = 0; i < 100; i++){
+			buyExpansionGenerator(tier);
+		}
+	}
+	for (let i = 0; i < 100; i++){
+		epMult();
+	}
+}
+
 /*document.onkeydown = function(e){
 	
 	// https://keycode.info/
@@ -1240,8 +1251,13 @@ function maxAll(){
 }*/
 
 function hotkeys(e){
+	//https://keycode.info/
 	if (e.which == 77){
 		maxAll();
+	}
+
+	if (e.which == 69){
+		maxAllExpansion();
 	}
 	
 	if (e.which == 80){
@@ -5517,13 +5533,13 @@ function updateGUI(){
 
 	let hotkeyText = "<p><b>HOTKEYS:</b><br>M: Buys all generators and all mult<br>P: Prestige</p>";
 	
-	let hotkeyTextExpansion = "<p><b>HOTKEYS:</b><br>M: Buys all generators and all mult<br>P: Prestige<br>X: Expand</p>";
+	let hotkeyTextExpansion = "<p><b>HOTKEYS:</b><br>M: Buys all generators and all mult<br>P: Prestige<br>E: Buys all Expansion Generators and 2x EP<br>X: Expand</p>";
 	
-	let hotkeyTextOmega = "<p><b>HOTKEYS:</b><br>M: Buys all generators and all mult<br>P: Prestige<br>X: Expand<br>O: Become Omega</p>";
+	let hotkeyTextOmega = "<p><b>HOTKEYS:</b><br>M: Buys all generators and all mult<br>P: Prestige<br>E: Buys all Expansion Generators and 2x EP<br>X: Expand<br>O: Become Omega</p>";
 	
-	let hotkeyTextReality = "<p><b>HOTKEYS:</b><br>M: Buys all generators and all mult<br>P: Prestige<br>X: Expand<br>O: Become Omega<br>R: Reach Reality</p>";
+	let hotkeyTextReality = "<p><b>HOTKEYS:</b><br>M: Buys all generators and all mult<br>P: Prestige<br>E: Buys all Expansion Generators and 2x EP<br>X: Expand<br>O: Become Omega<br>R: Reach Reality</p>";
 
-	let hotkeyTextBattleTower = "<p><b>HOTKEYS:</b><br>M: Buys all generators and all mult<br>P: Prestige<br>X: Expand<br>O: Become Omega<br>R: Reach Reality<br>CTRL: 10 Stats<br>SHIFT: 10% Stats<br>ALT: 100% Stats</p>";
+	let hotkeyTextBattleTower = "<p><b>HOTKEYS:</b><br>M: Buys all generators and all mult<br>P: Prestige<br>E: Buys all Expansion Generators and 2x EP<br>X: Expand<br>O: Become Omega<br>R: Reach Reality<br>CTRL: 10 Stats<br>SHIFT: 10% Stats<br>ALT: 100% Stats</p>";
 	
 	let generatorText = "<p><b>GENERATORS:</b><br>The first generator makes energy. Energy is the main currency you use to upgrade your generators <br>and your all mult. The second generator creates the first, the third creates the second and so on.</p>";
 	
