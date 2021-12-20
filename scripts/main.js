@@ -5958,7 +5958,16 @@ function updateGUI(){
 	document.getElementById("skillpointsText").innerText = "Skillpoints:";
 	document.getElementById("skillpointsNumber").innerText = format(player.skillpoints, 0);
 	
-	document.getElementById("retire").innerHTML = "RETIRE<br>from fighting and gain " + format(Decimal.floor(player.friendlyLevel.div(10)), 0) + " Super Skillpoints";
+	let totalSuperSkillpoints = player.superSkillpoints.plus(player.superStamina).plus(player.superStrength).plus(player.superArmor).plus(player.superRegeneration).plus(player.superAgility);
+	if ((totalSuperSkillpoints.plus(Decimal.floor(player.friendlyLevel.div(10)))).lte(player.highestEnemyLevel)){
+		document.getElementById("retire").innerHTML = "RETIRE<br>from fighting and gain " + format(Decimal.floor(player.friendlyLevel.div(10)), 0) + " Super Skillpoints";
+	}
+	else if (totalSuperSkillpoints.lt(player.highestEnemyLevel)){
+		document.getElementById("retire").innerHTML = "RETIRE<br>from fighting and gain " + format(player.highestEnemyLevel.minus(totalSuperSkillpoints), 0) + " Super Skillpoints";
+	}
+	else {
+		document.getElementById("retire").innerHTML = "RETIRE<br>You have max SSP, you can increase it by killing higher level Enemies.";
+	}
 	
 	if (player.friendlyLevel.lt(15)){
 		document.getElementById("retire").classList.add("locked");	
