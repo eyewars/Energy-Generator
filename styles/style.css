@@ -1320,11 +1320,16 @@ html{
 	z-index: 2;
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: center;
+	text-align: center;
+}
+
+#friendlyHPBarText{
+	width: 100%;
 }
 
 #friendlyHPBarTextDps{
 	font-size: 20px;
+	width: 100%;
 }
 
 #enemyHPBar{
@@ -1361,11 +1366,16 @@ html{
 	z-index: 2;
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: center;
+	text-align: center;
+}
+
+#enemyHPBarText{
+	width: 100%;
 }
 
 #enemyHPBarTextDps{
 	font-size: 20px;
+	width: 100%;
 }
 
 #friendlyRest{
