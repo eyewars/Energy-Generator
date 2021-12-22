@@ -302,6 +302,7 @@
 						<div id="omegaUpgradeResetText">RESET OMEGA UPGRADES<br>ON NEXT EXPANSION OR<br>WHEN YOU BECOME OMEGA</div>
 					</div>
 				</div>
+				<div id="omegaUpgradeCurrentOmega">You currenctly have 100 Omega</div>
 				<div id="omegaUpgradeContainer">
 					<div class="omegaUpgrades" id="omegaUp1" onclick="buyOmegaUpgrade(1, 1)">
 						<div id="omegaUpgrade1"></div>
@@ -400,6 +401,7 @@
 			</div>
 			
 			<div class="tabPanel" id="simulationUpgradesTab">
+				<div id="simUpgradeGoldText">Gold: 1000</div>
 				<div id="simUpgradesContainer">
 					<div class="simUpgrade" id="simUpgrade1" onclick="buySimUpgrade(1)"></div>
 					<div class="simUpgrade" id="simUpgrade2" onclick="buySimUpgrade(2)"></div>
@@ -549,14 +551,20 @@
 				<div id="battleBarContainer" class="battleTowerContainers">
 					<div id="friendlyBars" class="battleTowerFloatLeft">
 						<div id="friendlyHPBar" class="battleTowerBarButtonText" style="--width: 100" data-label="">
-							<div id="friendlyHPBarText">80 / 100</div>
+							<div id="friendlyHPBarTextContainer">
+								<div id="friendlyHPBarText">80 / 100</div>
+								<div id="friendlyHPBarTextDps">Taking 100 DPS</div>
+							</div>
 						</div>
 						<div id="friendlyRest" class="battleTowerBarButtonText battleTowerFloatLeft" onclick="restOrFight(1)">Rest</div>
 						<div id="friendlyFight" class="battleTowerBarButtonText battleTowerFloatRight" onclick="restOrFight(2)">Fight</div>
 					</div>
 					<div id="enemyBars" class="battleTowerFloatRight">
 						<div id="enemyHPBar" class="battleTowerBarButtonText" style="--width: 100" data-label="">
-							<div id="enemyHPBarText">80 / 100</div>
+							<div id="enemyHPBarTextContainer">
+								<div id="enemyHPBarText">80 / 100</div>
+								<div id="enemyHPBarTextDps">Taking 100 DPS</div>
+							</div>
 						</div>
 						<div id="enemyPrevious" class="battleTowerBarButtonText battleTowerFloatLeft" onclick="prevNext(1)">Previous</div>
 						<div id="enemyNext" class="battleTowerBarButtonText battleTowerFloatRight" onclick="prevNext(2)">Next</div>
