@@ -488,6 +488,8 @@ function hardReset(){
 		hasUnlockedSimUps: false,
 
 		hasUnlockedElectrons: false,
+		electronCurrent: new Decimal(0),
+		electronInterval: new Decimal(1000),
 		electrons: new Decimal(1),
 		electronEffect: new Decimal(1),
 		maxElectrons: new Decimal(1e10),
@@ -515,7 +517,7 @@ function hardReset(){
 
 		firstAtomUpgrade3: new Decimal(1),
 		secondAtomUpgrade3: new Decimal(1),
-		thirdAtomUpgrade3: 0,
+		thirdAtomUpgrade3: new Decimal(0),
 
 		firstAtomUpgradeCost: new Decimal(1),
 		secondAtomUpgradeCost: new Decimal(1),
@@ -686,6 +688,8 @@ function hardReset(){
 
 		atomShopItem2Effect: new Decimal(1),
 
+		atomShopItem11Effect: new Decimal(1),
+
 		atomShopItem13Effect: new Decimal(1000),
 
 		atomShopItem16Effect: new Decimal(1),
@@ -779,8 +783,8 @@ function hardReset(){
 		build4TalentRow5: 0
 
 	};
-	clearInterval(electronInterval);
-	electronInterval = setInterval(getElectrons, 1000);
+	//clearInterval(electronInterval);
+	//electronInterval = setInterval(getElectrons, 1000);
 }
 hardReset();
 
@@ -836,8 +840,10 @@ function importSave(){
 		Object.assign(tempPlayer, player);
 		player = tempPlayer;
 		
-		clearInterval(electronInterval);
-		electronInterval = setInterval(getElectrons, 1000-player.thirdAtomUpgrade3);
+		//clearInterval(electronInterval);
+		//electronInterval = setInterval(getElectrons, 1000-player.thirdAtomUpgrade3);
+
+		player.thirdAtomUpgrade3 = new Decimal(player.thirdAtomUpgrade3);
 	}
 }
 
@@ -1511,18 +1517,18 @@ function getExpansionUpgradeText(){
 	if (player.expansionUpgrade1 == true){
 		document.getElementById("expUp1").classList.remove("locked");
 		document.getElementById("expUp1").innerHTML = "Gain a 20x multiplier<br>to every generator.";
-		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 100 Electricity";
+		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 100 Electricity and you Currently have " + format(player.electricity, 2) + " Electricity";
 	}
 	else {
 		document.getElementById("expUp1").innerHTML = "Gain a 20x multiplier<br>to every generator."
 		document.getElementById("expUp1").classList.add("locked");
-		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1 Electricity";
+		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1 Electricity and you Currently have " + format(player.electricity, 2) + " Electricity";
 	};
 	
 	if (player.expansionUpgrade2 == true){
 		document.getElementById("expUp2").classList.remove("locked");
 		document.getElementById("expUp2").innerHTML = "Multiply your all<br>mult gain by 1.1x";
-		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e4 Electricity";
+		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e4 Electricity and you Currently have " + format(player.electricity, 2) + " Electricity";
 	}
 	else {
 		document.getElementById("expUp2").innerHTML = "Multiply your all<br>mult gain by 1.1x";
@@ -1532,7 +1538,7 @@ function getExpansionUpgradeText(){
 	if (player.expansionUpgrade3 == true){
 		document.getElementById("expUp3").classList.remove("locked");
 		document.getElementById("expUp3").innerHTML = "Increase max prestige<br>by 35.<br>Current: " + format(player.maxPrestige, 0);
-		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e6 Electricity";
+		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e6 Electricity and you Currently have " + format(player.electricity, 2) + " Electricity";
 	}
 	else {
 		document.getElementById("expUp3").innerHTML = "Increase max prestige<br>by 35.<br>Current: 15";
@@ -1542,7 +1548,7 @@ function getExpansionUpgradeText(){
 	if (player.expansionUpgrade4 == true){
 		document.getElementById("expUp4").classList.remove("locked");
 		document.getElementById("expUp4").innerHTML = "Gain a multiplier to<br>all generators based<br>on current Energy.<br>Current: " + format(player.allMultFromFourthExpansionUpgrade, 2) + "x";
-		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e8 Electricity";
+		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e8 Electricity and you Currently have " + format(player.electricity, 2) + " Electricity";
 	}
 	else {
 		document.getElementById("expUp4").innerHTML = "Gain a multiplier to<br>all generators based<br>on current Energy.<br>Current: 1x";
@@ -1552,7 +1558,7 @@ function getExpansionUpgradeText(){
 	if (player.expansionUpgrade5 == true){
 		document.getElementById("expUp5").classList.remove("locked");
 		document.getElementById("expUp5").innerHTML = "Unlock automatic<br>prestige autobuyer.<br>Prestige doesn't<br>reset.";
-		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e10 Electricity";
+		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e10 Electricity and you Currently have " + format(player.electricity, 2) + " Electricity";
 	}
 	else {
 		document.getElementById("expUp5").innerHTML = "Unlock automatic<br>prestige autobuyer.<br>Prestige doesn't<br>reset.";
@@ -1563,7 +1569,7 @@ function getExpansionUpgradeText(){
 		document.getElementById("expUp6").classList.remove("locked");
 		document.getElementById("expUp6").innerHTML = "Remove the max<br>prestige limit.";
 		document.getElementById("expUp3").innerHTML = "Increase max prestige<br>by 35.<br>Current: Infinite";
-		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e12 Electricity";
+		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e12 Electricity and you Currently have " + format(player.electricity, 2) + " Electricity";
 	}
 	else {
 		document.getElementById("expUp6").innerHTML = "Remove the max<br>prestige limit.";
@@ -1573,7 +1579,7 @@ function getExpansionUpgradeText(){
 	if (player.expansionUpgrade7 == true){
 		document.getElementById("expUp7").classList.remove("locked");
 		document.getElementById("expUp7").innerHTML = "Unlock generator<br>and all mult.<br>autobuyers";
-		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e14 Electricity";
+		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e14 Electricity and you Currently have " + format(player.electricity, 2) + " Electricity";
 	}
 	else {
 		document.getElementById("expUp7").innerHTML = "Unlock generator<br>and all mult.<br>autobuyers";
@@ -1583,7 +1589,7 @@ function getExpansionUpgradeText(){
 	if (player.expansionUpgrade8 == true){
 		document.getElementById("expUp8").classList.remove("locked");
 		document.getElementById("expUp8").innerHTML = "Gain a multiplier<br>to all generators<br>based on EP.<br>Current: " + format(player.allMultFromEighthExpansionUpgrade, 2) + "x";
-		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e16 Electricity";
+		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e16 Electricity and you Currently have " + format(player.electricity, 2) + " Electricity";
 	}
 	else {
 		document.getElementById("expUp8").innerHTML = "Gain a multiplier<br>to all generators<br>based on EP.<br>Current: " + format(player.allMultFromEighthExpansionUpgrade, 2) + "x";
@@ -1593,7 +1599,7 @@ function getExpansionUpgradeText(){
 	if (player.expansionUpgrade9 == true){
 		document.getElementById("expUp9").classList.remove("locked");
 		document.getElementById("expUp9").innerHTML = "Gain a multiplier<br>to EP gain<br>based on first<br>generator prestiges.<br>Current: " + format(player.expansionPointMultFromNinthExpansionUpgrade, 0) + "x";
-		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e18 Electricity";
+		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e18 Electricity and you Currently have " + format(player.electricity, 2) + " Electricity";
 	}
 	else {
 		document.getElementById("expUp9").innerHTML = "Gain a multiplier<br>to EP gain<br>based on first<br>generator prestiges.<br>Current: 1x";
@@ -1603,7 +1609,7 @@ function getExpansionUpgradeText(){
 	if (player.expansionUpgrade10 == true){
 		document.getElementById("expUp10").classList.remove("locked");
 		document.getElementById("expUp10").innerHTML = "Gain a multiplier<br>to all generators<br>based on electricity.<br>Current: " + format(player.allMultFromTenthExpansionUpgrade, 2) + "x";
-		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e20 Electricity";
+		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e20 Electricity and you Currently have " + format(player.electricity, 2) + " Electricity";
 	}
 	else {
 		document.getElementById("expUp10").innerHTML = "Gain a multiplier<br>to all generators<br>based on electricity.<br>Current: 1x";
@@ -1613,7 +1619,7 @@ function getExpansionUpgradeText(){
 	if (player.expansionUpgrade11 == true){
 		document.getElementById("expUp11").classList.remove("locked");
 		document.getElementById("expUp11").innerHTML = "Gain a multiplier<br>to all<br>expansion generators<br>based on EP.<br>Current: " + format(player.expansionGeneratorAllMultFromEleventhExpansionUpgrade, 2) + "x";
-		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e22 Electricity";
+		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e22 Electricity and you Currently have " + format(player.electricity, 2) + " Electricity";
 	}
 	else {
 		document.getElementById("expUp11").innerHTML = "Gain a multiplier<br>to all<br>expansion generators<br>based on EP.<br>Current: 1x";
@@ -1623,7 +1629,7 @@ function getExpansionUpgradeText(){
 	if (player.expansionUpgrade12 == true){
 		document.getElementById("expUp12").classList.remove("locked");
 		document.getElementById("expUp12").innerHTML = "Increase your all<br>mult gain based<br>on highest ever EP.<br>Current: " + format(player.allMultGainFromTwelfthExpansionUpgrade, 2) + "x";
-		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e24 Electricity";
+		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e24 Electricity and you Currently have " + format(player.electricity, 2) + " Electricity";
 	}
 	else {
 		document.getElementById("expUp12").innerHTML = "Increase your all<br>mult gain based<br>on highest ever EP.<br>Current: " + format(player.allMultGainFromTwelfthExpansionUpgrade, 2) + "x";
@@ -1633,7 +1639,7 @@ function getExpansionUpgradeText(){
 	if (player.expansionUpgrade13 == true){
 		document.getElementById("expUp13").classList.remove("locked");
 		document.getElementById("expUp13").innerHTML = "Gain a multiplier<br>to EP gain based<br>on how many<br>times you have<br>Expanded.<br>Current: " + format(player.expansionPointMultFromThirteenthExpansionUpgrade, 0) + "x";
-		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e26 Electricity";
+		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e26 Electricity and you Currently have " + format(player.electricity, 2) + " Electricity";
 	}
 	else {
 		document.getElementById("expUp13").innerHTML = "Gain a multiplier<br>to EP gain based<br>on how many<br>times you have<br>Expanded.<br>Current: 1x";
@@ -1643,7 +1649,7 @@ function getExpansionUpgradeText(){
 	if (player.expansionUpgrade14 == true){
 		document.getElementById("expUp14").classList.remove("locked");
 		document.getElementById("expUp14").innerHTML = "Unlock expansion<br>autobuyer.";
-		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e28 Electricity";
+		document.getElementById("nextExpansionUpgradeText").innerText = "Next Expansion Upgrade is unlocked at 1e28 Electricity and you Currently have " + format(player.electricity, 2) + " Electricity";
 	}
 	else {
 		document.getElementById("expUp14").innerHTML = "Unlock expansion<br>autobuyer.";
@@ -1653,7 +1659,7 @@ function getExpansionUpgradeText(){
 	if (player.expansionUpgrade15 == true){
 		document.getElementById("expUp15").classList.remove("locked");
 		document.getElementById("expUp15").innerHTML = "Alpha, Beta and<br>Gamma unlocked!";
-		document.getElementById("nextExpansionUpgradeText").innerText = "All Expansion Upgrades are unlocked!";
+		document.getElementById("nextExpansionUpgradeText").innerText = "All Expansion Upgrades are unlocked! You Currently have " + format(player.electricity, 2) + " Electricity";
 	}
 	else {
 		document.getElementById("expUp15").innerHTML = "Unlock ???";
@@ -1803,6 +1809,8 @@ function getLoop(){
 	
 	player.electronGainFinal = player.electronGain.times(player.electronGainFromOmegaUpgrade3x3y).times(player.atomShopItem18Effect);
 	
+	player.electronInterval = new Decimal(1000).minus(player.thirdAtomUpgrade3);
+
 
 	
 	if (player.talent1IsActive == true){
@@ -1906,6 +1914,10 @@ function getLoop(){
 	}
 	else player.atomShopItem2Effect = new Decimal(1);
 
+	if (player.atomShopItem11Bought = true){
+		player.atomShopItem11Effect = new Decimal(1.5);
+	}
+	else player.atomShopItem11Effect = new Decimal(1);
 
 	if (player.atomShopItem16Bought == true){
 		player.atomShopItem16Effect = player.friendlyLevel.pow(2);
@@ -3200,10 +3212,17 @@ function fight(){
 	}
 }
 
-function getElectrons(){
+player.thirdAtomUpgrade3 = new Decimal(player.thirdAtomUpgrade3);
+function getElectrons(diff){
 	if (player.hasUnlockedElectrons == true){
 		if (player.electrons.lt(player.maxElectrons)){
-			player.electrons = player.electrons.times(player.electronGainFinal);
+			if (player.electronCurrent.lt(player.electronInterval)){
+				player.electronCurrent = player.electronCurrent.plus(new Decimal(1000).times(diff));
+			}
+			else if (player.electronCurrent.gte(player.electronInterval)){
+				player.electrons = player.electrons.times(player.electronGainFinal);
+				player.electronCurrent = player.electronCurrent.minus(player.electronInterval);
+			}
 		}
 		else if (player.electrons.gt(player.maxElectrons)){
 			player.electrons = player.maxElectrons;
@@ -3211,7 +3230,7 @@ function getElectrons(){
 	}
 }
 
-var electronInterval = setInterval(getElectrons, 1000-player.thirdAtomUpgrade3);
+//var electronInterval = setInterval(getElectrons, 1000-player.thirdAtomUpgrade3);
 
 function buyElectronUpgrades(x) {
 	if (x == 1){
@@ -3301,7 +3320,7 @@ function buyAtomUpgrades(x){
 		/*
 		1. Skip Stages
 		2. Keep ABG
-		3. Increase electronEffect 
+		3. Increase electronEffect
 		*/
 	}
 	if (x == 3){
@@ -3320,9 +3339,9 @@ function buyAtomUpgrades(x){
 				player.atoms = player.atoms.minus(player.thirdAtomUpgradeCost);
 				player.thirdAtomUpgradeBought = player.thirdAtomUpgradeBought.plus(1);
 				
-				player.thirdAtomUpgrade3 += 150;
-				clearInterval(electronInterval);
-				electronInterval = setInterval(getElectrons, 1000-player.thirdAtomUpgrade3);
+				player.thirdAtomUpgrade3 = player.thirdAtomUpgrade3.plus(150);
+				//clearInterval(electronInterval);
+				//electronInterval = setInterval(getElectrons, 1000-player.thirdAtomUpgrade3);
 			}
 		}
 		/*
@@ -3331,8 +3350,6 @@ function buyAtomUpgrades(x){
 		3. Reduce Electron interval 
 		*/
 	}
-	// UPGRADE 3 MÅ OGSÅ VÆRE LIMITED (KANSKJE 3 - 5 UPGRADES ELLER NOE) MEN DET MÅ VÆRE EN MAKS SÅ DET IKKE BLIR EN OPTIMAL MÅTE OG FOLK IKKE KJØPER EN AV DE F.EKS
-	// UNLOCK EN 4. UPGRADE (NY KNAPP I MIDTEN UNDER/OVER DE ANDRE 3) ETTER DU HAR MAXA DE ANDRE 3. DENNE VIL DU KUN KUNNE KJØPE EN GANG OG VIL UPGRADEE NOE BASERT PÅ ATOMS. KANSKJE DET SKAL HELLER BARE VÆRE EN 4. UPGRADE PÅ NR 2
 }
 
 function reachReality(){
@@ -3854,7 +3871,7 @@ function reachReality(){
 	
 			player.firstAtomUpgrade3 = new Decimal(1);
 			player.secondAtomUpgrade3 = new Decimal(1);
-			player.thirdAtomUpgrade3 = 0;
+			player.thirdAtomUpgrade3 = new Decimal(0),
 	
 			player.firstAtomUpgradeCost = new Decimal(1);
 			player.secondAtomUpgradeCost = new Decimal(1);
@@ -3864,8 +3881,8 @@ function reachReality(){
 		
 		
 		
-		clearInterval(electronInterval);
-		electronInterval = setInterval(getElectrons, 1000-player.thirdAtomUpgrade3);
+		//clearInterval(electronInterval);
+		//electronInterval = setInterval(getElectrons, 1000-player.thirdAtomUpgrade3);
 		
 	}
 }
@@ -4154,41 +4171,60 @@ function restOrFight(i){
 function prevNext(i){
 	if (i == 1){
 		if (player.enemyLevel.gt(1)){
-			player.enemyLevel = player.enemyLevel.minus(1);
-			generateEnemy(player.enemyLevel);
+			if ((player.enemyLevel.minus(changeEnemyLevelNum)).gte(1)){
+				player.enemyLevel = player.enemyLevel.minus(changeEnemyLevelNum);
+				generateEnemy(player.enemyLevel);
+			}
+			else {
+				player.enemyLevel = new Decimal(1);
+				generateEnemy(player.enemyLevel);
+			}
 		}
 		else {
 			generateEnemy(player.enemyLevel);
 		}
 	}
 	if (i == 2 && player.enemyLevel.lt(player.maxEnemyLevel)){
-		player.enemyLevel = player.enemyLevel.plus(1);
-		generateEnemy(player.enemyLevel);
+		if ((player.enemyLevel.plus(changeEnemyLevelNum)).lte(player.maxEnemyLevel)){
+			player.enemyLevel = player.enemyLevel.plus(changeEnemyLevelNum);
+			generateEnemy(player.enemyLevel);
+		}
+		else {
+			player.enemyLevel = player.maxEnemyLevel;
+			generateEnemy(player.enemyLevel);
+		}
 	}
 }
 
 let changeStatsNum = 0;
+let changeEnemyLevelNum = new Decimal(1);
 function getNum(e){
 	if (e.which == 18){
 		changeStatsNum = 1;
+		changeEnemyLevelNum = new Decimal(1000);
 	}
 	else if (e.which == 16){
 		changeStatsNum = 2;
+		changeEnemyLevelNum = new Decimal(10);
 	}
 	else if (e.which == 17){
 		changeStatsNum = 3;
+		changeEnemyLevelNum = new Decimal(100);
 	}
 }
 document.addEventListener("keydown", getNum);
 function getNumRelease(e){
 	if (e.which == 18){
 		changeStatsNum = 0;
+		changeEnemyLevelNum = new Decimal(1);
 	}
 	else if (e.which == 16){
 		changeStatsNum = 0;
+		changeEnemyLevelNum = new Decimal(1);
 	}
 	else if (e.which == 17){
 		changeStatsNum = 0;
+		changeEnemyLevelNum = new Decimal(1);
 	}
 }
 document.addEventListener("keyup", getNumRelease);
@@ -5181,7 +5217,7 @@ function loadBuild(num){
 
 function retire(){
 	if (player.friendlyLevel.gte(15)){
-		player.superSkillpoints = player.superSkillpoints.plus(Decimal.floor(player.friendlyLevel.div(10)));
+		player.superSkillpoints = player.superSkillpoints.plus(Decimal.floor((player.friendlyLevel.div(10)).pow(player.atomShopItem11Effect)));
 		player.skillpoints = player.atomShopItem1Skillpoints.plus(player.atomShopItem9Skillpoints);
 		
 		player.friendlyLevel = new Decimal(1);
@@ -5269,6 +5305,7 @@ function updateGUI(){
 	document.getElementById("omega").textContent = "You have " + format(player.omega, 1) + " Omega";
 	document.getElementById("omegaPerSec").textContent = "You're getting " + format(player.firstOmegaGeneratorAmount.times(player.firstOmegaGeneratorFinalMult), 1) + " Omega per second";
 	document.getElementById("omegaPointMult").innerHTML = "Multiply OP gain by 2x<br>Current: " + format(player.omegaPointMult, 0) + "x<br>Cost: " + format(player.omegaPointMultCost, 0) + " EP";
+	document.getElementById("omegaUpgradeCurrentOmega").innerText = "You currently have " + format(player.omega, 2) + " Omega";
 	document.getElementById("realityEnergy").textContent = "You have " + format(player.realityEnergy, 1) + " Reality Energy";
 	document.getElementById("realityEnergyPerSec").textContent = "You're getting " + format(player.firstRealityGeneratorAmount.times(player.firstRealityGeneratorFinalMult), 1) + " Reality Energy per second";
 	document.getElementById("expansionAmountText").textContent = "You have " + format(player.expansionPoints) + " Expansion Points";
@@ -5552,7 +5589,7 @@ function updateGUI(){
 	
 	let hotkeyTextReality = "<p><b>HOTKEYS:</b><br>M: Buys all generators and all mult<br>P: Prestige<br>E: Buys all Expansion Generators and 2x EP<br>X: Expand<br>O: Become Omega<br>R: Reach Reality</p>";
 
-	let hotkeyTextBattleTower = "<p><b>HOTKEYS:</b><br>M: Buys all generators and all mult<br>P: Prestige<br>E: Buys all Expansion Generators and 2x EP<br>X: Expand<br>O: Become Omega<br>R: Reach Reality<br>CTRL: 10 Stats<br>SHIFT: 10% Stats<br>ALT: 100% Stats</p>";
+	let hotkeyTextBattleTower = "<p><b>HOTKEYS:</b><br>M: Buys all generators and all mult<br>P: Prestige<br>E: Buys all Expansion Generators and 2x EP<br>X: Expand<br>O: Become Omega<br>R: Reach Reality<br>CTRL: 10 Stats or 100 Enemy Levels<br>SHIFT: 10% Stats or 10 Enemy Levels<br>ALT: 100% Stats or 1000 Enemy Levels</p>";
 	
 	let generatorText = "<p><b>GENERATORS:</b><br>The first generator makes energy. Energy is the main currency you use to upgrade your generators <br>and your all mult. The second generator creates the first, the third creates the second and so on.</p>";
 	
@@ -5572,7 +5609,7 @@ function updateGUI(){
 	
 	let realityText = "<p><b>REALITY:</b><br>You have now Reached Reality! As a reward you now have access to Reality Generators.<br>They generate Reality Energy, which can be used on 6 different buffs. At first you can only use 1 at once,<br>but later on you will be able to use more. You are freely able to switch between which bonuses you want to use,<br>so don't worry about picking the 'wrong' buff. They are all useful in different stages of reality.<br>After you Reach Reality for the second time you unlock ???";
 	
-	let battleTowerText = "<p><b>BATTLE TOWER:</b><br>After Reaching Reality again you unlocked the Battle Tower. Could this be what the simulation was simulating?<br>Here you will fight enemies and level up. Every time you level up you gain 3 Skillpoints that you can use on whatever you want!<br>You can also allocate your stats however you wish without any cost, so don't worry about experimenting.<br>Stamina gives 10 HP<br>Strength increases DPS by 2<br>Armor reduces incoming damage by 5%<br>Regeneration regenerates 1 HP per second<br>Agility penetrates 0.75 Armor<br>Sometimes the enemy will be Legendary. Legendary enemies drop Atoms when they die. The higher the level of the enemy,<br>the higher the chance for the enemy to be Legendary and the more Atoms they will drop. Higher level enemies also gives more XP.";
+	let battleTowerText = "<p><b>BATTLE TOWER:</b><br>After Reaching Reality again you unlocked the Battle Tower. Could this be what the simulation was simulating?<br>Here you will fight enemies and level up. Every time you level up you gain 3 Skillpoints that you can use on whatever you want!<br>You can also allocate your stats however you wish without any cost, so go ahead and experiment with different builds!<br>Stamina gives 10 HP<br>Strength increases DPS by 2<br>Armor reduces incoming damage<br>Regeneration regenerates 1 HP per second<br>Agility reduces Armor by 0.75 and it can even go below 0 which increases damage instead<br>Sometimes the enemy will be Legendary. Legendary enemies drop Atoms when they die. The higher the level of the enemy,<br>the higher the chance for the enemy to be Legendary and the more Atoms they will drop. Higher level enemies also gives more XP.";
 
 	let retireText = "<p><b>RETIRE:</b><br>You just Retired from the Battle Tower, resetting your character. However, you just gained some fancy new Super Skillpoints!<br>These Skillpoints will stay with you forever, even after Retiring. Super Skillpoints work differently from your normal Skillpoints.<br>Instead of directly making you strong, they make your Skillpoints more effective. The max amount of Super Skillpoints you can have<br>is equal to the highest level Enemy you have ever killed. When you retire you keep the permanent Skillpoints you gained from some of the Atom Shop items.";
 	
@@ -5751,6 +5788,7 @@ function updateGUI(){
 	document.getElementById("simGoldPerSec").innerText = "Gold Per Second: " + format(player.finalGPS, 2);
 	document.getElementById("simStage").innerText = "Stage: " + format(player.stage, 0);
 	document.getElementById("simDPS").innerText = "DPS: " + format(player.finalDPS, 2);
+	document.getElementById("simUpgradeGoldText").innerText = "Gold: " + format(player.simGold, 2);
 	
 	document.getElementById("hpBarText").innerText = format(player.monsterCurrentHP, 2) + " / " + format(player.monsterTotalHP, 2);
 	
@@ -5911,10 +5949,10 @@ function updateGUI(){
 		document.getElementById("atomUpgrade3").innerHTML = "Keep Electrons<br>when becoming Omega<br>Cost: " + format(player.thirdAtomUpgradeCost, 0) + " Atoms";
 	}
 	else if (player.thirdAtomUpgradeBought.lt(7)){
-		document.getElementById("atomUpgrade3").innerHTML = "Make the Electron interval lower<br>by 150ms<br>Current: " + (1000 - player.thirdAtomUpgrade3) + "ms<br>Cost: " + format(player.thirdAtomUpgradeCost, 0) + " Atoms";
+		document.getElementById("atomUpgrade3").innerHTML = "Make the Electron interval lower<br>by 150ms<br>Current: " + format(player.electronInterval, 0) + "ms<br>Cost: " + format(player.thirdAtomUpgradeCost, 0) + " Atoms";
 	}
 	else {
-		document.getElementById("atomUpgrade3").innerHTML = "MAX<br>Makes the Electron interval lower<br>Current: " + (1000 - player.thirdAtomUpgrade3) + "ms";
+		document.getElementById("atomUpgrade3").innerHTML = "MAX<br>Makes the Electron interval lower<br>Current: " + format(player.electronInterval, 0) + "ms";
 	}
 	
 	// BATTLE TOWER ******************************
@@ -5959,8 +5997,8 @@ function updateGUI(){
 	document.getElementById("skillpointsNumber").innerText = format(player.skillpoints, 0);
 	
 	let totalSuperSkillpoints = player.superSkillpoints.plus(player.superStamina).plus(player.superStrength).plus(player.superArmor).plus(player.superRegeneration).plus(player.superAgility);
-	if ((totalSuperSkillpoints.plus(Decimal.floor(player.friendlyLevel.div(10)))).lte(player.highestEnemyLevel)){
-		document.getElementById("retire").innerHTML = "RETIRE<br>from fighting and gain " + format(Decimal.floor(player.friendlyLevel.div(10)), 0) + " Super Skillpoints";
+	if ((totalSuperSkillpoints.plus(Decimal.floor((player.friendlyLevel.div(10)).pow(player.atomShopItem11Effect)))).lte(player.highestEnemyLevel)){
+		document.getElementById("retire").innerHTML = "RETIRE<br>from fighting and gain " + format(Decimal.floor((player.friendlyLevel.div(10)).pow(player.atomShopItem11Effect)), 0) + " Super Skillpoints";
 	}
 	else if (totalSuperSkillpoints.lt(player.highestEnemyLevel)){
 		document.getElementById("retire").innerHTML = "RETIRE<br>from fighting and gain " + format(player.highestEnemyLevel.minus(totalSuperSkillpoints), 0) + " Super Skillpoints";
@@ -6207,9 +6245,9 @@ function updateGUI(){
 	else document.getElementById("atomShopItem7").innerHTML = "You can use all Reality Bonuses at the same time.";
 
 	if (player.atomShopItem8Bought == false){
-		document.getElementById("atomShopItem8").innerHTML = "You can save 2 build.<br>Cost: 5e7 Atoms"; 
+		document.getElementById("atomShopItem8").innerHTML = "You can save 2 builds.<br>Cost: 5e7 Atoms"; 
 	}
-	else document.getElementById("atomShopItem8").innerHTML = "You can save 2 build.";
+	else document.getElementById("atomShopItem8").innerHTML = "You can save 2 builds.";
 
 	if (player.atomShopItem9Bought == false){
 		document.getElementById("atomShopItem9").innerHTML = "For every " + format(player.atomShopItem13Effect, 0) + " enemies you kill<br>recieve 1 skillpoint. You can get<br>Skillpoints equal to the highest Level Enemy killed.<br>Cost: 1e8 Atoms"; 
@@ -6222,9 +6260,9 @@ function updateGUI(){
 	else document.getElementById("atomShopItem10").innerHTML = "You unlocked the Battle Tower Autobuyer.";
 
 	if (player.atomShopItem11Bought == false){
-		document.getElementById("atomShopItem11").innerHTML = "You can save 3 build.<br>Cost: 1e13 Atoms"; 
+		document.getElementById("atomShopItem11").innerHTML = "You can save 3 builds, and Super Skill Point gain is increased the higher level you are.<br>Cost: 1e13 Atoms"; 
 	}
-	else document.getElementById("atomShopItem11").innerHTML = "You can save 3 build.";
+	else document.getElementById("atomShopItem11").innerHTML = "You can save 3 builds, and Super Skill Point gain is increased the higher level you are.";
 
 	if (player.atomShopItem12Bought == false){
 		document.getElementById("atomShopItem12").innerHTML = "You unlock the Load Build Autobuyer.<br>Cost: 1e16 Atoms"; 
@@ -6237,9 +6275,9 @@ function updateGUI(){
 	else document.getElementById("atomShopItem13").innerHTML = "You now only need 10 kills to gain a Skillpoint from Atom Shop Item 1 and 9.";
 
 	if (player.atomShopItem14Bought == false){
-		document.getElementById("atomShopItem14").innerHTML = "You can save 4 build.<br>Cost: 1e50 Atoms"; 
+		document.getElementById("atomShopItem14").innerHTML = "You can save 4 builds.<br>Cost: 1e50 Atoms"; 
 	}
-	else document.getElementById("atomShopItem14").innerHTML = "You can save 4 build.";
+	else document.getElementById("atomShopItem14").innerHTML = "You can save 4 builds.";
 
 	if (player.atomShopItem15Bought == false){
 		document.getElementById("atomShopItem15").innerHTML = "You unlock the lvl 1000 Talent row.<br>Cost: 1e100 Atoms"; 
@@ -6459,7 +6497,6 @@ function productionLoop(diff){
 		}
 	}
 	
-	
 	// MAX HEALTH
 	if ((player.friendlyStamina.plus(player.talent12Effect)).eq(0)){
 		player.friendlyHealthTotal = new Decimal(1);
@@ -6478,6 +6515,11 @@ function productionLoop(diff){
 		if (player.friendlyHealthCurrent.sign == -1){
 			player.friendlyHealthCurrent = new Decimal(0);
 		}
+
+		document.getElementById("friendlyHPBarTextDps").innerText = "Regenerating " + format((player.friendlyRegeneration.times(new Decimal(1).plus(player.talent1Effect)).plus(player.talent15Effect.times(100))), 2) + " HPS";
+
+		document.getElementById("enemyHPBarTextDps").innerText = "Regenerating " + format(player.enemyRegeneration, 2) + " HPS";
+
 	} 
 	else{
 
@@ -6504,16 +6546,44 @@ function productionLoop(diff){
 		
 		if ((friendlyArmor.minus(enemyAgility)).lt(0)){
 			player.friendlyHealthCurrent = player.friendlyHealthCurrent.minus((enemyFinalDamage.times(friendlyArmorEffectNegative).minus(friendlyRegeneration)).times(diff));
+
+			if ((enemyFinalDamage.times(friendlyArmorEffectNegative).minus(friendlyRegeneration)).lte(0)){
+				document.getElementById("friendlyHPBarTextDps").innerText = "Taking 0 DPS";
+			}
+			else {
+				document.getElementById("friendlyHPBarTextDps").innerText = "Taking " + format((enemyFinalDamage.times(friendlyArmorEffectNegative).minus(friendlyRegeneration)), 2) + " DPS";
+			}
 		}
 		else {
 			player.friendlyHealthCurrent = player.friendlyHealthCurrent.minus((enemyFinalDamage.div(friendlyArmorEffectPositive).minus(friendlyRegeneration)).times(diff));
+
+			if ((enemyFinalDamage.div(friendlyArmorEffectPositive).minus(friendlyRegeneration)).lte(0)){
+				document.getElementById("friendlyHPBarTextDps").innerText = "Taking 0 DPS";
+			}
+			else {
+				document.getElementById("friendlyHPBarTextDps").innerText = "Taking " + format((enemyFinalDamage.div(friendlyArmorEffectPositive).minus(friendlyRegeneration)), 2) + " DPS";
+			}
 		}
 		
 		if ((enemyArmor.minus(friendlyAgility)).lt(0)){
-			player.enemyHealthCurrent = player.enemyHealthCurrent.minus((friendlyFinalDamage.times(enemyArmorEffectNegative).minus(enemyRegeneration)).times(diff));	
+			player.enemyHealthCurrent = player.enemyHealthCurrent.minus((friendlyFinalDamage.times(enemyArmorEffectNegative).minus(enemyRegeneration)).times(diff));
+			
+			if ((friendlyFinalDamage.times(enemyArmorEffectNegative).minus(enemyRegeneration)).lte(0)){
+				document.getElementById("enemyHPBarTextDps").innerText = "Taking 0 DPS";
+			}
+			else {
+				document.getElementById("enemyHPBarTextDps").innerText = "Taking " + format((friendlyFinalDamage.times(enemyArmorEffectNegative).minus(enemyRegeneration)), 2) + " DPS";
+			}
 		}
 		else {
 			player.enemyHealthCurrent = player.enemyHealthCurrent.minus((friendlyFinalDamage.div(enemyArmorEffectPositive).minus(enemyRegeneration)).times(diff));
+
+			if ((friendlyFinalDamage.div(enemyArmorEffectPositive).minus(enemyRegeneration)).lte(0)){
+				document.getElementById("enemyHPBarTextDps").innerText = "Taking 0 DPS";
+			}
+			else {
+				document.getElementById("enemyHPBarTextDps").innerText = "Taking " + format((friendlyFinalDamage.div(enemyArmorEffectPositive).minus(enemyRegeneration)), 2) + " DPS";
+			}
 		}
 	}
 	if (player.friendlyHealthCurrent.gt(player.friendlyHealthTotal)){
@@ -6636,6 +6706,7 @@ function mainLoop(){
 	getExpansionUpgradeTrue();
 	getOmegaUpgradeEffect();
 	getFinalOmegaPointMult();
+	getElectrons(diff);
 	getLoop();
 	getABGText();
 	productionLoop(diff);
@@ -6650,8 +6721,3 @@ setInterval(mainLoop, 50);
 setInterval(save, 10000);
 
 updateGUI();
-
-
-
-
-
