@@ -893,20 +893,39 @@ function time(diff){
 }
 
 function format(amount, i){
-	let power = Decimal.floor(Decimal.log10(amount));
-	let mantissa = amount.div(Decimal.pow(10, power));
-	
-	let power2 = Decimal.floor(Decimal.log10(power));
-	let mantissa2 = power.div(Decimal.pow(10, power2));
-	
-	let power3 = Decimal.floor(Decimal.log10(power2));
-	let mantissa3 = power2.div(Decimal.pow(10, power3));
-	
-	if (amount == 0) return "0"
-	if (power < 4) return amount.toFixed(i);
-	if (power < 1000000) return mantissa.toFixed(2) + "e" + power;
-	if (power2 < 1000000) return "e" + mantissa2.toFixed(3) + "e" + power2;
-	return "ee" + mantissa3.toFixed(3) + "e" + power3;
+	if (amount.sign != -1){
+		let power = Decimal.floor(Decimal.log10(amount));
+		let mantissa = amount.div(Decimal.pow(10, power));
+		
+		let power2 = Decimal.floor(Decimal.log10(power));
+		let mantissa2 = power.div(Decimal.pow(10, power2));
+		
+		let power3 = Decimal.floor(Decimal.log10(power2));
+		let mantissa3 = power2.div(Decimal.pow(10, power3));
+		
+		if (amount == 0) return "0"
+		if (power < 4) return amount.toFixed(i);
+		if (power < 1000000) return mantissa.toFixed(2) + "e" + power;
+		if (power2 < 1000000) return "e" + mantissa2.toFixed(3) + "e" + power2;
+		return "ee" + mantissa3.toFixed(3) + "e" + power3;
+	}
+	else {
+		amount.sign = 1;
+
+		let power = Decimal.floor(Decimal.log10(amount));
+		let mantissa = amount.div(Decimal.pow(10, power));
+		
+		let power2 = Decimal.floor(Decimal.log10(power));
+		let mantissa2 = power.div(Decimal.pow(10, power2));
+		
+		let power3 = Decimal.floor(Decimal.log10(power2));
+		let mantissa3 = power2.div(Decimal.pow(10, power3));
+		
+		if (power < 4) return "-" + amount.toFixed(i);
+		if (power < 1000000) return mantissa.toFixed(2) + "-e" + power;
+		if (power2 < 1000000) return "-e" + mantissa2.toFixed(3) + "e" + power2;
+		return "-ee" + mantissa3.toFixed(3) + "e" + power3;
+	}
 }
 
 function buyGenerator(tier){
