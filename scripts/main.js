@@ -6557,7 +6557,7 @@ function productionLoop(diff){
 		var enemyRegeneration = player.enemyRegeneration.minus(player.talent8Effect);
 		var enemyAgility = (player.enemyAgility.minus(player.talent7Effect)).times(0.75);
 		
-		var friendlyArmorEffectPositive = new Decimal(1).plus((new Decimal(0.05).plus(player.talent4Effect)).times(friendlyArmor));
+		var friendlyArmorEffectPositive = new Decimal(1).plus((new Decimal(0.05).plus(player.talent4Effect)).times(friendlyArmor.minus(enemyAgility)));
 		var friendlyArmorEffectNegative = new Decimal(1).plus(new Decimal(0.05).times(enemyAgility.minus(friendlyArmor)));
 		
 		var enemyArmorEffectPositive = new Decimal(1).plus(new Decimal(0.05).times(enemyArmor.minus(friendlyAgility)));
