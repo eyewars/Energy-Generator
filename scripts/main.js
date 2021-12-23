@@ -1853,7 +1853,7 @@ function getLoop(){
 	else player.talent3Effect = new Decimal(0);
 	
 	if (player.talent4IsActive == true){
-		player.talent4Effect = player.friendlyRegeneration.times(0.1);
+		player.talent4Effect = player.friendlyRegeneration.times(0.01);
 	}
 	else player.talent4Effect = new Decimal(0);
 	
@@ -6184,7 +6184,7 @@ function updateGUI(){
 	
 	document.getElementById("talent3").innerHTML = "LEVEL 10 TALENT<br>You deal 10% of your Max Health as DPS.<br>Current: " + format(player.talent3Effect, 2) + " DPS";
 	
-	document.getElementById("talent4").innerHTML = "LEVEL 20 TALENT<br>For every point you have in Regeneration,<br>your Armor blocks for 0.1% more.<br>Current: " + format(player.talent4Effect, 1) + "% More";
+	document.getElementById("talent4").innerHTML = "LEVEL 20 TALENT<br>For every point you have in Regeneration,<br>your Armor blocks for 1% more.<br>Current: " + format(player.talent4Effect.times(100), 0) + "% More";
 	
 	document.getElementById("talent5").innerHTML = "LEVEL 20 TALENT<br>Agility now removes 0.25 additional armor.";
 	
@@ -6557,12 +6557,12 @@ function productionLoop(diff){
 		var enemyRegeneration = player.enemyRegeneration.minus(player.talent8Effect);
 		var enemyAgility = (player.enemyAgility.minus(player.talent7Effect)).times(0.75);
 		
-		var friendlyArmorEffectPositive = (new Decimal(1.05).plus(player.talent4Effect)).pow(friendlyArmor);
+		var friendlyArmorEffectPositive = new Decimal(1).plus((new Decimal(0.05).plus(player.talent4Effect)).times(friendlyArmor));
 		var friendlyArmorEffectNegative = new Decimal(1).plus(new Decimal(0.05).times(enemyAgility.minus(friendlyArmor)));
 		
-		var enemyArmorEffectPositive = new Decimal(1.05).pow(enemyArmor);
+		var enemyArmorEffectPositive = new Decimal(1).plus(new Decimal(0.05).times(enemyArmor.minus(friendlyAgility)));
 		var enemyArmorEffectNegative = new Decimal(1).plus(new Decimal(0.05).times(friendlyAgility.minus(enemyArmor)));
-		
+
 		if ((friendlyArmor.minus(enemyAgility)).lt(0)){
 			player.friendlyHealthCurrent = player.friendlyHealthCurrent.minus((enemyFinalDamage.times(friendlyArmorEffectNegative).minus(friendlyRegeneration)).times(diff));
 
@@ -6575,7 +6575,7 @@ function productionLoop(diff){
 		}
 		else {
 			player.friendlyHealthCurrent = player.friendlyHealthCurrent.minus((enemyFinalDamage.div(friendlyArmorEffectPositive).minus(friendlyRegeneration)).times(diff));
-
+			
 			if ((enemyFinalDamage.div(friendlyArmorEffectPositive).minus(friendlyRegeneration)).lte(0)){
 				document.getElementById("friendlyHPBarTextDps").innerText = "Taking 0 DPS";
 			}
