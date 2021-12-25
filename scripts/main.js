@@ -2084,115 +2084,18 @@ function autobuy(){
 			restOrFight(2);
 		}
 
-		let friendlyStrengthDamage2 = player.friendlyStrength.times(new Decimal(1).plus(player.superStrength.times(0.1))).times(player.talent11Effect.plus(2));
-		let talent3Damage2 = player.talent3Effect;
-		let talent10Damage2 = player.talent10Effect;
-		let friendlyFinalDamage2 = friendlyStrengthDamage2.plus(talent3Damage2).plus(talent10Damage2);
-		let friendlyArmor2 = (player.friendlyArmor.plus(player.talent14Effect).plus(player.talent15Effect2)).times(new Decimal(1).plus(player.superArmor.times(0.1)));
-		let friendlyRegeneration2 = player.friendlyRegeneration.times(new Decimal(1).plus(player.superRegeneration.times(0.1)).plus(player.talent1Effect)).plus(player.talent15Effect);
-		let friendlyAgility2 = (player.friendlyAgility.plus(player.talent2Effect).plus(player.talent13Effect)).times(new Decimal(0.75).plus(player.talent5Effect)).times(new Decimal(1).plus(player.superAgility.times(0.01)));
-		
-		let enemyFinalDamage2 = player.enemyStrength.times(2);
-		let enemyArmor2 = player.enemyArmor;
-		let enemyRegeneration2 = player.enemyRegeneration.minus(player.talent8Effect);
-		let enemyAgility2 = (player.enemyAgility.minus(player.talent7Effect)).times(0.75);
-		
-		let friendlyArmorEffectPositive2 = (new Decimal(1.05).plus(player.talent4Effect)).pow(friendlyArmor2);
-		let friendlyArmorEffectNegative2 = new Decimal(1).plus(new Decimal(0.05).times(enemyAgility2.minus(friendlyArmor2)));
-		
-		let enemyArmorEffectPositive2 = new Decimal(1.05).pow(enemyArmor2);
-		let enemyArmorEffectNegative2 = new Decimal(1).plus(new Decimal(0.05).times(friendlyAgility2.minus(enemyArmor2)));
-
-		let friendlyIsTakingDamage = true;
-		let enemyIsTakingDamage = true;
-
-		if ((friendlyArmor2.minus(enemyAgility2)).lt(0)){
-			if ((enemyFinalDamage2.times(friendlyArmorEffectNegative2).minus(friendlyRegeneration2)).lte(player.friendlyHealthTotal.div(60))){
-				friendlyIsTakingDamage = false;
-			}
-			else friendlyIsTakingDamage = true;
-		}
-		else {
-			if ((enemyFinalDamage2.div(friendlyArmorEffectPositive2).minus(friendlyRegeneration2)).lte(player.friendlyHealthTotal.div(60))){
-				friendlyIsTakingDamage = false;
-			}
-			else friendlyIsTakingDamage = true;
-		}
-		
-		if ((enemyArmor2.minus(friendlyAgility2)).lt(0)){
-			if ((friendlyFinalDamage2.times(enemyArmorEffectNegative2).minus(enemyRegeneration2)).lte(player.enemyHealthTotal.div(60))){
-				enemyIsTakingDamage = false;
-			}
-			else enemyIsTakingDamage = true;
-		}
-		else {
-			if ((friendlyFinalDamage2.div(enemyArmorEffectPositive2).minus(enemyRegeneration2)).lte(player.enemyHealthTotal.div(60))){
-				enemyIsTakingDamage = false;
-			}
-			else enemyIsTakingDamage = true;
-		}
-
 		if (friendlyIsTakingDamage == false && enemyIsTakingDamage == false){
 			prevNext(1);
 		}
 
-		if (player.enemyHealthCurrent.lte(0)){
-			if (player.isBoss == true){
-				if (player.bossesKilled == 0 && player.enemyLevel.eq(100)){
-					player.bossesKilled = new Decimal(1);
-					player.maxEnemyLevel = new Decimal(200);
-				}
-				if (player.bossesKilled == 1 && player.enemyLevel.eq(200)){
-					player.bossesKilled = new Decimal(2);
-					player.maxEnemyLevel = new Decimal(300);
-				}
-				if (player.bossesKilled == 2 && player.enemyLevel.eq(300)){
-					player.bossesKilled = new Decimal(3);
-					player.maxEnemyLevel = new Decimal(400);
-				}
-				if (player.bossesKilled == 3 && player.enemyLevel.eq(400)){
-					player.bossesKilled = new Decimal(4);
-					player.maxEnemyLevel = new Decimal(500);
-				}
-				if (player.bossesKilled == 4 && player.enemyLevel.eq(500)){
-					player.bossesKilled = new Decimal(5);
-					player.maxEnemyLevel = new Decimal(1e300);
-				}
-			}
-	
-			if (player.isLegendary == true){
-				player.atoms = player.atoms.plus(Decimal.floor((new Decimal(1.1).pow(player.enemyLevel)).times(player.atomShopItem2Effect)));
-			}
-			
-			player.currentXp = player.currentXp.plus(new Decimal(1.3).pow(player.enemyLevel));
-			
-			if (player.highestEnemyLevel.lt(player.enemyLevel)){
-				player.highestEnemyLevel = player.enemyLevel;
-			}
-			
-			if (player.atomShopItem1Bought == true && player.atomShopItem1Skillpoints.lt(player.highestFriendlyLevel.times(3))){
-				if (player.atomShopItem1Counter.lt(player.atomShopItem13Effect.minus(1))){
-					player.atomShopItem1Counter = player.atomShopItem1Counter.plus(1);
-				}
-				else {
-					player.atomShopItem1Counter = new Decimal(0);
-					player.atomShopItem1Skillpoints = player.atomShopItem1Skillpoints.plus(1);
-					player.skillpoints = player.skillpoints.plus(1);
-				}
-			}
-	
-			if (player.atomShopItem9Bought == true && player.atomShopItem9Skillpoints.lt(player.highestEnemyLevel)){
-				if (player.atomShopItem9Counter.lt(player.atomShopItem13Effect.minus(1))){
-					player.atomShopItem9Counter = player.atomShopItem9Counter.plus(1);
-				}
-				else {
-					player.atomShopItem9Counter = new Decimal(0);
-					player.atomShopItem9Skillpoints = player.atomShopItem9Skillpoints.plus(1);
-					player.skillpoints = player.skillpoints.plus(1);
-				}
-			}
-			
+		if (shouldGoNext == true){
 			prevNext(2);
+			shouldGoNext = false;
+		}
+
+		if (shouldGoPrev == true){
+			prevNext(1);
+			shouldGoPrev = false;
 		}
 
 		player.battleTowerAutobuyerChecked = true;
@@ -2253,6 +2156,11 @@ function autobuy(){
 		resimulate();
 	}
 }
+
+let friendlyIsTakingDamage = true;
+let enemyIsTakingDamage = true;
+let shouldGoNext = false;
+let shouldGoPrev = false;
 
 function autoBuilds(){
 	if (player.build1AutobuyerChecked == true){
@@ -6566,45 +6474,78 @@ function productionLoop(diff){
 		if ((friendlyArmor.minus(enemyAgility)).lt(0)){
 			player.friendlyHealthCurrent = player.friendlyHealthCurrent.minus((enemyFinalDamage.times(friendlyArmorEffectNegative).minus(friendlyRegeneration)).times(diff));
 
-			if ((enemyFinalDamage.times(friendlyArmorEffectNegative).minus(friendlyRegeneration)).lte(0)){
+			if ((enemyFinalDamage.times(friendlyArmorEffectNegative).minus(friendlyRegeneration)).lt(0)){
+				document.getElementById("friendlyHPBarTextDps").innerText = "Regenerating " + format((friendlyRegeneration.minus(enemyFinalDamage.times(friendlyArmorEffectNegative))), 2) + " HPS";
+			}
+			else if ((enemyFinalDamage.times(friendlyArmorEffectNegative).minus(friendlyRegeneration)).eq(0)){
 				document.getElementById("friendlyHPBarTextDps").innerText = "Taking 0 DPS";
 			}
 			else {
 				document.getElementById("friendlyHPBarTextDps").innerText = "Taking " + format((enemyFinalDamage.times(friendlyArmorEffectNegative).minus(friendlyRegeneration)), 2) + " DPS";
 			}
+
+			if ((enemyFinalDamage.times(friendlyArmorEffectNegative).minus(friendlyRegeneration)).lte(player.friendlyHealthTotal.div(60))){
+				friendlyIsTakingDamage = false;
+			}
+			else friendlyIsTakingDamage = true;
 		}
 		else {
 			player.friendlyHealthCurrent = player.friendlyHealthCurrent.minus((enemyFinalDamage.div(friendlyArmorEffectPositive).minus(friendlyRegeneration)).times(diff));
 			
-			if ((enemyFinalDamage.div(friendlyArmorEffectPositive).minus(friendlyRegeneration)).lte(0)){
+			if ((enemyFinalDamage.div(friendlyArmorEffectPositive).minus(friendlyRegeneration)).lt(0)){
+				document.getElementById("friendlyHPBarTextDps").innerText = "Regenerating " + format((friendlyRegeneration.minus(enemyFinalDamage.div(friendlyArmorEffectPositive))), 2) + " HPS";
+			}
+			else if ((enemyFinalDamage.div(friendlyArmorEffectPositive).minus(friendlyRegeneration)).eq(0)){
 				document.getElementById("friendlyHPBarTextDps").innerText = "Taking 0 DPS";
 			}
 			else {
 				document.getElementById("friendlyHPBarTextDps").innerText = "Taking " + format((enemyFinalDamage.div(friendlyArmorEffectPositive).minus(friendlyRegeneration)), 2) + " DPS";
 			}
+
+			if ((enemyFinalDamage.div(friendlyArmorEffectPositive).minus(friendlyRegeneration)).lte(player.friendlyHealthTotal.div(60))){
+				friendlyIsTakingDamage = false;
+			}
+			else friendlyIsTakingDamage = true;
 		}
 		
 		if ((enemyArmor.minus(friendlyAgility)).lt(0)){
 			player.enemyHealthCurrent = player.enemyHealthCurrent.minus((friendlyFinalDamage.times(enemyArmorEffectNegative).minus(enemyRegeneration)).times(diff));
 			
-			if ((friendlyFinalDamage.times(enemyArmorEffectNegative).minus(enemyRegeneration)).lte(0)){
+			if ((friendlyFinalDamage.div(enemyArmorEffectNegative).minus(enemyRegeneration)).lt(0)){
+				document.getElementById("enemyHPBarTextDps").innerText = "Regenerating " + format((enemyRegeneration.minus(friendlyFinalDamage.times(enemyArmorEffectNegative))), 2) + " HPS";
+			}
+			else if ((friendlyFinalDamage.times(enemyArmorEffectNegative).minus(enemyRegeneration)).eq(0)){
 				document.getElementById("enemyHPBarTextDps").innerText = "Taking 0 DPS";
 			}
 			else {
 				document.getElementById("enemyHPBarTextDps").innerText = "Taking " + format((friendlyFinalDamage.times(enemyArmorEffectNegative).minus(enemyRegeneration)), 2) + " DPS";
 			}
+
+			if ((friendlyFinalDamage.times(enemyArmorEffectNegative).minus(enemyRegeneration)).lte(player.enemyHealthTotal.div(60))){
+				enemyIsTakingDamage = false;
+			}
+			else enemyIsTakingDamage = true;
 		}
 		else {
 			player.enemyHealthCurrent = player.enemyHealthCurrent.minus((friendlyFinalDamage.div(enemyArmorEffectPositive).minus(enemyRegeneration)).times(diff));
 
-			if ((friendlyFinalDamage.div(enemyArmorEffectPositive).minus(enemyRegeneration)).lte(0)){
+			if ((friendlyFinalDamage.div(enemyArmorEffectPositive).minus(enemyRegeneration)).lt(0)){
+				document.getElementById("enemyHPBarTextDps").innerText = "Regenerating " + format((enemyRegeneration.minus(friendlyFinalDamage.div(enemyArmorEffectPositive))), 2) + " HPS";
+			}
+			else if ((friendlyFinalDamage.div(enemyArmorEffectPositive).minus(enemyRegeneration)).eq(0)){
 				document.getElementById("enemyHPBarTextDps").innerText = "Taking 0 DPS";
 			}
 			else {
 				document.getElementById("enemyHPBarTextDps").innerText = "Taking " + format((friendlyFinalDamage.div(enemyArmorEffectPositive).minus(enemyRegeneration)), 2) + " DPS";
 			}
+
+			if ((friendlyFinalDamage.div(enemyArmorEffectPositive).minus(enemyRegeneration)).lte(player.enemyHealthTotal.div(60))){
+				enemyIsTakingDamage = false;
+			}
+			else enemyIsTakingDamage = true;
 		}
 	}
+
 	if (player.friendlyHealthCurrent.gt(player.friendlyHealthTotal)){
 		player.friendlyHealthCurrent = player.friendlyHealthTotal;
 	}
@@ -6615,76 +6556,78 @@ function productionLoop(diff){
 	
 	if (player.friendlyHealthCurrent.lte(0)){
 		restOrFight(1);
+		shouldGoPrev = true;
 	}
 	
-	if (player.battleTowerAutobuyerChecked == false){
-		if (player.enemyHealthCurrent.lte(0)){
-			if (player.isBoss == true){
-				if (player.bossesKilled == 0 && player.enemyLevel.eq(100)){
-					player.bossesKilled = new Decimal(1);
-					player.maxEnemyLevel = new Decimal(200);
-				}
-				if (player.bossesKilled == 1 && player.enemyLevel.eq(200)){
-					player.bossesKilled = new Decimal(2);
-					player.maxEnemyLevel = new Decimal(300);
-				}
-				if (player.bossesKilled == 2 && player.enemyLevel.eq(300)){
-					player.bossesKilled = new Decimal(3);
-					player.maxEnemyLevel = new Decimal(400);
-				}
-				if (player.bossesKilled == 3 && player.enemyLevel.eq(400)){
-					player.bossesKilled = new Decimal(4);
-					player.maxEnemyLevel = new Decimal(500);
-				}
-				if (player.bossesKilled == 4 && player.enemyLevel.eq(500)){
-					player.bossesKilled = new Decimal(5);
-					player.maxEnemyLevel = new Decimal(1e300);
-				}
+	if (player.enemyHealthCurrent.lte(0)){
+		shouldGoNext = true;
+		if (player.isBoss == true){
+			if (player.bossesKilled == 0 && player.enemyLevel.eq(100)){
+				player.bossesKilled = new Decimal(1);
+				player.maxEnemyLevel = new Decimal(200);
 			}
-	
-			if (player.isLegendary == true){
-				player.atoms = player.atoms.plus(Decimal.floor((new Decimal(1.1).pow(player.enemyLevel)).times(player.atomShopItem2Effect)));
+			if (player.bossesKilled == 1 && player.enemyLevel.eq(200)){
+				player.bossesKilled = new Decimal(2);
+				player.maxEnemyLevel = new Decimal(300);
 			}
-			
-			player.currentXp = player.currentXp.plus(new Decimal(1.3).pow(player.enemyLevel));
-			
-			if (player.highestEnemyLevel.lt(player.enemyLevel)){
-				player.highestEnemyLevel = player.enemyLevel;
+			if (player.bossesKilled == 2 && player.enemyLevel.eq(300)){
+				player.bossesKilled = new Decimal(3);
+				player.maxEnemyLevel = new Decimal(400);
 			}
-			
-			if (player.atomShopItem1Bought == true && player.atomShopItem1Skillpoints.lt(player.highestFriendlyLevel.times(3))){
-				if (player.atomShopItem1Counter.lt(player.atomShopItem13Effect.minus(1))){
-					player.atomShopItem1Counter = player.atomShopItem1Counter.plus(1);
-				}
-				else {
-					player.atomShopItem1Counter = new Decimal(0);
-					player.atomShopItem1Skillpoints = player.atomShopItem1Skillpoints.plus(1);
-					player.skillpoints = player.skillpoints.plus(1);
-				}
+			if (player.bossesKilled == 3 && player.enemyLevel.eq(400)){
+				player.bossesKilled = new Decimal(4);
+				player.maxEnemyLevel = new Decimal(500);
 			}
-	
-			if (player.atomShopItem9Bought == true && player.atomShopItem9Skillpoints.lt(player.highestEnemyLevel)){
-				if (player.atomShopItem9Counter.lt(player.atomShopItem13Effect.minus(1))){
-					player.atomShopItem9Counter = player.atomShopItem9Counter.plus(1);
-				}
-				else {
-					player.atomShopItem9Counter = new Decimal(0);
-					player.atomShopItem9Skillpoints = player.atomShopItem9Skillpoints.plus(1);
-					player.skillpoints = player.skillpoints.plus(1);
-				}
+			if (player.bossesKilled == 4 && player.enemyLevel.eq(500)){
+				player.bossesKilled = new Decimal(5);
+				player.maxEnemyLevel = new Decimal(1e300);
 			}
-			
-			generateEnemy(player.enemyLevel);
 		}
+	
+		if (player.isLegendary == true){
+			player.atoms = player.atoms.plus(Decimal.floor((new Decimal(1.1).pow(player.enemyLevel)).times(player.atomShopItem2Effect)));
+		}
+			
+		player.currentXp = player.currentXp.plus(new Decimal(1.3).pow(player.enemyLevel));
+			
+		if (player.highestEnemyLevel.lt(player.enemyLevel)){
+			player.highestEnemyLevel = player.enemyLevel;
+		}
+			
+		if (player.atomShopItem1Bought == true && player.atomShopItem1Skillpoints.lt(player.highestFriendlyLevel.times(3))){
+			if (player.atomShopItem1Counter.lt(player.atomShopItem13Effect.minus(1))){
+				player.atomShopItem1Counter = player.atomShopItem1Counter.plus(1);
+			}
+			else {
+				player.atomShopItem1Counter = new Decimal(0);
+				player.atomShopItem1Skillpoints = player.atomShopItem1Skillpoints.plus(1);
+				player.skillpoints = player.skillpoints.plus(1);
+			}
+		}
+	
+		if (player.atomShopItem9Bought == true && player.atomShopItem9Skillpoints.lt(player.highestEnemyLevel)){
+			if (player.atomShopItem9Counter.lt(player.atomShopItem13Effect.minus(1))){
+				player.atomShopItem9Counter = player.atomShopItem9Counter.plus(1);
+			}
+			else {
+				player.atomShopItem9Counter = new Decimal(0);
+				player.atomShopItem9Skillpoints = player.atomShopItem9Skillpoints.plus(1);
+				player.skillpoints = player.skillpoints.plus(1);
+			}
+		}
+		
+		generateEnemy(player.enemyLevel);
 	}
 	
 	if (player.currentXp.gte(player.needToLvlUpXp)){
-		player.currentXp = new Decimal(0);
-		player.needToLvlUpXp = player.needToLvlUpXp.times(1.5);
-		player.friendlyLevel = player.friendlyLevel.plus(1);
-		player.skillpoints = player.skillpoints.plus(3);
-		if (player.highestFriendlyLevel.lt(player.friendlyLevel)){
-			player.highestFriendlyLevel = player.friendlyLevel;
+		while (player.currentXp.gte(player.needToLvlUpXp)){
+			player.currentXp = player.currentXp.minus(player.needToLvlUpXp);
+			player.needToLvlUpXp = player.needToLvlUpXp.times(1.5);
+			player.friendlyLevel = player.friendlyLevel.plus(1);
+			player.skillpoints = player.skillpoints.plus(3);
+			if (player.highestFriendlyLevel.lt(player.friendlyLevel)){
+				player.highestFriendlyLevel = player.friendlyLevel;
+			}
 		}
 	}
 }
