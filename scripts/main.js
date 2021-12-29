@@ -6432,7 +6432,7 @@ function productionLoop(diff){
 	
 	if (player.isResting == true){
 		if (player.friendlyHealthCurrent.lt(player.friendlyHealthTotal)){
-			player.friendlyHealthCurrent = player.friendlyHealthCurrent.plus((player.friendlyRegeneration.times(new Decimal(1).plus(player.talent1Effect)).plus(player.talent15Effect.times(100))).times(diff));
+			player.friendlyHealthCurrent = player.friendlyHealthCurrent.plus(((player.friendlyRegeneration.times(new Decimal(1).plus(player.talent1Effect))).times(new Decimal(1).plus(player.superRegeneration.times(0.1))).plus(player.talent15Effect.times(100))).times(diff));
 		}
 		
 		if (player.enemyHealthCurrent.lt(player.enemyHealthTotal)){
@@ -6443,21 +6443,19 @@ function productionLoop(diff){
 			player.friendlyHealthCurrent = new Decimal(0);
 		}
 
-		document.getElementById("friendlyHPBarTextDps").innerText = "Regenerating " + format((player.friendlyRegeneration.times(new Decimal(1).plus(player.talent1Effect)).plus(player.talent15Effect.times(100))), 2) + " HPS";
+		document.getElementById("friendlyHPBarTextDps").innerText = "Regenerating " + format(((player.friendlyRegeneration.times(new Decimal(1).plus(player.talent1Effect))).times(new Decimal(1).plus(player.superRegeneration.times(0.1))).plus(player.talent15Effect.times(100))), 2) + " HPS";
 
 		document.getElementById("enemyHPBarTextDps").innerText = "Regenerating " + format(player.enemyRegeneration, 2) + " HPS";
 
 	} 
 	else{
-
-		// HUSK Å OPPDATERE AUTOBUYEREN HVIS DU OPPDATERER DETTE!!!!!
 		
 		var friendlyStrengthDamage = player.friendlyStrength.times(new Decimal(1).plus(player.superStrength.times(0.1))).times(player.talent11Effect.plus(2));
 		var talent3Damage = player.talent3Effect;
 		var talent10Damage = player.talent10Effect;
 		var friendlyFinalDamage = friendlyStrengthDamage.plus(talent3Damage).plus(talent10Damage);
 		var friendlyArmor = (player.friendlyArmor.plus(player.talent14Effect).plus(player.talent15Effect2)).times(new Decimal(1).plus(player.superArmor.times(0.1)));
-		var friendlyRegeneration = player.friendlyRegeneration.times(new Decimal(1).plus(player.superRegeneration.times(0.1)).plus(player.talent1Effect)).plus(player.talent15Effect);
+		var friendlyRegeneration = ((player.friendlyRegeneration.times(new Decimal(1).plus(player.talent1Effect))).times(new Decimal(1).plus(player.superRegeneration.times(0.1)))).plus(player.talent15Effect);
 		var friendlyAgility = (player.friendlyAgility.plus(player.talent2Effect).plus(player.talent13Effect)).times(new Decimal(0.75).plus(player.talent5Effect)).times(new Decimal(1).plus(player.superAgility.times(0.01)));
 		
 		var enemyFinalDamage = player.enemyStrength.times(2);
