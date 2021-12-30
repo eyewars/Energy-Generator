@@ -5231,7 +5231,7 @@ function updateGUI(){
 	getExpansionUpgradeText();
 	document.getElementById("omega").textContent = "You have " + format(player.omega, 1) + " Omega";
 	document.getElementById("omegaPerSec").textContent = "You're getting " + format(player.firstOmegaGeneratorAmount.times(player.firstOmegaGeneratorFinalMult), 1) + " Omega per second";
-	document.getElementById("omegaPointMult").innerHTML = "Multiply OP gain by 2x<br>Current: " + format(player.omegaPointMult, 0) + "x<br>Cost: " + format(player.omegaPointMultCost, 0) + " EP";
+	document.getElementById("omegaPointMult").innerHTML = "Multiply OP gain by 2x<br>Current: " + format(player.omegaPointMult, 0) + "x<br>Cost: " + format(player.omegaPointMultCost, 0) + " OP";
 	document.getElementById("omegaUpgradeCurrentOmega").innerText = "You currently have " + format(player.omega, 2) + " Omega";
 	document.getElementById("realityEnergy").textContent = "You have " + format(player.realityEnergy, 1) + " Reality Energy";
 	document.getElementById("realityEnergyPerSec").textContent = "You're getting " + format(player.firstRealityGeneratorAmount.times(player.firstRealityGeneratorFinalMult), 1) + " Reality Energy per second";
