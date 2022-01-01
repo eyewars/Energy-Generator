@@ -2131,14 +2131,14 @@ function autobuy(){
 	}
 
 	if (document.getElementById("autoOmegaGeneratorCheck").checked == true && player.atomShopItem17Bought == true){
-		for (tier = 1; tier < 9; tier++){
-			for (let i = 0; i < 100; i++){
-				buyOmegaGenerator(tier);
-			}
-		}
 		if (player.atomShopItem20Bought == true){
 			for (let i = 0; i < 100; i++){
 				opMult();
+			}
+		}
+		for (tier = 1; tier < 9; tier++){
+			for (let i = 0; i < 100; i++){
+				buyOmegaGenerator(tier);
 			}
 		}
 		player.omegaGeneratorAutobuyerChecked = true;
