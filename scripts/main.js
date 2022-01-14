@@ -3804,6 +3804,10 @@ function reachReality(){
 			player.secondAtomUpgradeCost = new Decimal(1);
 			player.thirdAtomUpgradeCost = new Decimal(1);
 		}
+		else{
+			player.firstElectronUpgradeCost = player.firstElectronUpgradeCost.div(player.firstAtomUpgrade3);
+			player.secondElectronUpgradeCost = player.secondElectronUpgradeCost.div(player.firstAtomUpgrade3);
+		}
 		
 		
 		
