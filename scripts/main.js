@@ -1950,9 +1950,6 @@ function getLoop(){
 
 	if (player.atomShopItem19Bought == true){
 		let totalSP = player.skillpoints.plus(player.friendlyStamina).plus(player.friendlyStrength).plus(player.friendlyArmor).plus(player.friendlyRegeneration).plus(player.friendlyAgility);
-		if (totalSP.gt(1e5)){
-			totalSP = new Decimal(1e5).plus(Decimal.sqrt(totalSP));
-		}
 		player.atomShopItem19Effect = Decimal.pow(2, totalSP);
 	}
 	else player.atomShopItem19Effect = new Decimal(1);
@@ -6515,8 +6512,8 @@ function productionLoop(diff){
 		
 		if ((enemyArmor.minus(friendlyAgility)).lt(0)){
 			player.enemyHealthCurrent = player.enemyHealthCurrent.minus((friendlyFinalDamage.times(enemyArmorEffectNegative).minus(enemyRegeneration)).times(diff));
-			
-			if ((friendlyFinalDamage.div(enemyArmorEffectNegative).minus(enemyRegeneration)).lt(0)){
+
+			if ((friendlyFinalDamage.times(enemyArmorEffectNegative).minus(enemyRegeneration)).lt(0)){
 				document.getElementById("enemyHPBarTextDps").innerText = "Regenerating " + format((enemyRegeneration.minus(friendlyFinalDamage.times(enemyArmorEffectNegative))), 2) + " HPS";
 			}
 			else if ((friendlyFinalDamage.times(enemyArmorEffectNegative).minus(enemyRegeneration)).eq(0)){
