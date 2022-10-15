@@ -1,7 +1,7 @@
 var lastUpdate = Date.now();
 //var diff = (Date.now() - lastUpdate) / 1000;
-var TIER_NAMES = [ null, "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth" ];
-var DISPLAY_NAMES = [ null, "First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Seventh", "Eighth" ];
+var TIER_NAMES = [null, "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth"];
+var DISPLAY_NAMES = [null, "First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Seventh", "Eighth"];
 var player;
 function hardReset(){
 	player = {
@@ -272,6 +272,11 @@ function hardReset(){
 		build4AutobuyerChecked: false,
 		omegaGeneratorAutobuyerChecked: false,
 		electronUpgradesAutobuyerChecked: false,
+		fillBarAutobuyerChecked: false,
+		ascensionAutobuyerChecked: false,
+		transcensionUpgradesAutobuyerChecked: false,
+		hypercensionAutobuyerChecked: false,
+		realityGeneratorAutobuyerChecked: false,
 
 		alpha: new Decimal(0),
 		alphaCost: new Decimal("1e2000"),
@@ -323,6 +328,24 @@ function hardReset(){
 		sixthOmegaGeneratorCost: new Decimal(1e10),
 		seventhOmegaGeneratorCost: new Decimal(1e12),
 		eighthOmegaGeneratorCost: new Decimal(1e14),
+
+		firstOmegaGeneratorCostInc: new Decimal(2),
+		secondOmegaGeneratorCostInc: new Decimal(3),
+		thirdOmegaGeneratorCostInc: new Decimal(4),
+		fourthOmegaGeneratorCostInc: new Decimal(5),
+		fifthOmegaGeneratorCostInc: new Decimal(6),
+		sixthOmegaGeneratorCostInc: new Decimal(7),
+		seventhOmegaGeneratorCostInc: new Decimal(8),
+		eighthOmegaGeneratorCostInc: new Decimal(9),
+
+		firstOmegaGeneratorCostIncInc: new Decimal(1.1),
+		secondOmegaGeneratorCostIncInc: new Decimal(1.1),
+		thirdOmegaGeneratorCostIncInc: new Decimal(1.1),
+		fourthOmegaGeneratorCostIncInc: new Decimal(1.1),
+		fifthOmegaGeneratorCostIncInc: new Decimal(1.1),
+		sixthOmegaGeneratorCostIncInc: new Decimal(1.1),
+		seventhOmegaGeneratorCostIncInc: new Decimal(1.1),
+		eighthOmegaGeneratorCostIncInc: new Decimal(1.1),
 
 		firstOmegaGeneratorAmount: new Decimal(0),
 		secondOmegaGeneratorAmount: new Decimal(0),
@@ -442,18 +465,21 @@ function hardReset(){
 		goldFarmerCost: new Decimal(10),
 		goldFarmerScale: new Decimal(1),
 		goldFarmerScaleScale: new Decimal(1),
+		goldFarmerScaleScaleScale: new Decimal(1),
 
 		hybridLevel: new Decimal(1),
 		hybridMult: new Decimal(1),
 		hybridCost: new Decimal(10),
 		hybridScale: new Decimal(1),
 		hybridScaleScale: new Decimal(1),
+		hybridScaleScaleScale: new Decimal(1),
 
 		PVPLegendLevel: new Decimal(1),
 		PVPLegendMult: new Decimal(1),
 		PVPLegendCost: new Decimal(10),
 		PVPLegendScale: new Decimal(1),
 		PVPLegendScaleScale: new Decimal(1),
+		PVPLegendScaleScaleScale: new Decimal(1),
 
 		monsterTotalHP: new Decimal(10),
 		monsterCurrentHP: new Decimal(10),
@@ -536,12 +562,14 @@ function hardReset(){
 		realityBonus4: new Decimal(1),
 		realityBonus5: new Decimal(1),
 		realityBonus6: new Decimal(1),
+		realityBonus7: new Decimal(1),
 		realityBonus1Checked: false,
 		realityBonus2Checked: false,
 		realityBonus3Checked: false,
 		realityBonus4Checked: false,
 		realityBonus5Checked: false,
 		realityBonus6Checked: false,
+		realityBonus7Checked: false,
 		
 		firstRealityGeneratorCost: new Decimal(1),
 		secondRealityGeneratorCost: new Decimal(100),
@@ -551,6 +579,24 @@ function hardReset(){
 		sixthRealityGeneratorCost: new Decimal(1e10),
 		seventhRealityGeneratorCost: new Decimal(1e12),
 		eighthRealityGeneratorCost: new Decimal(1e14),
+
+		firstRealityGeneratorCostInc: new Decimal(1.5),
+		secondRealityGeneratorCostInc: new Decimal(1.5),
+		thirdRealityGeneratorCostInc: new Decimal(1.5),
+		fourthRealityGeneratorCostInc: new Decimal(1.5),
+		fifthRealityGeneratorCostInc: new Decimal(1.5),
+		sixthRealityGeneratorCostInc: new Decimal(1.5),
+		seventhRealityGeneratorCostInc: new Decimal(1.5),
+		eighthRealityGeneratorCostInc: new Decimal(1.5),
+
+		firstRealityGeneratorCostIncInc: new Decimal(1.1),
+		secondRealityGeneratorCostIncInc: new Decimal(1.1),
+		thirdRealityGeneratorCostIncInc: new Decimal(1.1),
+		fourthRealityGeneratorCostIncInc: new Decimal(1.1),
+		fifthRealityGeneratorCostIncInc: new Decimal(1.1),
+		sixthRealityGeneratorCostIncInc: new Decimal(1.1),
+		seventhRealityGeneratorCostIncInc: new Decimal(1.1),
+		eighthRealityGeneratorCostIncInc: new Decimal(1.1),
 
 		firstRealityGeneratorAmount: new Decimal(0),
 		secondRealityGeneratorAmount: new Decimal(0),
@@ -780,11 +826,226 @@ function hardReset(){
 		build4TalentRow2: 0,
 		build4TalentRow3: 0,
 		build4TalentRow4: 0,
-		build4TalentRow5: 0
+		build4TalentRow5: 0,
+
+		lastNormalPanel: 0,
+		lastExpansionPanel: 0,
+		lastOmegaPanel: 0,
+		lastRealityPanel: 0,
+		lastAutobuyerPanel: 0,
+		lastExtraPanel: 0,
+		hasSwitchedToExpansionGenerators: false,
+		hasSwitchedToABG: false,
+		hasSwitchedToOmegaGenerators: false,
+		hasSwitchedToSim: false,
+		hasSwitchedToSimUpgrades: false,
+		hasSwitchedToElectrons: false,
+		hasSwitchedToRealityGenerators: false,
+		hasSwitchedToBattleTower: false,
+		hasSwitchedToTalents: false,
+		hasSwitchedToAtomShop: false,
+		hasSwitchedToAutobuyer: false,
+		hasSwitchedToFillBar: false,
+
+		hasUnlockedFillBar: false,
+		hasSwitchedToFillBar: false,
+
+		fillBarFinalMult: new Decimal(1),
+		fillBarGold: new Decimal(1),
+
+		firstFillBarLevel: new Decimal(0),
+		firstFillBarCost: new Decimal(1),
+		firstFillBarCostfinal: new Decimal(1),
+		firstFillBarSpeed: new Decimal(3000),
+		firstFillBarSpeedFinal: new Decimal(3000),
+		firstFillBarSpeedBase: new Decimal(3000),
+		firstFillBarProgress: new Decimal(0),
+		firstFillBarAscension: new Decimal(0),
+		firstFillBarMult: new Decimal(1),
+		firstFillBarMultPerFill: new Decimal(0.01),
+		firstFillBarMultPerFillFinal: new Decimal(0.01),
+		firstFillBarBought: new Decimal(0),
+
+		secondFillBarLevel: new Decimal(0),
+		secondFillBarCost: new Decimal(50),
+		secondFillBarCostFinal: new Decimal(50),
+		secondFillBarSpeed: new Decimal(5000),
+		secondFillBarSpeedFinal: new Decimal(5000),
+		secondFillBarSpeedBase: new Decimal(5000),
+		secondFillBarProgress: new Decimal(0),
+		secondFillBarAscension: new Decimal(0),
+		secondFillBarMult: new Decimal(1),
+		secondFillBarMultPerFill: new Decimal(0.01),
+		secondFillBarMultPerFillFinal: new Decimal(0.01),
+		secondFillBarBought: new Decimal(0),
+
+		thirdFillBarLevel: new Decimal(0),
+		thirdFillBarCost: new Decimal(1000),
+		thirdFillBarCostFinal: new Decimal(1000),
+		thirdFillBarSpeed: new Decimal(10000),
+		thirdFillBarSpeedFinal: new Decimal(10000),
+		thirdFillBarSpeedBase: new Decimal(10000),
+		thirdFillBarProgress: new Decimal(0),
+		thirdFillBarAscension: new Decimal(0),
+		thirdFillBarMult: new Decimal(1),
+		thirdFillBarMultPerFill: new Decimal(0.01),
+		thirdFillBarMultPerFillFinal: new Decimal(0.01),
+		thirdFillBarBought: new Decimal(0),
+
+		fourthFillBarLevel: new Decimal(0),
+		fourthFillBarCost: new Decimal(1e5),
+		fourthFillBarCostFinal: new Decimal(1e5),
+		fourthFillBarSpeed: new Decimal(15000),
+		fourthFillBarSpeedFinal: new Decimal(15000),
+		fourthFillBarSpeedBase: new Decimal(15000),
+		fourthFillBarProgress: new Decimal(0),
+		fourthFillBarAscension: new Decimal(0),
+		fourthFillBarMult: new Decimal(1),
+		fourthFillBarMultPerFill: new Decimal(0.01),
+		fourthFillBarMultPerFillFinal: new Decimal(0.01),
+		fourthFillBarBought: new Decimal(0),
+
+		fifthFillBarLevel: new Decimal(0),
+		fifthFillBarCost: new Decimal(1e8),
+		fifthFillBarCostFinal: new Decimal(1e8),
+		fifthFillBarSpeed: new Decimal(20000),
+		fifthFillBarSpeedFinal: new Decimal(20000),
+		fifthFillBarSpeedBase: new Decimal(20000),
+		fifthFillBarProgress: new Decimal(0),
+		fifthFillBarAscension: new Decimal(0),
+		fifthFillBarMult: new Decimal(1),
+		fifthFillBarMultPerFill: new Decimal(0.01),
+		fifthFillBarMultPerFillFinal: new Decimal(0.01),
+		fifthFillBarBought: new Decimal(0),
+
+		sixthFillBarLevel: new Decimal(0),
+		sixthFillBarCost: new Decimal(1e12),
+		sixthFillBarCostFinal: new Decimal(1e12),
+		sixthFillBarSpeed: new Decimal(25000),
+		sixthFillBarSpeedFinal: new Decimal(25000),
+		sixthFillBarSpeedBase: new Decimal(25000),
+		sixthFillBarProgress: new Decimal(0),
+		sixthFillBarAscension: new Decimal(0),
+		sixthFillBarMult: new Decimal(1),
+		sixthFillBarMultPerFill: new Decimal(0.01),
+		sixthFillBarMultPerFillFinal: new Decimal(0.01),
+		sixthFillBarBought: new Decimal(0),
+
+		seventhFillBarLevel: new Decimal(0),
+		seventhFillBarCost: new Decimal(1e16),
+		seventhFillBarCostFinal: new Decimal(1e16),
+		seventhFillBarSpeed: new Decimal(30000),
+		seventhFillBarSpeedFinal: new Decimal(30000),
+		seventhFillBarSpeedBase: new Decimal(30000),
+		seventhFillBarProgress: new Decimal(0),
+		seventhFillBarAscension: new Decimal(0),
+		seventhFillBarMult: new Decimal(1),
+		seventhFillBarMultPerFill: new Decimal(0.01),
+		seventhFillBarMultPerFillFinal: new Decimal(0.01),
+		seventhFillBarBought: new Decimal(0),
+
+		eighthFillBarLevel: new Decimal(0),
+		eighthFillBarCost: new Decimal(1e25),
+		eighthFillBarCostFinal: new Decimal(1e25),
+		eighthFillBarSpeed: new Decimal(60000),
+		eighthFillBarSpeedFinal: new Decimal(60000),
+		eighthFillBarSpeedBase: new Decimal(60000),
+		eighthFillBarProgress: new Decimal(0),
+		eighthFillBarAscension: new Decimal(0),
+		eighthFillBarMult: new Decimal(1),
+		eighthFillBarMultPerFill: new Decimal(0.01),
+		eighthFillBarMultPerFillFinal: new Decimal(0.01),
+		eighthFillBarBought: new Decimal(0),
+
+		recreateMult: new Decimal(1),
+
+		transcensionPoints: new Decimal(0),
+
+		hasUnlockedTranscensionUpgrades: false,
+		hasSwitchedToTranscensionUpgrades: false,
+
+		transcensionUpgrade1: new Decimal(1),
+		transcensionUpgrade1Cost: new Decimal(1),
+		transcensionUpgrade1Bought: new Decimal(0),
+		transcensionUpgrade2: new Decimal(1),
+		transcensionUpgrade2Cost: new Decimal(1),
+		transcensionUpgrade2Bought: new Decimal(0),
+		transcensionUpgrade3: new Decimal(1),
+		transcensionUpgrade3Cost: new Decimal(1),
+		transcensionUpgrade3Bought: new Decimal(0),
+		transcensionUpgrade4: new Decimal(1),
+		transcensionUpgrade4Cost: new Decimal(1),
+		transcensionUpgrade4Bought: new Decimal(0),
+		transcensionUpgrade5: new Decimal(1),
+		transcensionUpgrade5Cost: new Decimal(1),
+		transcensionUpgrade5Bought: new Decimal(0),
+		transcensionUpgrade6: new Decimal(1),
+		transcensionUpgrade6Cost: new Decimal(1),
+		transcensionUpgrade6Bought: new Decimal(0),
+		transcensionUpgrade7: new Decimal(1),
+		transcensionUpgrade7Cost: new Decimal(1),
+		transcensionUpgrade7Bought: new Decimal(0),
+		transcensionUpgrade8: new Decimal(1),
+		transcensionUpgrade8Cost: new Decimal(1),
+		transcensionUpgrade8Bought: new Decimal(0),
+
+		milestone1: false,
+		milestone2: false,
+		milestone3: false,
+		milestone4: false,
+		milestone5: false,
+		milestone6: false,
+		milestone7: false,
+		milestone8: false,
+		milestone9: false,
+		milestone10: false,
+		milestone11: false,
+		milestone12: false,
+		milestone13: false,
+		milestone14: false,
+		milestone15: false,
+		milestone16: false,
+		milestone17: false,
+		milestone18: false,
+		milestone19: false,
+		milestone20: false,
+		milestone21: false,
+		milestone22: false,
+		milestone23: false,
+		milestone24: false,
+		milestone24Mult: new Decimal(1),
+
+		maxParticleAssimilatorAutobuy: 0,
+
+		hyperPoints: new Decimal(0),
+
+		hasUnlockedHypercensionUpgrades: false,
+		hasSwitchedToHypercensionUpgrades: false,
+
+		hypercensionUpgrade1: new Decimal(1),
+		hypercensionUpgrade1Cost: new Decimal(1),
+		hypercensionUpgrade2: new Decimal(1),
+		hypercensionUpgrade2Cost: new Decimal(1),
+		hypercensionUpgrade3: new Decimal(1),
+		hypercensionUpgrade3Cost: new Decimal(1),
+		hypercensionUpgrade4: new Decimal(1),
+		hypercensionUpgrade4Cost: new Decimal(1),
+		hypercensionUpgrade5: new Decimal(1),
+		hypercensionUpgrade5Cost: new Decimal(10),
+		hypercensionUpgrade5Bought: false,
+		hypercensionUpgrade6: new Decimal(1),
+		hypercensionUpgrade6Cost: new Decimal(1000),
+		hypercensionUpgrade6Bought: false,
+		hypercensionUpgrade7: new Decimal(1),
+		hypercensionUpgrade7Cost: new Decimal(1e4),
+		hypercensionUpgrade7Bought: false,
+		hypercensionUpgrade8: new Decimal(1),
+		hypercensionUpgrade8Cost: new Decimal(1e5),
+		hypercensionUpgrade8Bought: false
 
 	};
-	//clearInterval(electronInterval);
-	//electronInterval = setInterval(getElectrons, 1000);
+	checkUncheckAutobuyers();
+	lastPanel();
 }
 hardReset();
 
@@ -796,14 +1057,26 @@ Object.assign(tempPlayer, player);
 
 player = tempPlayer;
 
+function lastPanel(){
+	player.lastNormalPanel = 0;
+	player.lastExpansionPanel = 1;
+	player.lastOmegaPanel = 4;
+	player.lastRealityPanel = 9;
+	player.lastAutobuyerPanel = 17;
+	player.lastExtraPanel = 18;
+}
+lastPanel();
+
 function test(){
-	player.gold = player.gold.pow(10);
+	//player.gold = player.gold.pow(10);
 	//player.omega = player.omega.pow(10);
 	//player.simGold = player.simGold.times(10);
 	//player.simGold = new Decimal(0);
 	//player.atoms = new Decimal(1000);
 	//player.omegaPoints = player.omegaPoints.pow(10);
 	//player.expansionPoints = player.expansionPoints.times("1e1000");
+	//player.fillBarGold = player.fillBarGold.times(1e10);
+	//player.transcensionPoints = player.transcensionPoints.times(10);
 }
 
 function save() {
@@ -844,6 +1117,8 @@ function importSave(){
 		//electronInterval = setInterval(getElectrons, 1000-player.thirdAtomUpgrade3);
 
 		player.thirdAtomUpgrade3 = new Decimal(player.thirdAtomUpgrade3);
+
+		lastPanel();
 	}
 }
 
@@ -1019,7 +1294,7 @@ function getFinalGenMult(){
 			
 		}
 		
-		player[name + "OmegaGeneratorFinalMult"] = player[name + "OmegaGeneratorMult"].times(player.realityBonus3);
+		player[name + "OmegaGeneratorFinalMult"] = player[name + "OmegaGeneratorMult"].times(player.realityBonus3).times(player.milestone24Mult);
 		
 		player[name + "RealityGeneratorFinalMult"] = player[name + "RealityGeneratorMult"];
 	}
@@ -1031,7 +1306,12 @@ function getFinalMultPerBuy(){
 
 function getFinalAllMultCost(){
 	if ((Decimal.log10(Decimal.log10(player.omega))).gt(1)){
-		player.omegaEffect = new Decimal(1).plus(Decimal.log10(Decimal.log10(player.omega)));
+		if (player.milestone22){
+			player.omegaEffect = new Decimal(1).plus(Decimal.log2(Decimal.log2(player.omega)));
+		}
+		else {
+			player.omegaEffect = new Decimal(1).plus(Decimal.log10(Decimal.log10(player.omega)));
+		}
 	}
 	player.allMultFinalCost = player.allMultCost.div(player.electricity.plus(1).pow(15).pow(player.electricityEffectFromThirdBetaUpgrade).pow(player.omegaEffect));
 }
@@ -1303,6 +1583,14 @@ function hotkeys(e){
 	
 	if (e.which == 82){
 		reachReality();
+	}
+
+	if (e.which == 37){
+		prevNext(1);
+	}
+
+	if (e.which == 39){
+		prevNext(2);
 	}
 }
 document.addEventListener("keydown", hotkeys);
@@ -1933,7 +2221,7 @@ function getLoop(){
 	}
 	else player.atomShopItem2Effect = new Decimal(1);
 
-	if (player.atomShopItem11Bought = true){
+	if (player.atomShopItem11Bought == true){
 		player.atomShopItem11Effect = new Decimal(1.5);
 	}
 	else player.atomShopItem11Effect = new Decimal(1);
@@ -1956,29 +2244,104 @@ function getLoop(){
 		player.atomShopItem19Effect = Decimal.pow(2, totalSP);
 	}
 	else player.atomShopItem19Effect = new Decimal(1);
+
+	player.fillBarFinalMult = (player.firstFillBarMult.times(player.secondFillBarMult).times(player.thirdFillBarMult).times(player.fourthFillBarMult).times(player.fifthFillBarMult).times(player.sixthFillBarMult).times(player.seventhFillBarMult).times(player.eighthFillBarMult).times(player.recreateMult).times(player.transcensionUpgrade1).times(player.hypercensionUpgrade1)).pow(player.transcensionUpgrade5);
+
+	if (player.hypercensionUpgrade5Bought){
+		player.hypercensionUpgrade5 = new Decimal(1).plus(Decimal.root(player.transcensionPoints, 3));
+	}
+	else player.hypercensionUpgrade5 = new Decimal(1);
+
+	if (player.hypercensionUpgrade6Bought && player.hyperPoints.gt(0)){
+		player.hypercensionUpgrade6 = new Decimal(1).plus(Decimal.log2(player.hyperPoints).pow(2));
+	}
+	else player.hypercensionUpgrade6 = new Decimal(1);
+
+	if (player.hypercensionUpgrade7Bought && player.hyperPoints.gt(0) && player.transcensionPoints.gt(0)){
+		player.hypercensionUpgrade7 = new Decimal(1).plus(Decimal.log10(Decimal.log10(player.transcensionPoints)).times(Decimal.log10(Decimal.log10(player.hyperPoints)).div(3)));
+	}
+	else player.hypercensionUpgrade7 = new Decimal(1);
+
+	for (let tier = 1; tier < 9; tier++){
+		let name = TIER_NAMES[tier];
+
+		player[name + "FillBarMultPerFill"] = new Decimal(0.01).times((new Decimal(10).times(player.transcensionUpgrade4).times(player.hypercensionUpgrade7)).pow(player[name + "FillBarAscension"]));
+		player[name + "FillBarMultPerFillFinal"] = player[name + "FillBarMultPerFill"].times(player.transcensionUpgrade3).times(player.hypercensionUpgrade3);
+
+		player[name + "FillBarSpeedFinal"] = player[name + "FillBarSpeed"].div(player.transcensionUpgrade2.times(player.hypercensionUpgrade2).times(player.hypercensionUpgrade5));
+	}
+
+	getFillBarFinalCost();
+
+	if (player.milestone8){
+		player.maxParticleAssimilatorAutobuy = 8;
+	}
+	else if (player.milestone7){
+		player.maxParticleAssimilatorAutobuy = 7;
+	}
+	else if (player.milestone6){
+		player.maxParticleAssimilatorAutobuy = 6;
+	}
+	else if (player.milestone5){
+		player.maxParticleAssimilatorAutobuy = 5;
+	}
+	else if (player.milestone4){
+		player.maxParticleAssimilatorAutobuy = 4;
+	}
+	else if (player.milestone3){
+		player.maxParticleAssimilatorAutobuy = 3;
+	}
+	else if (player.milestone2){
+		player.maxParticleAssimilatorAutobuy = 2;
+	}
+	else if (player.milestone1){
+		player.maxParticleAssimilatorAutobuy = 1;
+	}
+	else player.maxParticleAssimilatorAutobuy = 0;
+
+	if (player.milestone24){
+		player.milestone24Mult = new Decimal(1).plus(player.hyperPoints.pow(10));
+	}
+	else player.milestone24Mult = new Decimal(1);
 }
 
-document.getElementById("autoPrestigeCheck").checked = player.prestigeAutobuyerChecked;
-document.getElementById("autoGeneratorCheck").checked = player.generatorAutobuyerChecked;
-document.getElementById("autoAllMultCheck").checked = player.allMultAutobuyerChecked;
-document.getElementById("autoExpansionCheck").checked = player.expansionAutobuyerChecked;
-document.getElementById("autoABGCheck").checked = player.alphaBetaGammaAutobuyerChecked;
-document.getElementById("autoExpansionGeneratorCheck").checked = player.expansionGeneratorAutobuyerChecked;
-document.getElementById("autoExpansionPointMultCheck").checked = player.expansionPointMultAutobuyerChecked;
-document.getElementById("autoABGUpgrade5Check").checked = player.alphaBetaGammaUpgrade5AutobuyerChecked;
-document.getElementById("autoSimulationHeroCheck").checked = player.simulationHeroAutobuyerChecked;
-document.getElementById("autoFightCheck").checked = player.fightingAutobuyerChecked;
-document.getElementById("autoBattleTowerCheck").checked = player.battleTowerAutobuyerChecked;
-document.getElementById("autoBuild1Check").checked = player.build1AutobuyerChecked;
-document.getElementById("autoBuild2Check").checked = player.build2AutobuyerChecked;
-document.getElementById("autoBuild3Check").checked = player.build3AutobuyerChecked;
-document.getElementById("autoBuild4Check").checked = player.build4AutobuyerChecked;
-document.getElementById("autoBuild1Check2").checked = player.build1AutobuyerChecked;
-document.getElementById("autoBuild2Check2").checked = player.build2AutobuyerChecked;
-document.getElementById("autoBuild3Check2").checked = player.build3AutobuyerChecked;
-document.getElementById("autoBuild4Check2").checked = player.build4AutobuyerChecked;
-document.getElementById("autoOmegaGeneratorCheck").checked = player.omegaGeneratorAutobuyerChecked;
-document.getElementById("autoElectronUpgradesCheck").checked = player.electronUpgradesAutobuyerChecked;
+function getFillBarFinalCost(){
+	for (let tier = 1; tier < 9; tier++){
+		let name = TIER_NAMES[tier];
+
+		player[name + "FillBarCostFinal"] = player[name + "FillBarCost"].div(player.transcensionUpgrade7.times(player.hypercensionUpgrade4));
+	}
+}
+
+function checkUncheckAutobuyers(){
+	document.getElementById("autoPrestigeCheck").checked = player.prestigeAutobuyerChecked;
+	document.getElementById("autoGeneratorCheck").checked = player.generatorAutobuyerChecked;
+	document.getElementById("autoAllMultCheck").checked = player.allMultAutobuyerChecked;
+	document.getElementById("autoExpansionCheck").checked = player.expansionAutobuyerChecked;
+	document.getElementById("autoABGCheck").checked = player.alphaBetaGammaAutobuyerChecked;
+	document.getElementById("autoExpansionGeneratorCheck").checked = player.expansionGeneratorAutobuyerChecked;
+	document.getElementById("autoExpansionPointMultCheck").checked = player.expansionPointMultAutobuyerChecked;
+	document.getElementById("autoABGUpgrade5Check").checked = player.alphaBetaGammaUpgrade5AutobuyerChecked;
+	document.getElementById("autoSimulationHeroCheck").checked = player.simulationHeroAutobuyerChecked;
+	document.getElementById("autoFightCheck").checked = player.fightingAutobuyerChecked;
+	document.getElementById("autoBattleTowerCheck").checked = player.battleTowerAutobuyerChecked;
+	document.getElementById("autoBuild1Check").checked = player.build1AutobuyerChecked;
+	document.getElementById("autoBuild2Check").checked = player.build2AutobuyerChecked;
+	document.getElementById("autoBuild3Check").checked = player.build3AutobuyerChecked;
+	document.getElementById("autoBuild4Check").checked = player.build4AutobuyerChecked;
+	document.getElementById("autoBuild1Check2").checked = player.build1AutobuyerChecked;
+	document.getElementById("autoBuild2Check2").checked = player.build2AutobuyerChecked;
+	document.getElementById("autoBuild3Check2").checked = player.build3AutobuyerChecked;
+	document.getElementById("autoBuild4Check2").checked = player.build4AutobuyerChecked;
+	document.getElementById("autoOmegaGeneratorCheck").checked = player.omegaGeneratorAutobuyerChecked;
+	document.getElementById("autoElectronUpgradesCheck").checked = player.electronUpgradesAutobuyerChecked;
+	document.getElementById("autoFillBarCheck").checked = player.fillBarAutobuyerChecked;
+	document.getElementById("autoAscensionCheck").checked = player.ascensionAutobuyerChecked;
+	document.getElementById("autoTranscensionUpgradesCheck").checked = player.transcensionUpgradesAutobuyerChecked;
+	document.getElementById("autoHypercensionCheck").checked = player.hypercensionAutobuyerChecked;
+	document.getElementById("autoRealityGeneratorCheck").checked = player.realityGeneratorAutobuyerChecked;
+}
+checkUncheckAutobuyers();
 
 function autobuy(){
 	if (document.getElementById("autoPrestigeCheck").checked == true && (player.expansionUpgrade5 == true || player.eighthSimUpgradeBought == true || player.atomShopItem6Bought == true)){
@@ -2135,12 +2498,12 @@ function autobuy(){
 
 	if (document.getElementById("autoOmegaGeneratorCheck").checked == true && player.atomShopItem17Bought == true){
 		if (player.atomShopItem20Bought == true){
-			for (let i = 0; i < 100; i++){
+			for (let i = 0; i < 500; i++){
 				opMult();
 			}
 		}
 		for (tier = 1; tier < 9; tier++){
-			for (let i = 0; i < 100; i++){
+			for (let i = 0; i < 500; i++){
 				buyOmegaGenerator(tier);
 			}
 		}
@@ -2158,6 +2521,77 @@ function autobuy(){
 	if (player.atomShopItem18Bought == true){
 		resimulate();
 	}
+
+	if ((document.getElementById("autoFillBarCheck").checked == true) || (document.getElementById("autoAscensionCheck").checked == true)){
+		for (let tier = 1; tier <= player.maxParticleAssimilatorAutobuy; tier++){
+			let spd = 1;
+			if (player.milestone13){
+				spd = 5;
+			}
+			for (let i = 0; i < spd; i++){
+				let name = TIER_NAMES[tier];
+				let barLevel = player[name + "FillBarLevel"];
+				let barCost = player[name + "FillBarCostFinal"];
+
+				if (barLevel.eq(100)){
+					if (document.getElementById("autoAscensionCheck").checked == true){
+						let ascensionRatio = new Decimal(document.getElementById("autoAscensionText").value);
+						if ((barCost.times(ascensionRatio)).lte(player.fillBarGold)){
+							buyFillBar(tier);
+						}
+					}
+				}
+				else if (barLevel.lt(100)){
+					if (document.getElementById("autoFillBarCheck").checked == true){
+						let spd2 = 1;
+						if (player.milestone11){
+							spd2 = 100 - barLevel.mag;
+						}
+						for (let j = 0; j < spd2; j++){
+							buyFillBar(tier);
+						}
+					}
+				}	
+			}
+		}
+		player.fillBarAutobuyerChecked = true;
+	}
+	else player.fillBarAutobuyerChecked = false;
+
+	if (document.getElementById("autoAscensionCheck").checked == true){
+		player.ascensionAutobuyerChecked = true;
+	}
+	else player.ascensionAutobuyerChecked = false;
+
+	if (document.getElementById("autoTranscensionUpgradesCheck").checked){
+		for (let tier = 1; tier < 9; tier++){
+			buyTranscensionUpgrade(tier);
+		}
+
+		player.transcensionUpgradesAutobuyerChecked = true;
+	}
+	else player.transcensionUpgradesAutobuyerChecked = false;
+
+	if (document.getElementById("autoHypercensionCheck").checked){
+		let hyp = new Decimal(document.getElementById("autoHypercensionText").value);
+		let base = new Decimal(1).plus(new Decimal(5).div(Decimal.root(Decimal.log10(Decimal.log10(player.transcensionPoints)), 1.1)));
+		if (hyp.lte(Decimal.floor((Decimal.pow(base, Decimal.log10(player.transcensionPoints).div(5))).div(base)))){
+			hypercend();
+		}
+
+		player.hypercensionAutobuyerChecked = true;
+	}
+	else player.hypercensionAutobuyerChecked = false;
+
+	if (document.getElementById("autoRealityGeneratorCheck").checked == true && player.milestone21 == true){
+		for (tier = 1; tier < 9; tier++){
+			for (let i = 0; i < 100; i++){
+				buyRealityGenerator(tier);
+			}
+		}
+		player.realityGeneratorAutobuyerChecked = true;
+	}
+	else player.realityGeneratorAutobuyerChecked = false;
 }
 
 let friendlyIsTakingDamage = true;
@@ -2773,7 +3207,17 @@ function becomeOmega(){
 
 function buyOmegaGenerator(tier){
 	var name = TIER_NAMES[tier];
-	if (player.omegaPoints.gt(player[name + "OmegaGeneratorCost"]) || player.omegaPoints.eq(player[name + "OmegaGeneratorCost"])){
+	var buys = [null, 10050, 6420, 5230, 4630, 4247, 3977, 3774, 3614];
+	if ((player.omegaPoints.gte(player[name + "OmegaGeneratorCost"])) && (player[name + "OmegaGeneratorBought"].gt(buys[tier]))){
+		player.omegaPoints = player.omegaPoints.minus(player[name + "OmegaGeneratorCost"]);
+		player[name + "OmegaGeneratorCost"] = player[name + "OmegaGeneratorCost"].times(new Decimal(2).times(tier));
+		player[name + "OmegaGeneratorCostInc"] = player[name + "OmegaGeneratorCostInc"].times(player[name + "OmegaGeneratorCostIncInc"]);
+		player[name + "OmegaGeneratorCostIncInc"] = player[name + "OmegaGeneratorCostIncInc"].times(1.01);
+		player[name + "OmegaGeneratorAmount"] = player[name + "OmegaGeneratorAmount"].plus(1);
+		player[name + "OmegaGeneratorBought"] = player[name + "OmegaGeneratorBought"].plus(1);
+		player[name + "OmegaGeneratorMult"] = player[name + "OmegaGeneratorMult"].times(2);
+	}
+	else if (player.omegaPoints.gte(player[name + "OmegaGeneratorCost"])){
 		player.omegaPoints = player.omegaPoints.minus(player[name + "OmegaGeneratorCost"]);
 		player[name + "OmegaGeneratorCost"] = player[name + "OmegaGeneratorCost"].times(new Decimal(2).times(tier));
 		player[name + "OmegaGeneratorAmount"] = player[name + "OmegaGeneratorAmount"].plus(1);
@@ -3145,7 +3589,7 @@ function fight(){
 player.thirdAtomUpgrade3 = new Decimal(player.thirdAtomUpgrade3);
 function getElectrons(diff){
 	if (player.hasUnlockedElectrons == true){
-		if (player.electrons.lt(player.maxElectrons)){
+		if (player.electrons.lt(player.maxElectrons) && !player.milestone10){
 			if (player.electronCurrent.lt(player.electronInterval)){
 				player.electronCurrent = player.electronCurrent.plus(new Decimal(1000).times(diff));
 			}
@@ -3154,7 +3598,7 @@ function getElectrons(diff){
 				player.electronCurrent = player.electronCurrent.minus(player.electronInterval);
 			}
 		}
-		else if (player.electrons.gt(player.maxElectrons)){
+		else{
 			player.electrons = player.maxElectrons;
 		}
 	}
@@ -3284,7 +3728,7 @@ function buyAtomUpgrades(x){
 
 function reachReality(){
 	if (player.omegaPoints.gte(1e16)){
-		player.realityPoints = player.realityPoints.plus(Decimal.floor((Decimal.pow(10, Decimal.log10(player.omegaPoints).div(16))).div(10)));
+		player.realityPoints = player.realityPoints.plus(Decimal.floor(((Decimal.pow(10, Decimal.log10(player.omegaPoints).div(16))).div(10)).times(player.realityBonus7)));
 		player.realities = player.realities.plus(1);
 		player.secondsInReality = new Decimal(0);
 		player.hasUnlockedReality = true;
@@ -3823,7 +4267,17 @@ function reachReality(){
 
 function buyRealityGenerator(tier){
 	var name = TIER_NAMES[tier];
-	if (player.realityPoints.gt(player[name + "RealityGeneratorCost"]) || player.realityPoints.eq(player[name + "RealityGeneratorCost"])){
+	var buys = [null, 10050, 6420, 5230, 4630, 4247, 3977, 3774, 3614];
+	if ((player.realityPoints.gte(player[name + "RealityGeneratorCost"])) && (player[name + "RealityGeneratorBought"].gt(buys[tier]))){
+		player.realityPoints = player.realityPoints.minus(player[name + "RealityGeneratorCost"]);
+		player[name + "RealityGeneratorCost"] = player[name + "RealityGeneratorCost"].times(new Decimal(2).times(tier));
+		player[name + "RealityGeneratorCostInc"] = player[name + "RealityGeneratorCostInc"].times(player[name + "RealityGeneratorCostIncInc"]);
+		player[name + "RealityGeneratorCostIncInc"] = player[name + "RealityGeneratorCostIncInc"].times(1.01);
+		player[name + "RealityGeneratorAmount"] = player[name + "RealityGeneratorAmount"].plus(1);
+		player[name + "RealityGeneratorBought"] = player[name + "RealityGeneratorBought"].plus(1);
+		player[name + "RealityGeneratorMult"] = player[name + "RealityGeneratorMult"].times(2);
+	}
+	else if (player.realityPoints.gte(player[name + "RealityGeneratorCost"])){
 		player.realityPoints = player.realityPoints.minus(player[name + "RealityGeneratorCost"]);
 		player[name + "RealityGeneratorCost"] = player[name + "RealityGeneratorCost"].times(new Decimal(2).times(tier));
 		player[name + "RealityGeneratorAmount"] = player[name + "RealityGeneratorAmount"].plus(1);
@@ -3834,34 +4288,60 @@ function buyRealityGenerator(tier){
 
 function getRealityBonus(){
 	if (document.getElementById("realityBonus1Check").checked == true){
-		player.realityBonus1 = new Decimal(1).plus(player.realityEnergy.pow(2));
+		if (player.milestone12){
+			player.realityBonus1 = new Decimal(1).plus(player.realityEnergy.pow(Decimal.log(player.realityEnergy, 1.5)));
+		}
+		else player.realityBonus1 = new Decimal(1).plus(player.realityEnergy.pow(2));
 	}
 	else player.realityBonus1 = new Decimal(1);
 	
 	if (document.getElementById("realityBonus2Check").checked == true){
-		player.realityBonus2 = new Decimal(1).plus(player.realityEnergy);
+		if (player.milestone12){
+			player.realityBonus2 = new Decimal(1).plus(player.realityEnergy.pow(100));
+		}
+		else player.realityBonus2 = new Decimal(1).plus(player.realityEnergy);
 	}
 	else player.realityBonus2 = new Decimal(1);
 	
 	if (document.getElementById("realityBonus3Check").checked == true){
-		player.realityBonus3 = new Decimal(1).plus(Decimal.log10(player.realityEnergy.plus(1)));
+		if (player.milestone12){
+			player.realityBonus3 = new Decimal(1).plus(player.realityEnergy);
+		}
+		else player.realityBonus3 = new Decimal(1).plus(Decimal.log10(player.realityEnergy.plus(1)));
 	}
 	else player.realityBonus3 = new Decimal(1);
 	
 	if (document.getElementById("realityBonus4Check").checked == true){
-		player.realityBonus4 = new Decimal(1).plus(Decimal.sqrt(player.realityEnergy));
+		if (player.milestone12){
+			player.realityBonus4 = new Decimal(1).plus(player.realityEnergy.pow(10));
+		}
+		else player.realityBonus4 = new Decimal(1).plus(Decimal.sqrt(player.realityEnergy));
 	}
 	else player.realityBonus4 = new Decimal(1);
 	
 	if (document.getElementById("realityBonus5Check").checked == true){
-		player.realityBonus5 = new Decimal(1).plus(Decimal.log10(player.realityEnergy.plus(1)));
+		if (player.milestone12){
+			player.realityBonus5 = new Decimal(1).plus(Decimal.root(player.realityEnergy, 2));
+		}
+		else player.realityBonus5 = new Decimal(1).plus(Decimal.log10(player.realityEnergy.plus(1)));
 	}
 	else player.realityBonus5 = new Decimal(1);
 	
 	if (document.getElementById("realityBonus6Check").checked == true){
-		player.realityBonus6 = new Decimal(1).plus(player.realityEnergy);
+		if (player.milestone12){
+			player.realityBonus6 = new Decimal(1).plus(player.realityEnergy.pow(5));
+		}
+		else player.realityBonus6 = new Decimal(1).plus(player.realityEnergy);
 	}
 	else player.realityBonus6 = new Decimal(1);
+
+	if (document.getElementById("realityBonus7Check").checked == true){
+		if (player.milestone12){
+			player.realityBonus7 = new Decimal(1).plus(Decimal.log10(player.realityEnergy.plus(1)));
+		}
+		else player.realityBonus7 = new Decimal(1);
+	}
+	else player.realityBonus7 = new Decimal(1);
 }
 
 for (let i = 1; i < 7; i++){
@@ -3871,7 +4351,7 @@ for (let i = 1; i < 7; i++){
 }
 
 function realityBonusCheck(){
-	for (let i = 1; i < 7; i++){
+	for (let i = 1; i < 8; i++){
 		if (document.getElementById("realityBonus" + i + "Check").checked == true){
 			player["realityBonus" + i + "Checked"] = true;
 		}
@@ -3900,6 +4380,10 @@ function realityBonusCheck(){
 	}
 	
 	if (document.getElementById("realityBonus6Check").checked == true){
+		player.checkedRealityBonus = player.checkedRealityBonus.plus(1);
+	}
+
+	if (document.getElementById("realityBonus7Check").checked == true){
 		player.checkedRealityBonus = player.checkedRealityBonus.plus(1);
 	}
 	
@@ -3933,6 +4417,11 @@ function realityBonusCheck(){
 			document.getElementById("realityBonus6Check").classList.add("locked");
 		}
 		else document.getElementById("realityBonus6Check").classList.remove("locked");
+
+		if (document.getElementById("realityBonus7Check").checked == false){
+			document.getElementById("realityBonus7Check").classList.add("locked");
+		}
+		else document.getElementById("realityBonus7Check").classList.remove("locked");
 	}
 	else {
 		document.getElementById("realityBonus1Check").classList.remove("locked");
@@ -3941,6 +4430,7 @@ function realityBonusCheck(){
 		document.getElementById("realityBonus4Check").classList.remove("locked");
 		document.getElementById("realityBonus5Check").classList.remove("locked");
 		document.getElementById("realityBonus6Check").classList.remove("locked");
+		document.getElementById("realityBonus7Check").classList.remove("locked");
 	}
 	
 }
@@ -5231,7 +5721,7 @@ function updateGUI(){
 	document.getElementById("electricityPerSec").textContent = "You're getting " + format(player.firstExpansionGeneratorAmount.times(player.firstExpansionGeneratorFinalMult), 1) + " Electricity per second";
 	document.getElementById("electricityEffect").innerHTML = "It divides your all mult cost by " + format(new Decimal(player.electricity.plus(1).pow(15).pow(player.electricityEffectFromThirdBetaUpgrade)).pow(omegaEffect), 0) + "x";
 	if (player.omega.gt(1)){
-		document.getElementById("omegaEffect").innerHTML = "It increases electricity effect by ^" + format(new Decimal(1).plus(Decimal.log10(Decimal.log10(player.omega))), 2);
+		document.getElementById("omegaEffect").innerHTML = "It increases electricity effect by ^" + format(player.omegaEffect, 2);
 	}
 	else document.getElementById("omegaEffect").innerText = "It increases electricity effect by " + "1x";
 	document.getElementById("expansionPointMult").innerHTML = "Multiply EP gain by 2x<br>Current: " + format(player.expansionPointMult, 0) + "x<br>Cost: " + format(player.expansionPointMultCost, 0) + " EP";
@@ -5247,17 +5737,228 @@ function updateGUI(){
 	document.getElementById("realityAmountText").textContent = "You have " + format(player.realityPoints) + " Reality Points";
 	getOmegaUpgradeText();
 	
-	document.getElementById("realityBonus1").textContent = format(new Decimal(1).plus(player.realityEnergy.pow(2)), 2) + "x to all Generators";
-	document.getElementById("realityBonus2").textContent = format(new Decimal(1).plus(player.realityEnergy), 2) + "x to all Expansion Generators";
-	document.getElementById("realityBonus3").textContent = format(new Decimal(1).plus(Decimal.log10(player.realityEnergy.plus(1))), 2) + "x to all Omega Generators";
-	document.getElementById("realityBonus4").textContent = format(new Decimal(1).plus(Decimal.sqrt(player.realityEnergy)), 2) + "x to Expansion Points";
-	document.getElementById("realityBonus5").textContent = format(new Decimal(1).plus(Decimal.log10(player.realityEnergy.plus(1))), 2) + "x to Omega Points";
-	document.getElementById("realityBonus6").textContent = format(new Decimal(1).plus(player.realityEnergy), 2) + "x to DPS and GPS";
+	if (player.milestone12){
+		document.getElementById("realityBonus1").textContent = format(new Decimal(1).plus(player.realityEnergy.pow(Decimal.log(player.realityEnergy, 1.5))), 2) + "x to all Generators";
+		document.getElementById("realityBonus2").textContent = format(new Decimal(1).plus(player.realityEnergy.pow(100)), 2) + "x to all Expansion Generators";
+		document.getElementById("realityBonus3").textContent = format(new Decimal(1).plus(player.realityEnergy), 2) + "x to all Omega Generators";
+		document.getElementById("realityBonus4").textContent = format(new Decimal(1).plus(player.realityEnergy.pow(10)), 2) + "x to Expansion Points";
+		document.getElementById("realityBonus5").textContent = format(new Decimal(1).plus(Decimal.root(player.realityEnergy, 2)), 2) + "x to Omega Points";
+		document.getElementById("realityBonus6").textContent = format(new Decimal(1).plus(player.realityEnergy.pow(5)), 2) + "x to DPS and GPS";
+		document.getElementById("realityBonus7").textContent = format(new Decimal(1).plus(Decimal.log10(player.realityEnergy.plus(1))), 2) + "x to Reality Points";	
+
+		document.getElementById("realityBonus7Container").classList.remove("locked");
+	}
+	else {
+		document.getElementById("realityBonus1").textContent = format(new Decimal(1).plus(player.realityEnergy.pow(2)), 2) + "x to all Generators";
+		document.getElementById("realityBonus2").textContent = format(new Decimal(1).plus(player.realityEnergy), 2) + "x to all Expansion Generators";
+		document.getElementById("realityBonus3").textContent = format(new Decimal(1).plus(Decimal.log10(player.realityEnergy.plus(1))), 2) + "x to all Omega Generators";
+		document.getElementById("realityBonus4").textContent = format(new Decimal(1).plus(Decimal.sqrt(player.realityEnergy)), 2) + "x to Expansion Points";
+		document.getElementById("realityBonus5").textContent = format(new Decimal(1).plus(Decimal.log10(player.realityEnergy.plus(1))), 2) + "x to Omega Points";
+		document.getElementById("realityBonus6").textContent = format(new Decimal(1).plus(player.realityEnergy), 2) + "x to DPS and GPS";	
+
+		document.getElementById("realityBonus7Container").classList.add("locked");
+	}
+
 	
+	
+	// UNLOCKING AND SWITCHING TABS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 	if (player.hasUnlockedExpansion == false){
 		document.getElementById("expansionAmountText").classList.add("locked");
 	}
-	else document.getElementById("expansionAmountText").classList.remove("locked");
+	else {
+		document.getElementById("expansionAmountText").classList.remove("locked");
+
+		if (!player.hasSwitchedToExpansionGenerators){
+			player.hasSwitchedToExpansionGenerators = true;
+			showPanel(1, '#a1a102', true);
+			showPanel(1, '#a1a102', false);
+		}
+	}
+
+	if (player.hasUnlockedABG == false){
+		document.getElementById("tab5").classList.add("locked");
+	}
+	else {
+		document.getElementById("tab5").classList.remove("locked");
+
+		if (!player.hasSwitchedToABG){
+			player.hasSwitchedToABG = true;
+			showPanel(1, '#a1a102', true);
+			showPanel(3, '#a1a102', false);
+		}
+	}
+
+	if (player.hasUnlockedOmega == true){
+		document.getElementById("tab6").classList.remove("locked");
+		document.getElementById("tab7").classList.remove("locked");
+		document.getElementById("topTab3").classList.remove("locked");
+
+		if (!player.hasSwitchedToOmegaGenerators){
+			player.hasSwitchedToOmegaGenerators = true;
+			showPanel(2, '#362301', true);
+			showPanel(4, '#362301', false);
+		}
+	}
+	else {
+		document.getElementById("tab6").classList.add("locked");
+		document.getElementById("tab7").classList.add("locked");
+		document.getElementById("topTab3").classList.add("locked");
+	}
+
+	if (player.hasUnlockedSim == false){
+		document.getElementById("tab9").classList.add("locked");
+	}
+	else {
+		document.getElementById("tab9").classList.remove("locked");
+
+		if (!player.hasSwitchedToSim){
+			player.hasSwitchedToSim = true;
+			showPanel(2, '#362301', true);
+			showPanel(6, '#362301', false);
+		}
+	}
+	if (player.hasUnlockedSimUps == false){
+		document.getElementById("tab10").classList.add("locked");
+	}
+	else {
+		document.getElementById("tab10").classList.remove("locked");
+
+		if (!player.hasSwitchedToSimUpgrades){
+			player.hasSwitchedToSimUpgrades = true;
+			showPanel(2, '#362301', true);
+			showPanel(7, '#362301', false);
+		}
+	}
+
+	if (player.hasUnlockedElectrons == true){
+		document.getElementById("tab11").classList.remove("locked");
+
+		if (!player.hasSwitchedToElectrons){
+			player.hasSwitchedToElectrons = true;
+			showPanel(2, '#362301', true);
+			showPanel(8, '#362301', false);
+		}
+	}
+	else {
+		document.getElementById("tab11").classList.add("locked");
+	}
+
+	if (player.hasUnlockedReality == false){
+		document.getElementById("realityAmountText").classList.add("locked");
+		document.getElementById("tab12").classList.add("locked");
+		document.getElementById("topTab4").classList.add("locked");
+	}
+	else {
+		document.getElementById("realityAmountText").classList.remove("locked");
+		document.getElementById("tab12").classList.remove("locked");
+		document.getElementById("topTab4").classList.remove("locked");
+
+		if (!player.hasSwitchedToRealityGenerators){
+			player.hasSwitchedToRealityGenerators = true;
+			showPanel(3, '#4b6eb1', true);
+			showPanel(9, '#4b6eb1', false);
+		}
+	}
+
+	if (player.hasUnlockedBattleTower == false){
+		document.getElementById("realityAmountText").classList.add("locked");
+		document.getElementById("tab13").classList.add("locked");
+	}
+	else {
+		document.getElementById("realityAmountText").classList.remove("locked");
+		document.getElementById("tab13").classList.remove("locked");
+
+		if (!player.hasSwitchedToBattleTower){
+			player.hasSwitchedToBattleTower = true;
+			showPanel(3, '#4b6eb1', true);
+			showPanel(10, '#4b6eb1', false);
+		}
+	}
+
+	if (player.hasUnlockedTalents == false){
+		document.getElementById("tab14").classList.add("locked");
+	}
+	else {
+		document.getElementById("tab14").classList.remove("locked");
+
+		if (!player.hasSwitchedToTalents){
+			player.hasSwitchedToTalents = true;
+			showPanel(3, '#4b6eb1', true);
+			showPanel(11, '#4b6eb1', false);
+		}
+	}
+
+	if (player.hasUnlockedAtomShop == false){
+		document.getElementById("tab15").classList.add("locked");
+	}
+	else {
+		document.getElementById("tab15").classList.remove("locked");
+
+		if (!player.hasSwitchedToAtomShop){
+			player.hasSwitchedToAtomShop = true;
+			showPanel(3, '#4b6eb1', true);
+			showPanel(12, '#4b6eb1', false);
+		}
+	}
+
+	if (player.hasUnlockedFillBar == false){
+		document.getElementById("tab16").classList.add("locked");
+		document.getElementById("tab17").classList.add("locked");
+	}
+	else {
+		document.getElementById("tab16").classList.remove("locked");
+		document.getElementById("tab17").classList.remove("locked");
+
+		if (!player.hasSwitchedToFillBar){
+			player.hasSwitchedToFillBar = true;
+			showPanel(3, '#4b6eb1', true);
+			showPanel(13, '#4b6eb1', false);
+		}
+	}
+
+	if (player.hasUnlockedTranscensionUpgrades == false){
+		document.getElementById("tab18").classList.add("locked");
+	}
+	else {
+		document.getElementById("tab18").classList.remove("locked");
+
+		if (!player.hasSwitchedToTranscensionUpgrades){
+			player.hasSwitchedToTranscensionUpgrades = true;
+			showPanel(3, '#4b6eb1', true);
+			showPanel(15, '#4b6eb1', false);
+		}
+	}
+
+	if (player.hasUnlockedHypercensionUpgrades == false){
+		document.getElementById("tab19").classList.add("locked");
+	}
+	else {
+		document.getElementById("tab19").classList.remove("locked");
+
+		if (!player.hasSwitchedToHypercensionUpgrades){
+			player.hasSwitchedToHypercensionUpgrades = true;
+			showPanel(3, '#4b6eb1', true);
+			showPanel(16, '#4b6eb1', false);
+		}
+	}
+
+	if (player.hasUnlockedAutobuyers == false){
+		document.getElementById("tab4").classList.add("locked");
+		document.getElementById("topTab5").classList.add("locked");
+	}
+	else {
+		document.getElementById("tab4").classList.remove("locked");
+		document.getElementById("topTab5").classList.remove("locked");
+
+		if (!player.hasSwitchedToAutobuyer){
+			player.hasSwitchedToAutobuyer = true;
+			showPanel(4, '#9c3386', true);
+			showPanel(17, '#9c3386', false);
+		}
+	}
+
+	// UNLOCKING AND SWITCHING TABS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	
 	if (player.hasUnlockedOmega == false){
 		document.getElementById("omegaAmountText").classList.add("locked");
@@ -5276,25 +5977,7 @@ function updateGUI(){
 	}
 	else document.getElementById("realityButton").classList.remove("locked");
 	
-	document.getElementById("realityButtonText").innerHTML = "REACH REALITY" + "<br>Reach reality for " + format(Decimal.floor((Decimal.pow(10, Decimal.log10(player.omegaPoints).div(16))).div(10)), 0) + " Reality Points";
-	
-	if (player.hasUnlockedReality == false){
-		document.getElementById("realityAmountText").classList.add("locked");
-		document.getElementById("tab12").classList.add("locked");
-	}
-	else {
-		document.getElementById("realityAmountText").classList.remove("locked");
-		document.getElementById("tab12").classList.remove("locked");
-	}
-	
-	if (player.hasUnlockedBattleTower == false){
-		document.getElementById("realityAmountText").classList.add("locked");
-		document.getElementById("tab13").classList.add("locked");
-	}
-	else {
-		document.getElementById("realityAmountText").classList.remove("locked");
-		document.getElementById("tab13").classList.remove("locked");
-	}
+	document.getElementById("realityButtonText").innerHTML = "REACH REALITY" + "<br>Reach reality for " + format(Decimal.floor(((Decimal.pow(10, Decimal.log10(player.omegaPoints).div(16))).div(10)).times(player.realityBonus7)), 0) + " Reality Points";
 	
 	for (let tier = 1; tier < 9; tier++){
 		let name = TIER_NAMES[tier];
@@ -5383,13 +6066,6 @@ function updateGUI(){
 		document.getElementById("expansionGenerators").classList.remove("preExpand");
 		document.getElementById("preExpansionText").classList.remove("preExpand");
 		document.getElementById("tab3").classList.remove("preExpand");
-	}
-	
-	if (player.hasUnlockedAutobuyers == false){
-		document.getElementById("tab4").classList.add("locked");
-	}
-	else {
-		document.getElementById("tab4").classList.remove("locked");
 	}
 	
 	if (player.expansionPoints.lt(player.expansionPointMultCost)){
@@ -5523,7 +6199,7 @@ function updateGUI(){
 	
 	let hotkeyTextReality = "<p><b>HOTKEYS:</b><br>M: Buys all generators and all mult<br>P: Prestige<br>E: Buys all Expansion Generators and 2x EP<br>X: Expand<br>O: Become Omega<br>R: Reach Reality</p>";
 
-	let hotkeyTextBattleTower = "<p><b>HOTKEYS:</b><br>M: Buys all generators and all mult<br>P: Prestige<br>E: Buys all Expansion Generators and 2x EP<br>X: Expand<br>O: Become Omega<br>R: Reach Reality<br>CTRL: 10 Stats or 100 Enemy Levels<br>SHIFT: 10% Stats or 10 Enemy Levels<br>ALT: 100% Stats or 1000 Enemy Levels</p>";
+	let hotkeyTextBattleTower = "<p><b>HOTKEYS:</b><br>M: Buys all generators and all mult<br>P: Prestige<br>E: Buys all Expansion Generators and 2x EP<br>X: Expand<br>O: Become Omega<br>R: Reach Reality<br>CTRL: 10 Stats or 100 Enemy Levels<br>SHIFT: 10% Stats or 10 Enemy Levels<br>ALT: 100% Stats or 1000 Enemy Levels<br>←: Previous Enemy<br>→: Next Enemy</p>";
 	
 	let generatorText = "<p><b>GENERATORS:</b><br>The first generator makes energy. Energy is the main currency you use to upgrade your generators <br>and your all mult. The second generator creates the first, the third creates the second and so on.</p>";
 	
@@ -5535,7 +6211,7 @@ function updateGUI(){
 	
 	let ABGText = "<p><b>ALPHA BETA GAMMA:</b><br>You can purchase three different currencies; Alpha, Beta and Gamma. Alpha costs energy,<br>Beta costs EP, and Gamma costs electricity. You can use them to buy different upgrades.<br>The next mechanic is unlocked at 1e75 EP.<br>Tip: Farm Expansions for a little while to increase the Expansion Upgrade 13 multiplier.";
 	
-	let omegaText = "<p><b>OMEGA:</b><br>Becoming Omega resets everything you've done so far, but with some big rewards. <br>You unlock a new set of generators, and upgrades. Omega Generators produce Omega.<br>Omega makes electricity stronger.<br>The upgrades costs Omega, and it goes up every time you buy another upgrade. <br>Omega upgrades is kind of like a skill tree. You need to buy every previous upgrade to be able to purchase <br>the next. If you're unhappy with a choice you made, or want to try a different build, you can reset your Upgrades.<br>But remember, your Omega won't be refunded.";
+	let omegaText = "<p><b>OMEGA:</b><br>Becoming Omega resets everything you've done so far, but with some big rewards. <br>You unlock a new set of generators, and upgrades. Omega Generators produce Omega.<br>Omega makes electricity stronger.<br>The upgrades costs Omega, and it goes up every time you buy another upgrade. <br>Omega upgrades is kind of like a skill tree. You need to buy every previous upgrade to be able to purchase <br>the next. If you're unhappy with a choice you made, or want to try a different build, you can reset your Upgrades.<br>But remember, your Omega won't be refunded. At 1e16 OP you unlock ???";
 	
 	let simulationText = "<p><b>SIMULATION:</b><br>In the simulation you have to fight your way through hordes of monsters, and infinite floors. <br>There are two different modes you can be in: Gold Mode and Fighting Mode. <br>In Gold Mode you will earn gold, and in Fighting Mode you will fight (duh). <br>Use your gold to upgrade your three heroes. You also get a multiplier to your gold income based on <br>what stage you're at. Later you will be able to Resimulate, resetting your simulation back to the beginning. <br>But like with all the other prestige mechanics, you get stronger.";
 	
@@ -5546,8 +6222,13 @@ function updateGUI(){
 	let battleTowerText = "<p><b>BATTLE TOWER:</b><br>After Reaching Reality again you unlocked the Battle Tower. Could this be what the simulation was simulating?<br>Here you will fight enemies and level up. Every time you level up you gain 3 Skillpoints that you can use on whatever you want!<br>You can also allocate your stats however you wish without any cost, so go ahead and experiment with different builds!<br>Stamina gives 10 HP<br>Strength increases DPS by 2<br>Armor reduces incoming damage<br>Regeneration regenerates 1 HP per second<br>Agility reduces Armor by 0.75 and it can even go below 0 which increases damage instead<br>Sometimes the enemy will be Legendary. Legendary enemies drop Atoms when they die. The higher the level of the enemy,<br>the higher the chance for the enemy to be Legendary and the more Atoms they will drop. Higher level enemies also gives more XP.";
 
 	let retireText = "<p><b>RETIRE:</b><br>You just Retired from the Battle Tower, resetting your character. However, you just gained some fancy new Super Skillpoints!<br>These Skillpoints will stay with you forever, even after Retiring. Super Skillpoints work differently from your normal Skillpoints.<br>Instead of directly making you strong, they make your Skillpoints more effective. The max amount of Super Skillpoints you can have<br>is equal to the highest level Enemy you have ever killed. When you retire you keep the permanent Skillpoints you gained from some of the Atom Shop items.";
+
+	let particleText = "<p><b>PARTICLE ASSIMILATOR:</b><br>You have 8 Particle Assimilators. When they fill up, you gain Particles and the amount of Partiles you get in the future is multiplied.<br>When you level a Particle Assimilator up, it gets a little faster. After reaching level 100, you can Ascend them.<br>After Ascending them, their level is set back to 1 and the Speed is reset, but in return, it now significantly increases how much it increases your multiplier when it fills up.<br>It's not always best to Ascend as soon as you can, so you'll have to figure out when it's most efficient.<br>Later on you will unlock different new Prestige layers that lets you reset your previous progress for a bonus.";
 	
-	if (player.hasUnlockedTraining == true){
+	if (player.hasUnlockedFillBar == true){
+		document.getElementById("infoText").innerHTML = baseText + hotkeyTextBattleTower + generatorText + prestigeText + expansionText + autobuyerText + ABGText + omegaText + simulationText + electronText + realityText + battleTowerText + retireText + particleText;
+	}
+	else if (player.hasUnlockedTraining == true){
 		document.getElementById("infoText").innerHTML = baseText + hotkeyTextBattleTower + generatorText + prestigeText + expansionText + autobuyerText + ABGText + omegaText + simulationText + electronText + realityText + battleTowerText + retireText;
 	}
 	else if (player.hasUnlockedBattleTower == true){
@@ -5579,11 +6260,6 @@ function updateGUI(){
 	}
 	
 	// ALPHA BETA GAMMA TAB *********************
-	
-	if (player.hasUnlockedABG == false){
-		document.getElementById("tab5").classList.add("locked");
-	}
-	else document.getElementById("tab5").classList.remove("locked");
 	
 	document.getElementById("alphaText").innerHTML = "You have " + format(player.alpha, 0) + " Alpha" + "<br>Cost: " + format(player.alphaCost, 0) + " Energy";
 	document.getElementById("betaText").innerHTML = "You have " + format(player.beta, 0) + " Beta" + "<br>Cost: " + format(player.betaCost, 0) + " EP";
@@ -5689,15 +6365,6 @@ function updateGUI(){
 	
 	// ALPHA BETA GAMMA TAB *********************
 	
-	if (player.hasUnlockedOmega == true){
-		document.getElementById("tab6").classList.remove("locked");
-		document.getElementById("tab7").classList.remove("locked");
-	}
-	else {
-		document.getElementById("tab6").classList.add("locked");
-		document.getElementById("tab7").classList.add("locked");
-	}
-	
 	// SIMULATION TAB ***************************
 	
 	if (player.omega.gte(1e6)){
@@ -5707,16 +6374,6 @@ function updateGUI(){
 	if (player.resimulateDPSMult.gt(1)){
 		player.hasUnlockedSimUps = true;
 	}
-	
-	if (player.hasUnlockedSim == false){
-		document.getElementById("tab9").classList.add("locked");
-	}
-	else document.getElementById("tab9").classList.remove("locked");
-	
-	if (player.hasUnlockedSimUps == false){
-		document.getElementById("tab10").classList.add("locked");
-	}
-	else document.getElementById("tab10").classList.remove("locked");
 	
 	document.getElementById("simGoldTotal").innerText = "Gold: " + format(player.simGold, 2);
 	document.getElementById("simGoldPerSec").innerText = "Gold Per Second: " + format(player.finalGPS, 2);
@@ -5833,11 +6490,6 @@ function updateGUI(){
 	if (player.omega.gte(1e20) && player.hasUnlockedElectrons == false){
 		player.hasUnlockedElectrons = true;
 	}
-	
-	if (player.hasUnlockedElectrons == true){
-		document.getElementById("tab11").classList.remove("locked");
-	}
-	else document.getElementById("tab11").classList.add("locked");
 	
 	document.getElementById("electrons").innerText = "You have " + format(player.electrons, 2) + " Electrons";
 	document.getElementById("electronEffect").innerText = "They multiply all mult gain by " + format(player.electronEffect, 2) + "x";
@@ -6002,11 +6654,6 @@ function updateGUI(){
 		player.hasUnlockedTalents = true;
 	}
 	
-	if (player.hasUnlockedTalents == false){
-		document.getElementById("tab14").classList.add("locked");
-	}
-	else document.getElementById("tab14").classList.remove("locked");
-	
 	if (player.talent1IsActive == true){
 		document.getElementById("talent1").classList.add("active");
 	}
@@ -6129,11 +6776,6 @@ function updateGUI(){
 		player.hasUnlockedAtomShop = true;
 	}
 	
-	if (player.hasUnlockedAtomShop == false){
-		document.getElementById("tab15").classList.add("locked");
-	}
-	else document.getElementById("tab15").classList.remove("locked");
-	
 	document.getElementById("atomShopText").innerText = "You have " + format(player.atoms, 0) + " Atoms";
 	
 	for (let i = 1; i <= 20; i++){
@@ -6239,12 +6881,923 @@ function updateGUI(){
 	else document.getElementById("atomShopItem19").innerHTML = "Multiply EP based on total Skillpoints. Keep Simulation Upgrades and Omega Upgrades on Reality.<br>Current: " + format(player.atomShopItem19Effect, 2) + "x";
 
 	if (player.atomShopItem20Bought == false){
-		document.getElementById("atomShopItem20").innerHTML = "You unlock a 2x OP Button and the Omega Generator Autobuyer also buys this. Unlock ??? (Not out yet)<br>Cost: 1e700 Atoms"; 
+		document.getElementById("atomShopItem20").innerHTML = "You unlock a 2x OP Button and the Omega Generator Autobuyer also buys this. Unlock ???<br>Cost: 1e700 Atoms"; 
 		document.getElementById("omegaPointMult").classList.add("locked");
 	}
 	else {
-		document.getElementById("atomShopItem20").innerHTML = "You unlock a 2x OP Button and the Omega Generator Autobuyer also buys this. Unlock ??? (Not out yet)";
+		document.getElementById("atomShopItem20").innerHTML = "You unlock a 2x OP Button and the Omega Generator Autobuyer also buys this. Unlock the Particle Assimilator";
 		document.getElementById("omegaPointMult").classList.remove("locked");
+	}
+
+	// FILL BAR *********************************
+
+	if (player.atomShopItem20Bought){
+		player.hasUnlockedFillBar = true;
+	}
+
+	if (player.transcensionPoints.gt(0)){
+		player.hasUnlockedTranscensionUpgrades = true;
+	}
+
+	if (player.hyperPoints.gt(0)){
+		player.hasUnlockedHypercensionUpgrades = true;
+	}
+
+	for (let tier = 1; tier < 9; tier++){
+		let name = TIER_NAMES[tier];
+		let display = DISPLAY_NAMES[tier];
+		let barLevel = player[name + "FillBarLevel"];
+		let barCost = player[name + "FillBarCostFinal"];
+		let barAscension = player[name + "FillBarAscension"];
+		let barSpeed = player[name + "FillBarSpeedFinal"];
+		let barMult = player[name + "FillBarMult"];
+		let barMultPerFill = player[name + "FillBarMultPerFillFinal"];
+		
+		document.getElementById("fillBar" + tier + "Name").innerText = display + " Particle Assimilator";
+		document.getElementById("fillBar" + tier + "Level").innerText = "Level: " + format(barLevel, 0) + " / 100";
+		if (barLevel.lt(100)){
+			document.getElementById("fillBar" + tier + "Cost").innerText = "Cost: " + format(barCost, 2) + " Particles";
+		}
+		else document.getElementById("fillBar" + tier + "Cost").innerHTML = "Ascend to increase the multiplier<br>you get per fill, but reset speed<br>(" + format(barCost, 2) + ")";
+		document.getElementById("fillBar" + tier + "Ascension").innerText = "Ascension: " + format(barAscension, 0);
+		if (barSpeed.gt(100)){
+			document.getElementById("fillBar" + tier + "Speed").innerText = "Speed: " + format(barSpeed.div(1000), 2) + " Seconds per Fill";
+		}
+		else document.getElementById("fillBar" + tier + "Speed").innerText = "Speed: " + format(new Decimal(1).div(barSpeed.div(1000)), 2) + " Fills per Second";
+		document.getElementById("fillBar" + tier + "Mult").innerText = "Mult: " + format(barMult, 2) + "x";
+		document.getElementById("fillBar" + tier + "MultPerFill").innerText = "Mult increase: +" + format(barMultPerFill, 2) + " Per Fill";
+	}
+
+	document.getElementById("fillBarGold").innerText = "You have " + format(player.fillBarGold, 2) + " Particles";
+	if (player.hypercensionUpgrade1.gt(1)){
+		document.getElementById("fillBarTotalMult").innerText = "Particles per Fill = (" + format(player.hypercensionUpgrade1, 2) + " * " + format(player.transcensionUpgrade1, 2) + " * "  + format(player.recreateMult, 2) + " * " + format(player.firstFillBarMult, 2) + " * " + format(player.secondFillBarMult, 2) + " * " + format(player.thirdFillBarMult, 2) + " * " + format(player.fourthFillBarMult, 2) + " * " + format(player.fifthFillBarMult, 2) + " * " + format(player.sixthFillBarMult, 2) + " * " + format(player.seventhFillBarMult, 2) + " * " + format(player.eighthFillBarMult, 2) + ") ^ " + format(player.transcensionUpgrade5, 2) + " = " + format(player.fillBarFinalMult, 2);
+	}
+	else if (player.transcensionUpgrade5.gt(1) && player.transcensionUpgrade1.gt(1)){
+		document.getElementById("fillBarTotalMult").innerText = "Particles per Fill = (" + format(player.transcensionUpgrade1, 2) + " * "  + format(player.recreateMult, 2) + " * " + format(player.firstFillBarMult, 2) + " * " + format(player.secondFillBarMult, 2) + " * " + format(player.thirdFillBarMult, 2) + " * " + format(player.fourthFillBarMult, 2) + " * " + format(player.fifthFillBarMult, 2) + " * " + format(player.sixthFillBarMult, 2) + " * " + format(player.seventhFillBarMult, 2) + " * " + format(player.eighthFillBarMult, 2) + ") ^ " + format(player.transcensionUpgrade5, 2) + " = " + format(player.fillBarFinalMult, 2);
+	}
+	else if (player.transcensionUpgrade5.gt(1)){
+		document.getElementById("fillBarTotalMult").innerText = "Particles per Fill = (" + format(player.recreateMult, 2) + " * " + format(player.firstFillBarMult, 2) + " * " + format(player.secondFillBarMult, 2) + " * " + format(player.thirdFillBarMult, 2) + " * " + format(player.fourthFillBarMult, 2) + " * " + format(player.fifthFillBarMult, 2) + " * " + format(player.sixthFillBarMult, 2) + " * " + format(player.seventhFillBarMult, 2) + " * " + format(player.eighthFillBarMult, 2) + ") ^ " + format(player.transcensionUpgrade5, 2) + " = " + format(player.fillBarFinalMult, 2);
+	}
+	else if (player.transcensionUpgrade1.gt(1)){
+		document.getElementById("fillBarTotalMult").innerText = "Particles per Fill = " + format(player.transcensionUpgrade1, 2) + " * " + format(player.recreateMult, 2) + " * " + format(player.firstFillBarMult, 2) + " * " + format(player.secondFillBarMult, 2) + " * " + format(player.thirdFillBarMult, 2) + " * " + format(player.fourthFillBarMult, 2) + " * " + format(player.fifthFillBarMult, 2) + " * " + format(player.sixthFillBarMult, 2) + " * " + format(player.seventhFillBarMult, 2) + " * " + format(player.eighthFillBarMult, 2) + " = " + format(player.fillBarFinalMult, 2);
+	}
+	else if (player.recreateMult.gt(1)){
+		document.getElementById("fillBarTotalMult").innerText = "Particles per Fill = " + format(player.recreateMult, 2) + " * " + format(player.firstFillBarMult, 2) + " * " + format(player.secondFillBarMult, 2) + " * " + format(player.thirdFillBarMult, 2) + " * " + format(player.fourthFillBarMult, 2) + " * " + format(player.fifthFillBarMult, 2) + " * " + format(player.sixthFillBarMult, 2) + " * " + format(player.seventhFillBarMult, 2) + " * " + format(player.eighthFillBarMult, 2) + " = " + format(player.fillBarFinalMult, 2);
+	}
+	else document.getElementById("fillBarTotalMult").innerText = "Particles per Fill = " + format(player.firstFillBarMult, 2) + " * " + format(player.secondFillBarMult, 2) + " * " + format(player.thirdFillBarMult, 2) + " * " + format(player.fourthFillBarMult, 2) + " * " + format(player.fifthFillBarMult, 2) + " * " + format(player.sixthFillBarMult, 2) + " * " + format(player.seventhFillBarMult, 2) + " * " + format(player.eighthFillBarMult, 2) + " = " + format(player.fillBarFinalMult, 2);
+
+	document.getElementById("fillBarPrestige1").innerHTML = "RECREATION<br>Recreate for +" + format(Decimal.pow(new Decimal(3).times(player.transcensionUpgrade8), Decimal.log10(player.fillBarGold.div(1e12))), 2) + "x to your Recreation multiplier.<br>Current: " + format(player.recreateMult, 2) + "x";
+
+	let base1 = new Decimal(1).plus(new Decimal(5).div(Decimal.root(Decimal.log10(Decimal.log10(player.fillBarGold)), 1.1)));
+	document.getElementById("fillBarPrestige2").innerHTML = "TRANSCENSION<br>Transcend for " + format(Decimal.floor((Decimal.pow(base1, Decimal.log10(player.fillBarGold).div(150))).div(base1).times(player.hypercensionUpgrade6)), 0) + " Transcension Points.<br>Current: " + format(player.transcensionPoints, 0) + " TP";
+
+	let base2 = new Decimal(1).plus(new Decimal(5).div(Decimal.root(Decimal.log10(Decimal.log10(player.transcensionPoints)), 1.1)));
+	document.getElementById("fillBarPrestige3").innerHTML = "HYPERCENSION<br>Hypercend for " + format(Decimal.floor((Decimal.pow(base2, Decimal.log10(player.transcensionPoints).div(5))).div(base2)), 0) + " Hyper Points.<br>Current: " + format(player.hyperPoints, 0) + " HP";
+
+	if (player.fillBarGold.lt(1e12)){
+		document.getElementById("fillBarPrestige1").classList.add("locked");
+	}
+	else document.getElementById("fillBarPrestige1").classList.remove("locked");
+
+	if (player.fillBarGold.lt(1e150)){
+		document.getElementById("fillBarPrestige2").classList.add("locked");
+	}
+	else document.getElementById("fillBarPrestige2").classList.remove("locked");
+
+	if (player.transcensionPoints.lt(1e5)){
+		document.getElementById("fillBarPrestige3").classList.add("locked");
+		document.getElementById("fillBarPrestigePlaceholder").classList.remove("locked");
+	}
+	else {
+		document.getElementById("fillBarPrestige3").classList.remove("locked");	
+		document.getElementById("fillBarPrestigePlaceholder").classList.add("locked");
+	}
+
+	document.getElementById("transcensionText").innerText = "You have " + format(player.transcensionPoints, 0) + " Transcension Points";
+
+	let tu1Mod = new Decimal(1);
+	let tu2Mod = new Decimal(0);
+	if (player.hypercensionUpgrade8Bought){
+		tu1Mod = new Decimal(100);
+		tu2Mod = new Decimal(1);
+	}
+
+	document.getElementById("transcensionUpgrade1").innerHTML = "Multiply Particles per Fill by " + format(player.transcensionUpgrade1, 0) + "x<br>Next Level: " + format(player.transcensionUpgrade1.times(tu1Mod.times(1000)), 0) + "x<br>Cost: " + format(player.transcensionUpgrade1Cost, 0) + " TP";
+	document.getElementById("transcensionUpgrade2").innerHTML = "Multiply Speed by " + format(player.transcensionUpgrade2, 0) + "x<br>Next Level: " + format(player.transcensionUpgrade2.times(tu2Mod.plus(2)), 0) + "x<br>Cost: " + format(player.transcensionUpgrade2Cost, 0) + " TP";
+	document.getElementById("transcensionUpgrade3").innerHTML = "Multiply Mult per Fill by " + format(player.transcensionUpgrade3, 0) + "x<br>Next Level: " + format(player.transcensionUpgrade3.times(5), 0) + "x<br>Cost: " + format(player.transcensionUpgrade3Cost, 0) + " TP";
+	document.getElementById("transcensionUpgrade4").innerHTML = "Multiply Ascension Reward by " + format(player.transcensionUpgrade4, 2) + "x<br>Next Level: " + format(player.transcensionUpgrade4.plus(0.2), 2) + "x<br>Cost: " + format(player.transcensionUpgrade4Cost, 0) + " TP";
+	document.getElementById("transcensionUpgrade5").innerHTML = "Exponentiate Particles per Fill by ^" + format(player.transcensionUpgrade5, 2) + "<br>Next Level: ^" + format(player.transcensionUpgrade5.plus(0.01), 2) + "<br>Cost: " + format(player.transcensionUpgrade5Cost, 0) + " TP";
+	document.getElementById("transcensionUpgrade6").innerHTML = "Divide Speed per Level Multiplier by /" + format(player.transcensionUpgrade6, 2) + "<br>Next Level: /" + format(player.transcensionUpgrade6.plus(0.01), 2) + "<br>Cost: " + format(player.transcensionUpgrade6Cost, 0) + " TP";
+	document.getElementById("transcensionUpgrade7").innerHTML = "Divide Costs by /" + format(player.transcensionUpgrade7, 0) + "<br>Next Level: /" + format(player.transcensionUpgrade7.times(10), 0) + "<br>Cost: " + format(player.transcensionUpgrade7Cost, 0) + " TP";
+	document.getElementById("transcensionUpgrade8").innerHTML = "Multiply Recreation Effect by " + format(player.transcensionUpgrade8, 2) + "x<br>Next Level: " + format(player.transcensionUpgrade8.times(new Decimal(1).plus(new Decimal(0.1).div(player.transcensionUpgrade8Bought.plus(1)))), 2) + "x<br>Cost: " + format(player.transcensionUpgrade8Cost, 0) + " TP";
+
+	for (let i = 1; i < 9; i++){
+		if (player.transcensionPoints.gte(player["transcensionUpgrade" + i + "Cost"])){
+			document.getElementById("transcensionUpgrade" + i).classList.remove("locked");
+		}
+		else document.getElementById("transcensionUpgrade" + i).classList.add("locked");
+	}
+
+	if (player.milestone1){
+		document.getElementById("milestone1").innerHTML = "UNLOCKED:<br>Unlock the Particle Assimilator Autobuyer, it can buy the <br>First Particle Assimilator";
+		document.getElementById("milestone1").classList.add("unlocked");
+		document.getElementById("autoFillBar").classList.remove("locked");
+	}
+	else {
+		document.getElementById("milestone1").innerHTML = "Unlock at 1e10 Particles:<br>XXX";
+		document.getElementById("milestone1").classList.remove("unlocked");
+		document.getElementById("autoFillBar").classList.add("locked");
+	}
+
+	if (player.milestone2){
+		document.getElementById("milestone2").innerHTML = "UNLOCKED:<br>The Particle Assimilator Autobuyer can now buy the Second Particle Assimilator";
+		document.getElementById("milestone2").classList.add("unlocked");
+	}
+	else {
+		document.getElementById("milestone2").innerHTML = "Unlock at 1e20 Particles:<br>XXX";
+		document.getElementById("milestone2").classList.remove("unlocked");
+	}
+
+	if (player.milestone3){
+		document.getElementById("milestone3").innerHTML = "UNLOCKED:<br>The Particle Assimilator Autobuyer can now buy the Third Particle Assimilator";
+		document.getElementById("milestone3").classList.add("unlocked");
+	}
+	else {
+		document.getElementById("milestone3").innerHTML = "Unlock at 1e30 Particles:<br>XXX";
+		document.getElementById("milestone3").classList.remove("unlocked");
+	}
+
+	if (player.milestone4){
+		document.getElementById("milestone4").innerHTML = "UNLOCKED:<br>The Particle Assimilator Autobuyer can now buy the Fourth Particle Assimilator";
+		document.getElementById("milestone4").classList.add("unlocked");
+	}
+	else {
+		document.getElementById("milestone4").innerHTML = "Unlock at 1e40 Particles:<br>XXX";
+		document.getElementById("milestone4").classList.remove("unlocked");
+	}
+
+	if (player.milestone5){
+		document.getElementById("milestone5").innerHTML = "UNLOCKED:<br>The Particle Assimilator Autobuyer can now buy the Fifth Particle Assimilator";
+		document.getElementById("milestone5").classList.add("unlocked");
+	}
+	else {
+		document.getElementById("milestone5").innerHTML = "Unlock at 1e50 Particles:<br>XXX";
+		document.getElementById("milestone5").classList.remove("unlocked");
+	}
+
+	if (player.milestone6){
+		document.getElementById("milestone6").innerHTML = "UNLOCKED:<br>The Particle Assimilator Autobuyer can now buy the Sixth Particle Assimilator";
+		document.getElementById("milestone6").classList.add("unlocked");
+	}
+	else {
+		document.getElementById("milestone6").innerHTML = "Unlock at 1e60 Particles:<br>XXX";
+		document.getElementById("milestone6").classList.remove("unlocked");
+	}
+
+	if (player.milestone7){
+		document.getElementById("milestone7").innerHTML = "UNLOCKED:<br>The Particle Assimilator Autobuyer can now buy the Seventh Particle Assimilator";
+		document.getElementById("milestone7").classList.add("unlocked");
+	}
+	else {
+		document.getElementById("milestone7").innerHTML = "Unlock at 1e70 Particles:<br>XXX";
+		document.getElementById("milestone7").classList.remove("unlocked");
+	}
+
+	if (player.milestone8){
+		document.getElementById("milestone8").innerHTML = "UNLOCKED:<br>The Particle Assimilator Autobuyer can now buy the Eighth Particle Assimilator";
+		document.getElementById("milestone8").classList.add("unlocked");
+	}
+	else {
+		document.getElementById("milestone8").innerHTML = "Unlock at 1e80 Particles:<br>XXX";
+		document.getElementById("milestone8").classList.remove("unlocked");
+	}
+
+	if (player.milestone9){
+		document.getElementById("milestone9").innerHTML = "UNLOCKED:<br>Unlock the Ascension Autobuyer";
+		document.getElementById("milestone9").classList.add("unlocked");
+		document.getElementById("autoAscension").classList.remove("locked");
+	}
+	else {
+		document.getElementById("milestone9").innerHTML = "Unlock at 1e100 Particles:<br>XXX";
+		document.getElementById("milestone9").classList.remove("unlocked");
+		document.getElementById("autoAscension").classList.add("locked");
+	}
+
+	if (player.milestone10){
+		document.getElementById("milestone10").innerHTML = "UNLOCKED:<br>You always have max Electrons";
+		document.getElementById("milestone10").classList.add("unlocked");
+	}
+	else {
+		document.getElementById("milestone10").innerHTML = "Unlock at 1 TP:<br>XXX";
+		document.getElementById("milestone10").classList.remove("unlocked");
+	}
+
+	if (player.milestone11){
+		document.getElementById("milestone11").innerHTML = "UNLOCKED:<br>The Particle Assimilator Autobuyer buys max instead of 1.";
+		document.getElementById("milestone11").classList.add("unlocked");
+	}
+	else {
+		document.getElementById("milestone11").innerHTML = "Unlock at 10 TP:<br>XXX";
+		document.getElementById("milestone11").classList.remove("unlocked");
+	}
+
+	if (player.milestone12){
+		document.getElementById("milestone12").innerHTML = "UNLOCKED:<br>Improve all Reality Bonuses";
+		document.getElementById("milestone12").classList.add("unlocked");
+	}
+	else {
+		document.getElementById("milestone12").innerHTML = "Unlock at 100 TP:<br>XXX";
+		document.getElementById("milestone12").classList.remove("unlocked");
+	}
+
+	if (player.milestone13){
+		document.getElementById("milestone13").innerHTML = "UNLOCKED:<br>The Particle Assimilator Autobuyer and the Ascension Autobuyer are faster.";
+		document.getElementById("milestone13").classList.add("unlocked");
+	}
+	else {
+		document.getElementById("milestone13").innerHTML = "Unlock at 1000 TP:<br>XXX";
+		document.getElementById("milestone13").classList.remove("unlocked");
+	}
+
+	if (player.milestone14){
+		document.getElementById("milestone14").innerHTML = "UNLOCKED:<br>Unlock a new Reality Bonus";
+		document.getElementById("milestone14").classList.add("unlocked");
+	}
+	else {
+		document.getElementById("milestone14").innerHTML = "Unlock at 1e4 TP:<br>XXX";
+		document.getElementById("milestone14").classList.remove("unlocked");
+	}
+
+	if (player.milestone15){
+		document.getElementById("milestone15").innerHTML = "UNLOCKED:<br>Gain 1% of the multiplier you would get on Recreation per second.";
+		document.getElementById("milestone15").classList.add("unlocked");
+	}
+	else {
+		document.getElementById("milestone15").innerHTML = "Unlock at 1 HP:<br>XXX";
+		document.getElementById("milestone15").classList.remove("unlocked");
+	}
+
+	if (player.milestone16){
+		document.getElementById("milestone16").innerHTML = "UNLOCKED:<br>Unlock the Transcension Upgrades Autobuyer";
+		document.getElementById("milestone16").classList.add("unlocked");
+		document.getElementById("autoTranscensionUpgrades").classList.remove("locked");
+	}
+	else {
+		document.getElementById("milestone16").innerHTML = "Unlock at 10 HP:<br>XXX";
+		document.getElementById("milestone16").classList.remove("unlocked");
+		document.getElementById("autoTranscensionUpgrades").classList.add("locked");
+	}
+
+	if (player.milestone17){
+		document.getElementById("milestone17").innerHTML = "UNLOCKED:<br>Gain 100% the TP you would get on Transcension per second";
+		document.getElementById("milestone17").classList.add("unlocked");
+	}
+	else {
+		document.getElementById("milestone17").innerHTML = "Unlock at 100 HP:<br>XXX";
+		document.getElementById("milestone17").classList.remove("unlocked");
+	}
+
+	if (player.milestone18){
+		document.getElementById("milestone18").innerHTML = "UNLOCKED:<br>Unlock the Hypercension Autobuyer";
+		document.getElementById("milestone18").classList.add("unlocked");
+		document.getElementById("autoHypercension").classList.remove("locked");
+	}
+	else {
+		document.getElementById("milestone18").innerHTML = "Unlock at 1000 HP:<br>XXX";
+		document.getElementById("milestone18").classList.remove("unlocked");
+		document.getElementById("autoHypercension").classList.add("locked");
+	}
+
+	if (player.milestone19){
+		document.getElementById("milestone19").innerHTML = "UNLOCKED:<br>Automatically gain max SSP";
+		document.getElementById("milestone19").classList.add("unlocked");
+	}
+	else {
+		document.getElementById("milestone19").innerHTML = "Unlock at 1e4 HP:<br>XXX";
+		document.getElementById("milestone19").classList.remove("unlocked");
+	}
+
+	if (player.milestone20){
+		document.getElementById("milestone20").innerHTML = "UNLOCKED:<br>Passively gain 100% of the OP you would get every second";
+		document.getElementById("milestone20").classList.add("unlocked");
+	}
+	else {
+		document.getElementById("milestone20").innerHTML = "Unlock at 1e5 HP:<br>XXX";
+		document.getElementById("milestone20").classList.remove("unlocked");
+	}
+
+	if (player.milestone21){
+		document.getElementById("milestone21").innerHTML = "UNLOCKED:<br>Unlock the Reality Generator Autobuyer";
+		document.getElementById("milestone21").classList.add("unlocked");
+		document.getElementById("autoRealityGenerator").classList.remove("locked");
+	}
+	else {
+		document.getElementById("milestone21").innerHTML = "Unlock at 1e6 HP:<br>XXX";
+		document.getElementById("milestone21").classList.remove("unlocked");
+		document.getElementById("autoRealityGenerator").classList.add("locked");
+	}
+
+	if (player.milestone22){
+		document.getElementById("milestone22").innerHTML = "UNLOCKED:<br>Improve Omega Effect";
+		document.getElementById("milestone22").classList.add("unlocked");
+	}
+	else {
+		document.getElementById("milestone22").innerHTML = "Unlock at 1e7 HP:<br>XXX";
+		document.getElementById("milestone22").classList.remove("unlocked");
+	}
+
+	if (player.milestone23){
+		document.getElementById("milestone23").innerHTML = "UNLOCKED:<br>Improve TU3 and TU7";
+		document.getElementById("milestone23").classList.add("unlocked");
+	}
+	else {
+		document.getElementById("milestone23").innerHTML = "Unlock at 1e8 HP:<br>XXX";
+		document.getElementById("milestone23").classList.remove("unlocked");
+	}
+
+	if (player.milestone24){
+		document.getElementById("milestone24").innerHTML = "UNLOCKED:<br>Improve Omega Generators based on HP and unlock ??? (not implemented yet)<br>Current: " + format(player.milestone24Mult, 2) + "x";
+		document.getElementById("milestone24").classList.add("unlocked");
+	}
+	else {
+		document.getElementById("milestone24").innerHTML = "Unlock at 1e10 HP:<br>XXX";
+		document.getElementById("milestone24").classList.remove("unlocked");
+	}
+
+
+	document.getElementById("hypercensionText").innerText = "You have " + format(player.hyperPoints, 0) + " Hyper Points"
+
+	document.getElementById("hypercensionUpgrade1").innerHTML = "Multiply Particles per Fill by " + format(player.hypercensionUpgrade1, 0) + "x<br>Next Level: " + format(player.hypercensionUpgrade1.times(1e10), 0) + "x<br>Cost: " + format(player.hypercensionUpgrade1Cost, 0) + " HP";
+	document.getElementById("hypercensionUpgrade2").innerHTML = "Multiply Speed by " + format(player.hypercensionUpgrade2, 0) + "x<br>Next Level: " + format(player.hypercensionUpgrade2.times(10), 0) + "x<br>Cost: " + format(player.hypercensionUpgrade2Cost, 0) + " HP";
+	document.getElementById("hypercensionUpgrade3").innerHTML = "Multiply Mult per Fill by " + format(player.hypercensionUpgrade3, 0) + "x<br>Next Level: " + format(player.hypercensionUpgrade3.times(10), 0) + "x<br>Cost: " + format(player.hypercensionUpgrade3Cost, 0) + " HP";
+	document.getElementById("hypercensionUpgrade4").innerHTML = "Divide Costs by / " + format(player.hypercensionUpgrade4, 0) + "<br>Next Level: / " + format(player.hypercensionUpgrade4.times(1000), 0) + "<br>Cost: " + format(player.hypercensionUpgrade4Cost, 0) + " HP";
+	if (player.hypercensionUpgrade5Bought == false){
+		document.getElementById("hypercensionUpgrade5").innerHTML = "Multiply Speed equal to TP" + "<br>Cost: " + format(player.hypercensionUpgrade5Cost, 0) + " HP";
+		document.getElementById("hypercensionUpgrade5").classList.remove("bought");
+	}
+	else {
+		document.getElementById("hypercensionUpgrade5").innerHTML = "Multiply Speed based on TP" + "<br>Current: " + format(player.hypercensionUpgrade5, 2) + "x";
+		document.getElementById("hypercensionUpgrade5").classList.add("bought");
+	}
+	if (player.hypercensionUpgrade6Bought == false){
+		document.getElementById("hypercensionUpgrade6").innerHTML = "Multiply TP gain based on HP" + "<br>Cost: " + format(player.hypercensionUpgrade6Cost, 0) + " HP";
+		document.getElementById("hypercensionUpgrade6").classList.remove("bought");
+	}
+	else {
+		document.getElementById("hypercensionUpgrade6").innerHTML = "Multiply TP gain based on HP" + "<br>Current: " + format(player.hypercensionUpgrade6, 2) + "x";
+		document.getElementById("hypercensionUpgrade6").classList.add("bought");
+	}
+	if (player.hypercensionUpgrade7Bought == false){
+		document.getElementById("hypercensionUpgrade7").innerHTML = "Multiply Ascension Reward based on HP and TP" + "<br>Cost: " + format(player.hypercensionUpgrade7Cost, 0) + " HP";
+		document.getElementById("hypercensionUpgrade7").classList.remove("bought");
+	}
+	else {
+		document.getElementById("hypercensionUpgrade7").innerHTML = "Multiply Ascension Reward based on HP and TP" + "<br>Current: " + format(player.hypercensionUpgrade7, 2) + "x";
+		document.getElementById("hypercensionUpgrade7").classList.add("bought");
+	}
+	if (player.hypercensionUpgrade8Bought == false){
+		document.getElementById("hypercensionUpgrade8").innerHTML = "TU1 is 1e5x instead and TU2 is 3x instead" + "<br>Cost: " + format(player.hypercensionUpgrade8Cost, 0) + " HP";
+		document.getElementById("hypercensionUpgrade8").classList.remove("bought");
+	}
+	else {
+		document.getElementById("hypercensionUpgrade8").innerHTML = "TU1 is 1e5x instead and TU2 is 3x instead";
+		document.getElementById("hypercensionUpgrade8").classList.add("bought");
+	}
+	for (let i = 1; i < 9; i++){
+		if (player.hyperPoints.gte(player["hypercensionUpgrade" + i + "Cost"])){
+			document.getElementById("hypercensionUpgrade" + i).classList.remove("locked");
+		}
+		else document.getElementById("hypercensionUpgrade" + i).classList.add("locked");
+	}
+}
+
+const fillBarProgresses = {
+	first: document.getElementById("fillBar1"),
+	second: document.getElementById("fillBar2"),
+	third: document.getElementById("fillBar3"),
+	fourth: document.getElementById("fillBar4"),
+	fifth: document.getElementById("fillBar5"),
+	sixth: document.getElementById("fillBar6"),
+	seventh: document.getElementById("fillBar7"),
+	eighth: document.getElementById("fillBar8")
+}
+
+function fillBarFill(diff){
+	for (let tier = 1; tier < 9; tier++){
+		let name = TIER_NAMES[tier];
+
+		if (player[name + "FillBarLevel"].gte(1)){
+			player[name + "FillBarProgress"] = player[name + "FillBarProgress"].plus(new Decimal(1000).times(diff));
+			if (player[name + "FillBarProgress"].gte(100) && player[name + "FillBarSpeedFinal"].lte(100)){
+				player[name + "FillBarProgress"] = player[name + "FillBarProgress"].minus(100);
+				player.fillBarGold = player.fillBarGold.plus(player.fillBarFinalMult.times((new Decimal(1).div(player[name + "FillBarSpeedFinal"].div(1000))).div(10)));
+				player[name + "FillBarMult"] = player[name + "FillBarMult"].plus(player[name + "FillBarMultPerFillFinal"].times((new Decimal(1).div(player[name + "FillBarSpeedFinal"].div(1000))).div(10)));
+			}
+			else if (player[name + "FillBarProgress"].gte(player[name + "FillBarSpeedFinal"])){
+				player[name + "FillBarProgress"] = player[name + "FillBarProgress"].minus(player[name + "FillBarSpeedFinal"]);
+				player.fillBarGold = player.fillBarGold.plus(player.fillBarFinalMult);
+				player[name + "FillBarMult"] = player[name + "FillBarMult"].plus(player[name + "FillBarMultPerFillFinal"]);
+			}
+		}
+		
+		let progress = player[name + "FillBarProgress"].div(player[name + "FillBarSpeedFinal"]).times(100);
+		if (player[name + "FillBarSpeedFinal"].lte(100)){
+			progress = new Decimal(100);
+		}
+		fillBarProgresses[name].style.setProperty("--width", progress);
+	}
+}
+
+const past2kScaleArr = [null, new Decimal(8600), new Decimal(7300), new Decimal(6400), new Decimal(5800), new Decimal(5300), new Decimal(4900), new Decimal(4600), new Decimal(4400)];
+function buyFillBar(tier){
+	getFillBarFinalCost();
+	let name = TIER_NAMES[tier];
+	if (player[name + "FillBarLevel"].eq(100)){
+		player[name + "FillBarSpeed"] = player[name + "FillBarSpeedBase"];
+		player[name + "FillBarLevel"] = new Decimal(1);
+		//player[name + "FillBarMultPerFill"] = player[name + "FillBarMultPerFill"].times(new Decimal(10).times(player.transcensionUpgrade4));
+		player[name + "FillBarAscension"] = player[name + "FillBarAscension"].plus(1);
+	}
+	else if (player.fillBarGold.gte(player[name + "FillBarCostFinal"]) && player[name + "FillBarLevel"].lt(100)){
+		player.fillBarGold = player.fillBarGold.minus(player[name + "FillBarCostFinal"]);
+		let past2kScale = 0;
+		if (past2kScaleArr[tier].lte(player[name + "FillBarBought"])){
+			past2kScale = (player[name + "FillBarBought"].plus(1)).div(5000);
+		}
+		player[name + "FillBarCost"] = player[name + "FillBarCost"].times(new Decimal(1).plus(new Decimal(tier).div(10)).plus(player[name + "FillBarAscension"].div(new Decimal(200).div(tier))).plus((player[name + "FillBarBought"].plus(1)).div(10000)).plus(past2kScale));
+		player[name + "FillBarBought"] = player[name + "FillBarBought"].plus(1);
+		if (player[name + "FillBarLevel"].gt(0)){
+			player[name + "FillBarSpeed"] = player[name + "FillBarSpeed"].times(new Decimal(0.95).div(player.transcensionUpgrade6));
+		}
+		player[name + "FillBarLevel"] = player[name + "FillBarLevel"].plus(1);
+	}
+}
+
+function recreate(){
+	if (player.fillBarGold.gte(1e12)){
+		player.recreateMult = player.recreateMult.plus(Decimal.pow(new Decimal(3).times(player.transcensionUpgrade8), Decimal.log10(player.fillBarGold.div(1e12))));
+
+		player.fillBarGold = new Decimal(1);
+
+		for (let tier = 1; tier < 9; tier++){
+			let name = TIER_NAMES[tier];
+
+			player[name + "FillBarLevel"] = new Decimal(0);
+			player[name + "FillBarAscension"] = new Decimal(0);
+			player[name + "FillBarMult"] = new Decimal(1);
+			player[name + "FillBarMultPerFill"] = new Decimal(0.01);
+			player[name + "FillBarProgress"] = new Decimal(0);
+			player[name + "FillBarBought"] = new Decimal(0);
+		}
+
+		player.firstFillBarCost = new Decimal(1);
+		player.firstFillBarSpeed = new Decimal(3000);
+
+		player.secondFillBarCost = new Decimal(50);
+		player.secondFillBarSpeed = new Decimal(5000);
+
+		player.thirdFillBarCost = new Decimal(1000);
+		player.thirdFillBarSpeed = new Decimal(10000);
+
+		player.fourthFillBarCost = new Decimal(1e5);
+		player.fourthFillBarSpeed = new Decimal(15000);
+
+		player.fifthFillBarCost = new Decimal(1e8);
+		player.fifthFillBarSpeed = new Decimal(20000);
+
+		player.sixthFillBarCost = new Decimal(1e12);
+		player.sixthFillBarSpeed = new Decimal(25000);
+
+		player.seventhFillBarCost = new Decimal(1e16);
+		player.seventhFillBarSpeed = new Decimal(30000);
+
+		player.eighthFillBarCost = new Decimal(1e25);
+		player.eighthFillBarSpeed = new Decimal(60000);
+	}
+}
+
+function trancend(){
+	if (player.fillBarGold.gte(1e150)){
+		let base = new Decimal(1).plus(new Decimal(5).div(Decimal.root(Decimal.log10(Decimal.log10(player.fillBarGold)), 1.1)));
+		player.transcensionPoints = player.transcensionPoints.plus(Decimal.floor((Decimal.pow(base, Decimal.log10(player.fillBarGold).div(150))).div(base).times(player.hypercensionUpgrade6)));
+
+		player.recreateMult = new Decimal(1);
+
+		player.fillBarFinalMult = new Decimal(1);
+		player.fillBarGold = new Decimal(1);
+		for (let tier = 1; tier < 9; tier++){
+			let name = TIER_NAMES[tier];
+
+			player[name + "FillBarLevel"] = new Decimal(0);
+			player[name + "FillBarAscension"] = new Decimal(0);
+			player[name + "FillBarMult"] = new Decimal(1);
+			player[name + "FillBarMultPerFill"] = new Decimal(0.01);
+			player[name + "FillBarProgress"] = new Decimal(0);
+			player[name + "FillBarBought"] = new Decimal(0);
+		}
+
+		player.firstFillBarCost = new Decimal(1);
+		player.firstFillBarSpeed = new Decimal(3000);
+
+		player.secondFillBarCost = new Decimal(50);
+		player.secondFillBarSpeed = new Decimal(5000);
+
+		player.thirdFillBarCost = new Decimal(1000);
+		player.thirdFillBarSpeed = new Decimal(10000);
+
+		player.fourthFillBarCost = new Decimal(1e5);
+		player.fourthFillBarSpeed = new Decimal(15000);
+
+		player.fifthFillBarCost = new Decimal(1e8);
+		player.fifthFillBarSpeed = new Decimal(20000);
+
+		player.sixthFillBarCost = new Decimal(1e12);
+		player.sixthFillBarSpeed = new Decimal(25000);
+
+		player.seventhFillBarCost = new Decimal(1e16);
+		player.seventhFillBarSpeed = new Decimal(30000);
+
+		player.eighthFillBarCost = new Decimal(1e25);
+		player.eighthFillBarSpeed = new Decimal(60000);
+	}
+}
+
+function hypercend(){
+	if (player.transcensionPoints.gte(1e5)){
+		let base = new Decimal(1).plus(new Decimal(5).div(Decimal.root(Decimal.log10(Decimal.log10(player.transcensionPoints)), 1.1)));
+		player.hyperPoints = player.hyperPoints.plus(Decimal.floor((Decimal.pow(base, Decimal.log10(player.transcensionPoints).div(5))).div(base)));
+
+		player.recreateMult = new Decimal(1);
+		
+		player.transcensionPoints = new Decimal(0);
+
+		player.fillBarFinalMult = new Decimal(1);
+		player.fillBarGold = new Decimal(1);
+		for (let tier = 1; tier < 9; tier++){
+			let name = TIER_NAMES[tier];
+
+			player[name + "FillBarLevel"] = new Decimal(0);
+			player[name + "FillBarAscension"] = new Decimal(0);
+			player[name + "FillBarMult"] = new Decimal(1);
+			player[name + "FillBarMultPerFill"] = new Decimal(0.01);
+			player[name + "FillBarProgress"] = new Decimal(0);
+			player[name + "FillBarBought"] = new Decimal(0);
+		}
+
+		player.firstFillBarCost = new Decimal(1);
+		player.firstFillBarSpeed = new Decimal(3000);
+
+		player.secondFillBarCost = new Decimal(50);
+		player.secondFillBarSpeed = new Decimal(5000);
+
+		player.thirdFillBarCost = new Decimal(1000);
+		player.thirdFillBarSpeed = new Decimal(10000);
+
+		player.fourthFillBarCost = new Decimal(1e5);
+		player.fourthFillBarSpeed = new Decimal(15000);
+
+		player.fifthFillBarCost = new Decimal(1e8);
+		player.fifthFillBarSpeed = new Decimal(20000);
+
+		player.sixthFillBarCost = new Decimal(1e12);
+		player.sixthFillBarSpeed = new Decimal(25000);
+
+		player.seventhFillBarCost = new Decimal(1e16);
+		player.seventhFillBarSpeed = new Decimal(30000);
+
+		player.eighthFillBarCost = new Decimal(1e25);
+		player.eighthFillBarSpeed = new Decimal(60000);
+		
+		player.transcensionUpgrade1 = new Decimal(1);
+		player.transcensionUpgrade1Cost = new Decimal(1);
+		player.transcensionUpgrade1Bought = new Decimal(0);
+
+		player.transcensionUpgrade2 = new Decimal(1);
+		player.transcensionUpgrade2Cost = new Decimal(1);
+		player.transcensionUpgrade2Bought = new Decimal(0);
+
+		player.transcensionUpgrade3 = new Decimal(1);
+		player.transcensionUpgrade3Cost = new Decimal(1);
+		player.transcensionUpgrade3Bought = new Decimal(0);
+
+		player.transcensionUpgrade4 = new Decimal(1);
+		player.transcensionUpgrade4Cost = new Decimal(1);
+		player.transcensionUpgrade4Bought = new Decimal(0);
+
+		player.transcensionUpgrade5 = new Decimal(1);
+		player.transcensionUpgrade5Cost = new Decimal(1);
+		player.transcensionUpgrade5Bought = new Decimal(0);
+
+		player.transcensionUpgrade6 = new Decimal(1);
+		player.transcensionUpgrade6Cost = new Decimal(1);
+		player.transcensionUpgrade6Bought = new Decimal(0);
+
+		player.transcensionUpgrade7 = new Decimal(1);
+		player.transcensionUpgrade7Cost = new Decimal(1);
+		player.transcensionUpgrade7Bought = new Decimal(0);
+
+		player.transcensionUpgrade8 = new Decimal(1);
+		player.transcensionUpgrade8Cost = new Decimal(1);
+		player.transcensionUpgrade8Bought = new Decimal(0);
+	}
+}
+
+const pastE5ScaleArr = [null, new Decimal(17), new Decimal(17), new Decimal(7), new Decimal(5), new Decimal(3), new Decimal(8), new Decimal(17), new Decimal(3)];
+function buyTranscensionUpgrade(tier){
+	let scale = new Decimal(0);
+	if (tier == 1){
+		if (player.transcensionPoints.gte(player.transcensionUpgrade1Cost)){
+			if (player.hypercensionUpgrade8Bought){
+				player.transcensionUpgrade1 = player.transcensionUpgrade1.times(1e5);
+			}
+			else player.transcensionUpgrade1 = player.transcensionUpgrade1.times(1000);
+			player.transcensionPoints = player.transcensionPoints.minus(player.transcensionUpgrade1Cost);
+			player.transcensionUpgrade1Bought = player.transcensionUpgrade1Bought.plus(1);
+			if (pastE5ScaleArr[tier].lt(player.transcensionUpgrade1Bought)){
+				scale = player.transcensionUpgrade1Bought.minus(pastE5ScaleArr[tier]).times(0.2);
+			}
+			player.transcensionUpgrade1Cost = player.transcensionUpgrade1Cost.times(new Decimal(2).plus(scale));
+		}
+	}
+	else if (tier == 2){
+		if (player.transcensionPoints.gte(player.transcensionUpgrade2Cost)){
+			if (player.hypercensionUpgrade8Bought){
+				player.transcensionUpgrade2 = player.transcensionUpgrade2.times(3);
+			}
+			else player.transcensionUpgrade2 = player.transcensionUpgrade2.times(2);
+			player.transcensionPoints = player.transcensionPoints.minus(player.transcensionUpgrade2Cost);
+			player.transcensionUpgrade2Bought = player.transcensionUpgrade2Bought.plus(1);
+			if (pastE5ScaleArr[tier].lt(player.transcensionUpgrade2Bought)){
+				scale = player.transcensionUpgrade2Bought.minus(pastE5ScaleArr[tier]).times(0.2);
+			}
+			player.transcensionUpgrade2Cost = player.transcensionUpgrade2Cost.times(new Decimal(2).plus(scale));
+		}
+	}
+	else if (tier == 3){
+		if (player.transcensionPoints.gte(player.transcensionUpgrade3Cost)){
+			if (player.milestone23){
+				player.transcensionUpgrade3 = player.transcensionUpgrade3.times(30);
+			}
+			else player.transcensionUpgrade3 = player.transcensionUpgrade3.times(5);
+			player.transcensionPoints = player.transcensionPoints.minus(player.transcensionUpgrade3Cost);
+			player.transcensionUpgrade3Bought = player.transcensionUpgrade3Bought.plus(1);
+			if (pastE5ScaleArr[tier].lt(player.transcensionUpgrade3Bought)){
+				scale = player.transcensionUpgrade3Bought.minus(pastE5ScaleArr[tier]).times(0.5);
+			}
+			player.transcensionUpgrade3Cost = player.transcensionUpgrade3Cost.times(new Decimal(6).plus(scale));
+		}
+	}
+	else if (tier == 4){
+		if (player.transcensionPoints.gte(player.transcensionUpgrade4Cost)){
+			player.transcensionUpgrade4 = player.transcensionUpgrade4.plus(0.2);
+			player.transcensionPoints = player.transcensionPoints.minus(player.transcensionUpgrade4Cost);
+			player.transcensionUpgrade4Bought = player.transcensionUpgrade4Bought.plus(1);
+			if (pastE5ScaleArr[tier].lt(player.transcensionUpgrade4Bought)){
+				scale = player.transcensionUpgrade4Bought.minus(pastE5ScaleArr[tier]).times(1);
+			}
+			player.transcensionUpgrade4Cost = player.transcensionUpgrade4Cost.times(new Decimal(15).plus(scale));
+		}
+	}
+	else if (tier == 5){
+		if (player.transcensionPoints.gte(player.transcensionUpgrade5Cost)){
+			player.transcensionUpgrade5 = player.transcensionUpgrade5.plus(0.01);
+			player.transcensionPoints = player.transcensionPoints.minus(player.transcensionUpgrade5Cost);
+			player.transcensionUpgrade5Bought = player.transcensionUpgrade5Bought.plus(1);
+			if (pastE5ScaleArr[tier].lt(player.transcensionUpgrade5Bought)){
+				player.transcensionUpgrade5Cost = player.transcensionUpgrade5Cost.pow(1.5);
+			}
+			else player.transcensionUpgrade5Cost = player.transcensionUpgrade5Cost.times(new Decimal(100));	
+		}
+	}
+	else if (tier == 6){
+		if (player.transcensionPoints.gte(player.transcensionUpgrade6Cost)){
+			player.transcensionUpgrade6 = player.transcensionUpgrade6.plus(0.01);
+			player.transcensionPoints = player.transcensionPoints.minus(player.transcensionUpgrade6Cost);
+			player.transcensionUpgrade6Bought = player.transcensionUpgrade6Bought.plus(1);
+			if (pastE5ScaleArr[tier].lt(player.transcensionUpgrade6Bought)){
+				scale = player.transcensionUpgrade6Bought.minus(pastE5ScaleArr[tier]).times(0.5);
+			}
+			player.transcensionUpgrade6Cost = player.transcensionUpgrade6Cost.times(new Decimal(5).plus(scale));
+		}
+	}
+	else if (tier == 7){
+		if (player.transcensionPoints.gte(player.transcensionUpgrade7Cost)){
+			if (player.milestone23){
+				player.transcensionUpgrade7 = player.transcensionUpgrade7.times(100);
+			}
+			else player.transcensionUpgrade7 = player.transcensionUpgrade7.times(10);
+			player.transcensionPoints = player.transcensionPoints.minus(player.transcensionUpgrade7Cost);
+			player.transcensionUpgrade7Bought = player.transcensionUpgrade7Bought.plus(1);
+			if (pastE5ScaleArr[tier].lt(player.transcensionUpgrade7Bought)){
+				scale = player.transcensionUpgrade7Bought.minus(pastE5ScaleArr[tier]).times(0.2);
+			}
+			player.transcensionUpgrade7Cost = player.transcensionUpgrade7Cost.times(new Decimal(2).plus(scale));
+		}
+	}
+	else if (tier == 8){
+		if (player.transcensionPoints.gte(player.transcensionUpgrade8Cost)){
+			player.transcensionUpgrade8 = player.transcensionUpgrade8.times(new Decimal(1).plus(new Decimal(0.1).div(player.transcensionUpgrade8Bought.plus(1))));
+			player.transcensionPoints = player.transcensionPoints.minus(player.transcensionUpgrade8Cost);
+			player.transcensionUpgrade8Bought = player.transcensionUpgrade8Bought.plus(1);
+			if (pastE5ScaleArr[tier].lt(player.transcensionUpgrade8Bought)){
+				player.transcensionUpgrade8Cost = player.transcensionUpgrade8Cost.pow(1.2);
+			}
+			else player.transcensionUpgrade8Cost = player.transcensionUpgrade8Cost.times(new Decimal(50));	
+		}
+	}
+}
+
+function buyHypercensionUpgrade(tier){
+	if (tier == 1){
+		if (player.hyperPoints.gte(player.hypercensionUpgrade1Cost)){
+			player.hypercensionUpgrade1 = player.hypercensionUpgrade1.times(1e10);
+			player.hyperPoints = player.hyperPoints.minus(player.hypercensionUpgrade1Cost);
+			player.hypercensionUpgrade1Cost = player.hypercensionUpgrade1Cost.times(2);
+		}
+	}
+
+	if (tier == 2){
+		if (player.hyperPoints.gte(player.hypercensionUpgrade2Cost)){
+			player.hypercensionUpgrade2 = player.hypercensionUpgrade2.times(10);
+			player.hyperPoints = player.hyperPoints.minus(player.hypercensionUpgrade2Cost);
+			player.hypercensionUpgrade2Cost = player.hypercensionUpgrade2Cost.times(2);
+		}
+	}
+
+	if (tier == 3){
+		if (player.hyperPoints.gte(player.hypercensionUpgrade3Cost)){
+			player.hypercensionUpgrade3 = player.hypercensionUpgrade3.times(10);
+			player.hyperPoints = player.hyperPoints.minus(player.hypercensionUpgrade3Cost);
+			player.hypercensionUpgrade3Cost = player.hypercensionUpgrade3Cost.times(2);
+		}
+	}
+
+	if (tier == 4){
+		if (player.hyperPoints.gte(player.hypercensionUpgrade4Cost)){
+			player.hypercensionUpgrade4 = player.hypercensionUpgrade4.times(1000);
+			player.hyperPoints = player.hyperPoints.minus(player.hypercensionUpgrade4Cost);
+			player.hypercensionUpgrade4Cost = player.hypercensionUpgrade4Cost.times(2);
+		}
+	}
+
+	if (tier == 5){
+		if (player.hyperPoints.gte(player.hypercensionUpgrade5Cost) && (player.hypercensionUpgrade5Bought == false)){
+			player.hyperPoints = player.hyperPoints.minus(player.hypercensionUpgrade5Cost);
+			player.hypercensionUpgrade5Bought = true;
+		}
+	}
+
+	if (tier == 6){
+		if (player.hyperPoints.gte(player.hypercensionUpgrade6Cost) && (player.hypercensionUpgrade6Bought == false)){
+			player.hyperPoints = player.hyperPoints.minus(player.hypercensionUpgrade6Cost);
+			player.hypercensionUpgrade6Bought = true;
+		}
+	}
+
+	if (tier == 7){
+		if (player.hyperPoints.gte(player.hypercensionUpgrade7Cost) && (player.hypercensionUpgrade7Bought == false)){
+			player.hyperPoints = player.hyperPoints.minus(player.hypercensionUpgrade7Cost);
+			player.hypercensionUpgrade7Bought = true;
+		}
+	}
+
+	if (tier == 8){
+		if (player.hyperPoints.gte(player.hypercensionUpgrade8Cost) && (player.hypercensionUpgrade8Bought == false)){
+			player.hyperPoints = player.hyperPoints.minus(player.hypercensionUpgrade8Cost);
+			player.hypercensionUpgrade8Bought = true;
+		}
+	}
+}
+
+function unlockParticleMilestone(){
+	if (!player.milestone1 && player.fillBarGold.gte(1e10)){
+		player.milestone1 = true;
+	}
+
+	if (!player.milestone2 && player.fillBarGold.gte(1e20)){
+		player.milestone2 = true;
+	}
+
+	if (!player.milestone3 && player.fillBarGold.gte(1e30)){
+		player.milestone3 = true;
+	}
+
+	if (!player.milestone4 && player.fillBarGold.gte(1e40)){
+		player.milestone4 = true;
+	}
+
+	if (!player.milestone5 && player.fillBarGold.gte(1e50)){
+		player.milestone5 = true;
+	}
+
+	if (!player.milestone6 && player.fillBarGold.gte(1e60)){
+		player.milestone6 = true;
+	}
+
+	if (!player.milestone7 && player.fillBarGold.gte(1e70)){
+		player.milestone7 = true;
+	}
+
+	if (!player.milestone8 && player.fillBarGold.gte(1e80)){
+		player.milestone8 = true;
+	}
+
+	if (!player.milestone9 && player.fillBarGold.gte(1e100)){
+		player.milestone9 = true;
+	}
+
+	if (!player.milestone10 && player.transcensionPoints.gte(1)){
+		player.milestone10 = true;
+	}
+
+	if (!player.milestone11 && player.transcensionPoints.gte(10)){
+		player.milestone11 = true;
+	}
+
+	if (!player.milestone12 && player.transcensionPoints.gte(100)){
+		player.milestone12 = true;
+	}
+
+	if (!player.milestone13 && player.transcensionPoints.gte(1000)){
+		player.milestone13 = true;
+	}
+
+	if (!player.milestone14 && player.transcensionPoints.gte(1e4)){
+		player.milestone14 = true;
+	}
+
+	if (!player.milestone15 && player.hyperPoints.gte(1)){
+		player.milestone15 = true;
+	}
+
+	if (!player.milestone16 && player.hyperPoints.gte(10)){
+		player.milestone16 = true;
+	}
+
+	if (!player.milestone17 && player.hyperPoints.gte(100)){
+		player.milestone17 = true;
+	}
+
+	if (!player.milestone18 && player.hyperPoints.gte(1000)){
+		player.milestone18 = true;
+	}
+
+	if (!player.milestone19 && player.hyperPoints.gte(1e4)){
+		player.milestone19 = true;
+	}
+
+	if (!player.milestone20 && player.hyperPoints.gte(1e5)){
+		player.milestone20 = true;
+	}
+
+	if (!player.milestone21 && player.hyperPoints.gte(1e6)){
+		player.milestone21 = true;
+	}
+
+	if (!player.milestone22 && player.hyperPoints.gte(1e7)){
+		player.milestone22 = true;
+	}
+
+	if (!player.milestone23 && player.hyperPoints.gte(1e8)){
+		player.milestone23 = true;
+	}
+
+	if (!player.milestone24 && player.hyperPoints.gte(1e10)){
+		player.milestone24 = true;
+	}
+}
+
+function passiveRecreation(diff){
+	if (player.milestone15){
+		if (player.fillBarGold.gte(1e12)){
+			player.recreateMult = player.recreateMult.plus(Decimal.pow(new Decimal(3).times(player.transcensionUpgrade8), Decimal.log10(player.fillBarGold.div(1e12))).times(0.01).times(diff));
+		}
+	}
+}
+
+function passiveTranscension(diff){
+	if (player.milestone17){
+		if (player.fillBarGold.gte(1e150)){
+			let base = new Decimal(1).plus(new Decimal(5).div(Decimal.root(Decimal.log10(Decimal.log10(player.fillBarGold)), 1.1)));
+			player.transcensionPoints = player.transcensionPoints.plus((Decimal.floor((Decimal.pow(base, Decimal.log10(player.fillBarGold).div(150))).div(base).times(player.hypercensionUpgrade6))).times(diff));
+		}
+	}
+}
+
+function passiveOmegaPoints(diff){
+	if (player.milestone20){
+		if (player.expansionPoints.gt(1e75)){
+			player.omegaPoints = player.omegaPoints.plus(Decimal.floor(Decimal.pow((Decimal.log10(new Decimal(player.expansionPoints)).div(75)), Decimal.log10(Decimal.log10(player.expansionPoints)).plus(1)).times(player.omegaPointMultFinal).times(diff)));
+		}
+	}
+}
+
+function passiveMaxSSP(){
+	if (player.milestone19){
+		let totalSuperSkillpoints = player.superSkillpoints.plus(player.superStamina).plus(player.superStrength).plus(player.superArmor).plus(player.superRegeneration).plus(player.superAgility);
+		if (totalSuperSkillpoints.lt(player.highestEnemyLevel)){
+			player.superSkillpoints = player.superSkillpoints.plus(player.highestEnemyLevel.minus(totalSuperSkillpoints));
+		}
 	}
 }
 
@@ -6270,7 +7823,8 @@ function getHpBar(){
 function buyHero(hero){
 	if (hero == 1){
 		if (player.simGold.gte(player.goldFarmerCost)){
-			player.goldFarmerScaleScale = new Decimal(Decimal.floor(player.goldFarmerLevel.div(200)).plus(1));
+			player.goldFarmerScaleScaleScale = new Decimal(Decimal.floor(player.goldFarmerLevel.div(1000)).plus(1));
+			player.goldFarmerScaleScale = new Decimal(Decimal.floor(player.goldFarmerLevel.div(new Decimal(200).div(player.goldFarmerScaleScaleScale))).plus(1));
 			player.goldFarmerScale = new Decimal(Decimal.floor(player.goldFarmerLevel.div(40)).plus(player.goldFarmerScaleScale));
 			player.simGold = player.simGold.minus(player.goldFarmerCost);
 			player.goldFarmerCost = player.goldFarmerCost.times(Decimal.pow(10, player.goldFarmerScale));
@@ -6281,7 +7835,8 @@ function buyHero(hero){
 	
 	if (hero == 2){
 		if (player.simGold.gte(player.hybridCost)){
-			player.hybridScaleScale = new Decimal(Decimal.floor(player.hybridLevel.div(200)).plus(1));
+			player.hybridScaleScaleScale = new Decimal(Decimal.floor(player.hybridLevel.div(1000)).plus(1));
+			player.hybridScaleScale = new Decimal(Decimal.floor(player.hybridLevel.div(new Decimal(200).div(player.hybridScaleScaleScale))).plus(1));
 			player.hybridScale = new Decimal(Decimal.floor(player.hybridLevel.div(40)).plus(player.hybridScaleScale));
 			player.simGold = player.simGold.minus(player.hybridCost);
 			player.hybridCost = player.hybridCost.times(Decimal.pow(10, player.hybridScale));
@@ -6292,7 +7847,8 @@ function buyHero(hero){
 	
 	if (hero == 3){
 		if (player.simGold.gte(player.PVPLegendCost)){
-			player.PVPLegendScaleScale = new Decimal(Decimal.floor(player.PVPLegendLevel.div(200)).plus(1));
+			player.PVPLegendScaleScaleScale = new Decimal(Decimal.floor(player.PVPLegendLevel.div(1000)).plus(1));
+			player.PVPLegendScaleScale = new Decimal(Decimal.floor(player.PVPLegendLevel.div(new Decimal(200).div(player.PVPLegendScaleScaleScale))).plus(1));
 			player.PVPLegendScale = new Decimal(Decimal.floor(player.PVPLegendLevel.div(40)).plus(player.PVPLegendScaleScale));
 			player.simGold = player.simGold.minus(player.PVPLegendCost);
 			player.PVPLegendCost = player.PVPLegendCost.times(Decimal.pow(10, player.PVPLegendScale));
@@ -6637,25 +8193,227 @@ function productionLoop(diff){
 	}
 }
 
-var tabButtons = document.querySelectorAll(".buttonContainer button");
+var tabButtons = document.querySelectorAll(".tabButton");
 var tabPanels = document.querySelectorAll(".tabPanel");
 
-function showPanel(panelIndex, colorCode){
-	tabButtons.forEach(function(node){
-		node.style.backgroundColor = "";
-		node.style.color = "";
-	});
-	
-	tabButtons[panelIndex].style.backgroundColor=colorCode;
-	tabButtons[panelIndex].color = "white";
-	tabPanels.forEach(function(node){
-		node.style.display = "none";
-	});
-	
-	tabPanels[panelIndex].style.display="grid";
-}
+let pageButtons = document.querySelectorAll(".pageButton");
+let pagePanels = document.querySelectorAll(".pagePanel");
 
-showPanel(0, '#3f5a4f');
+//BE CAREFUL WITH THIS WHEN ADDING NEW TABS, MAKE SURE ALL THE NUMBERS ARE CORRECT AND IT WORKS LIKE IT SHOULD!!!!!
+//INCLUDING UNLOCKING AND SWITCHING TO CORRECT TABS!!!
+
+function showPanel(panelIndex, colorCode, tabOrPage){
+	if (tabOrPage){
+		tabButtons.forEach(function(node){
+			node.style.backgroundColor = "";
+			node.style.color = "";
+		});
+		
+		tabButtons[panelIndex].style.backgroundColor=colorCode;
+		tabButtons[panelIndex].color = "white";
+		tabPanels.forEach(function(node){
+			node.style.display = "none";
+		});
+		
+		tabPanels[panelIndex].style.display="grid";
+
+		if (panelIndex == 0){
+			pageButtons.forEach(function(node){
+				node.style.display = "none";
+			});
+			document.getElementById("tab1").style.display = "grid";
+
+			showPanel(player.lastNormalPanel, '#3f5a4f', false);
+		}
+		else if (panelIndex == 1){
+			pageButtons.forEach(function(node){
+				node.style.display = "none";
+			});
+			if (player.hasUnlockedExpansion){
+				document.getElementById("tab2").style.display = "grid";
+				document.getElementById("tab3").style.display = "grid";
+			}
+			if (player.hasUnlockedABG){
+				document.getElementById("tab5").style.display = "grid";
+			}
+
+			showPanel(player.lastExpansionPanel, '#a1a102', false);
+		}
+		else if (panelIndex == 2){
+			pageButtons.forEach(function(node){
+				node.style.display = "none";
+			});
+			if (player.hasUnlockedOmega){
+				document.getElementById("tab6").style.display = "grid";
+				document.getElementById("tab7").style.display = "grid";
+			}
+			if (player.hasUnlockedSim){
+				document.getElementById("tab9").style.display = "grid";
+			}
+			if (player.hasUnlockedSimUps){
+				document.getElementById("tab10").style.display = "grid";
+			}
+			if (player.hasUnlockedElectrons){
+				document.getElementById("tab11").style.display = "grid";
+			}
+
+			showPanel(player.lastOmegaPanel, '#362301', false);
+		}
+		else if (panelIndex == 3){
+			pageButtons.forEach(function(node){
+				node.style.display = "none";
+			});
+			if (player.hasUnlockedReality){
+				document.getElementById("tab12").style.display = "grid";
+			}
+			if (player.hasUnlockedBattleTower){
+				document.getElementById("tab13").style.display = "grid";
+			}
+			if (player.hasUnlockedTalents){
+				document.getElementById("tab14").style.display = "grid";
+			}
+			if (player.hasUnlockedAtomShop){
+				document.getElementById("tab15").style.display = "grid";
+			}
+			if (player.hasUnlockedFillBar){
+				document.getElementById("tab16").style.display = "grid";
+				document.getElementById("tab17").style.display = "grid";
+			}
+			if (player.hasUnlockedTranscensionUpgrades){
+				document.getElementById("tab18").style.display = "grid";
+			}
+			if (player.hasUnlockedHypercensionUpgrades){
+				document.getElementById("tab19").style.display = "grid";
+			}
+
+			showPanel(player.lastRealityPanel, '#4b6eb1', false);
+		}
+		else if (panelIndex == 4){
+			pageButtons.forEach(function(node){
+				node.style.display = "none";
+			});
+			if (player.hasUnlockedAutobuyers){
+				document.getElementById("tab4").style.display = "grid";
+			}
+			showPanel(player.lastAutobuyerPanel, '#9c3386', false);
+		}
+		else if (panelIndex == 5){
+			pageButtons.forEach(function(node){
+				node.style.display = "none";
+			});
+			document.getElementById("tabInfo").style.display = "grid";
+			document.getElementById("tabExport").style.display = "grid";
+			showPanel(player.lastExtraPanel, '#5f38a7', false);
+		}
+	}
+	else {
+		pageButtons.forEach(function(node){
+			node.style.backgroundColor = "";
+			node.style.color = "";
+		});
+		
+		pageButtons[panelIndex].style.backgroundColor=colorCode;
+		pageButtons[panelIndex].color = "white";
+		pagePanels.forEach(function(node){
+			node.style.display = "none";
+		});
+		
+		pagePanels[panelIndex].style.display="grid";
+
+		if (panelIndex == 0){
+			pageButtons.forEach(function(node){
+				node.style.display = "none";
+			});
+			document.getElementById("tab1").style.display = "grid";
+
+			player.lastNormalPanel = panelIndex;
+		}
+		else if (panelIndex >= 1 && panelIndex <= 3){
+			pageButtons.forEach(function(node){
+				node.style.display = "none";
+			});
+			if (player.hasUnlockedExpansion){
+				document.getElementById("tab2").style.display = "grid";
+				document.getElementById("tab3").style.display = "grid";
+			}
+			if (player.hasUnlockedABG){
+				document.getElementById("tab5").style.display = "grid";
+			}
+
+			player.lastExpansionPanel = panelIndex;
+		}
+		else if (panelIndex >= 4 && panelIndex <= 8){
+			pageButtons.forEach(function(node){
+				node.style.display = "none";
+			});
+			if (player.hasUnlockedOmega){
+				document.getElementById("tab6").style.display = "grid";
+				document.getElementById("tab7").style.display = "grid";
+			}
+			if (player.hasUnlockedSim){
+				document.getElementById("tab9").style.display = "grid";
+			}
+			if (player.hasUnlockedSimUps){
+				document.getElementById("tab10").style.display = "grid";
+			}
+			if (player.hasUnlockedElectrons){
+				document.getElementById("tab11").style.display = "grid";
+			}
+
+			player.lastOmegaPanel = panelIndex;
+		}
+		else if (panelIndex >= 9 && panelIndex <= 16){
+			pageButtons.forEach(function(node){
+				node.style.display = "none";
+			});
+			if (player.hasUnlockedReality){
+				document.getElementById("tab12").style.display = "grid";
+			}
+			if (player.hasUnlockedBattleTower){
+				document.getElementById("tab13").style.display = "grid";
+			}
+			if (player.hasUnlockedTalents){
+				document.getElementById("tab14").style.display = "grid";
+			}
+			if (player.hasUnlockedAtomShop){
+				document.getElementById("tab15").style.display = "grid";
+			}
+			if (player.hasUnlockedFillBar){
+				document.getElementById("tab16").style.display = "grid";
+				document.getElementById("tab17").style.display = "grid";
+			}
+			if (player.hasUnlockedTranscensionUpgrades){
+				document.getElementById("tab18").style.display = "grid";
+			}
+			if (player.hasUnlockedHypercensionUpgrades){
+				document.getElementById("tab19").style.display = "grid";
+			}
+
+			player.lastRealityPanel = panelIndex;
+		}
+		else if (panelIndex == 17){
+			pageButtons.forEach(function(node){
+				node.style.display = "none";
+			});
+			if (player.hasUnlockedAutobuyers){
+				document.getElementById("tab4").style.display = "grid";
+			}
+
+			player.lastAutobuyerPanel = panelIndex;
+		}
+		else if (panelIndex >= 18 && panelIndex <= 19){
+			pageButtons.forEach(function(node){
+				node.style.display = "none";
+			});
+			document.getElementById("tabInfo").style.display = "grid";
+			document.getElementById("tabExport").style.display = "grid";
+
+			player.lastExtraPanel = panelIndex;
+		}
+	}
+}
+showPanel(0, '#3f5a4f', true);
+showPanel(0, '#3f5a4f', false);
 
 function mainLoop(){
 	diff = (Date.now() - lastUpdate) / 1000;
@@ -6667,6 +8425,7 @@ function mainLoop(){
 	getFinalMultPerBuy();
 	getFinalAllMultCost();
 	getFinalAllMultGain();
+	getLoop();
 	updateGUI();
 	getExpansionUpgradeEffect();
 	getFinalExpansionPointMult();
@@ -6674,13 +8433,18 @@ function mainLoop(){
 	getOmegaUpgradeEffect();
 	getFinalOmegaPointMult();
 	getElectrons(diff);
-	getLoop();
 	getABGText();
 	productionLoop(diff);
 	autobuy();
 	fight();
 	getHpBar();
 	getRealityBonus();
+	fillBarFill(diff);
+	unlockParticleMilestone();
+	passiveRecreation(diff);
+	passiveTranscension(diff);
+	passiveOmegaPoints(diff);
+	passiveMaxSSP();
 }
 
 setInterval(mainLoop, 50);
@@ -6688,3 +8452,12 @@ setInterval(mainLoop, 50);
 setInterval(save, 10000);
 
 updateGUI();
+
+
+
+
+/*
+
+
+
+*/
