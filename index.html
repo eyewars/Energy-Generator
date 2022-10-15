@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Energy Generator</title>
-		<link href="styles/style.css" rel="stylesheet"/>
+		<link href="styles/style.css" rel="stylesheet" type="text/css"/>
 	</head>
 	<body>
 		<div id="header">
@@ -24,6 +24,13 @@
 				</div>
 				<div class="buttonContainer">
 					<div>
+						<button onclick="showPanel(0, '#3f5a4f', true)" id="topTab1" class="tabButton baseTabs">Normal</button>
+						<button onclick="showPanel(1, '#a1a102', true)" id="topTab2" class="tabButton expansionTabs">Expansion</button>
+						<button onclick="showPanel(2, '#362301', true)" id="topTab3" class="tabButton omegaTabs">Omega</button>
+						<button onclick="showPanel(3, '#4b6eb1', true)" id="topTab4" class="tabButton realityTabs">Reality</button>
+						<button onclick="showPanel(4, '#9c3386', true)" id="topTab5" class="tabButton autoTabs">Autobuyers</button>
+						<button onclick="showPanel(5, '#5f38a7', true)" id="topTab6" class="tabButton extraTabs">Extra</button>
+						<!-- 
 						<button onclick="showPanel(0, '#3f5a4f')" id="tab1" class="baseTabs">Generators</button>
 						<button onclick="showPanel(1, '#a1a102')" id="tab2" class="expansionTabs">Expansion Generators</button>
 						<button onclick="showPanel(2, '#a1a102')" id="tab3" class="expansionTabs">Expansion Upgrades</button>
@@ -33,8 +40,6 @@
 						<button onclick="showPanel(6, '#362301')" id="tab7" class="omegaTabs">Omega Upgrades</button>
 						<button onclick="showPanel(7, '#3f5a4f')" id="tabInfo" class="baseTabs">Info</button>
 						<button onclick="showPanel(8, '#3f5a4f')" id="tabExport" class="baseTabs">Export/Import</button>
-					</div>
-					<div>
 						<button onclick="showPanel(9, '#362301')" id="tab9" class="omegaTabs">Simulation</button>
 						<button onclick="showPanel(10, '#362301')" id="tab10" class="omegaTabs">Simulation Upgrades</button>
 						<button onclick="showPanel(11, '#362301')" id="tab11" class="omegaTabs">Electrons</button>
@@ -42,6 +47,34 @@
 						<button onclick="showPanel(13, '#4b6eb1')" id="tab13" class="realityTabs">Battle Tower</button>
 						<button onclick="showPanel(14, '#4b6eb1')" id="tab14" class="realityTabs">Talents</button>
 						<button onclick="showPanel(15, '#4b6eb1')" id="tab15" class="realityTabs">Atom Shop</button>
+						-->
+					</div>
+					<div>
+						<button onclick="showPanel(0, '#3f5a4f', false)" id="tab1" class="baseTabs pageButton">Generators</button>
+
+						<button onclick="showPanel(1, '#a1a102', false)" id="tab2" class="expansionTabs pageButton">Expansion Generators</button>
+						<button onclick="showPanel(2, '#a1a102', false)" id="tab3" class="expansionTabs pageButton">Expansion Upgrades</button>
+						<button onclick="showPanel(3, '#a1a102', false)" id="tab5" class="expansionTabs pageButton">Alpha Beta Gamma</button>
+
+						<button onclick="showPanel(4, '#362301', false)" id="tab6" class="omegaTabs pageButton">Omega Generators</button>
+						<button onclick="showPanel(5, '#362301', false)" id="tab7" class="omegaTabs pageButton">Omega Upgrades</button>
+						<button onclick="showPanel(6, '#362301', false)" id="tab9" class="omegaTabs pageButton">Simulation</button>
+						<button onclick="showPanel(7, '#362301', false)" id="tab10" class="omegaTabs pageButton">Simulation Upgrades</button>
+						<button onclick="showPanel(8, '#362301', false)" id="tab11" class="omegaTabs pageButton">Electrons</button>
+
+						<button onclick="showPanel(9, '#4b6eb1', false)" id="tab12" class="realityTabs pageButton">Reality Generators</button>
+						<button onclick="showPanel(10, '#4b6eb1', false)" id="tab13" class="realityTabs pageButton">Battle Tower</button>
+						<button onclick="showPanel(11, '#4b6eb1', false)" id="tab14" class="realityTabs pageButton">Talents</button>
+						<button onclick="showPanel(12, '#4b6eb1', false)" id="tab15" class="realityTabs pageButton">Atom Shop</button>
+						<button onclick="showPanel(13, '#4b6eb1', false)" id="tab16" class="realityTabs pageButton">Particle Assimilator</button>
+						<button onclick="showPanel(14, '#4b6eb1', false)" id="tab17" class="realityTabs pageButton">Particle Milestones</button>
+						<button onclick="showPanel(15, '#4b6eb1', false)" id="tab18" class="realityTabs pageButton">Transcension Upgrades</button>
+						<button onclick="showPanel(16, '#4b6eb1', false)" id="tab19" class="realityTabs pageButton">Hypercension Upgrades</button>
+
+						<button onclick="showPanel(17, '#9c3386', false)" id="tab4" class="autoTabs pageButton">Autobuyers</button>
+
+						<button onclick="showPanel(18, '#5f38a7', false)" id="tabInfo" class="extraTabs pageButton">Info</button>
+						<button onclick="showPanel(19, '#5f38a7', false)" id="tabExport" class="extraTabs pageButton">Export/Import</button>
 					</div>
 				</div>
 			</div>
@@ -54,8 +87,7 @@
 		</div>
 		
 		<div id="wrapper">		
-			<div class="grid-container tabPanel" id="generators">
-				
+			<div class="grid-container tabPanel pagePanel" id="generators">
 				<div class="grid-item" id="allMultButton" onclick="buyAllMult()"></div>
 				
 				<div class="grid-item" id="firstGenerator" onclick="buyGenerator(1)"></div>
@@ -79,8 +111,11 @@
 				<div class="grid-item" id="maxAll" onclick="maxAll()">Max All</div>
 				<div class="grid-item" id="prestigeAll" onclick="prestigeAll()">Prestige All</div>
 			</div>
+
+			<!-- END OF NORMAL PAGES -->
+			<!-- START OF EXPANSION PAGES -->
 			
-			<div id="expand" class="tabPanel">
+			<div id="expand" class="tabPanel pagePanel">
 				<div id="preExpansionText">You need 1e308 Energy</div>
 				<div class="grid-container-expand" id="expansionGenerators">
 					<div class="grid-item-expand" id="expansionTextContainer">
@@ -102,7 +137,8 @@
 					<div class="grid-item-expand" id="maxAllExpansion" onclick="maxAllExpansion()">Buy All Expansion Generators and EP Multiplier</div>
 				</div>
 			</div>
-			<div id="expandUpgrade" class="tabPanel">
+
+			<div id="expandUpgrade" class="pagePanel">
 				<div id="nextExpansionUpgradeText">Next Expansion Upgrade at XeY Electricity!</div>
 				<div id="expansionUpgradeContainer">
 					<div class="expansionUpgrade" id="expUp1"></div>
@@ -122,96 +158,8 @@
 					<div class="expansionUpgrade" id="expUp15"></div>
 				</div>
 			</div>
-			
-			<div class="tabPanel" id="autobuyers">
-				<div id="autobuyerContainer">
-					<div class="autobuyer" id="autoPrestige">
-						<div>Prestige Autobuyer</div>
-						<input type="checkbox" id="autoPrestigeCheck" class="autoCheck">				
-					</div>
-					<div class="autobuyer" id="autoGenerator">
-						<div>Generator Autobuyer</div>
-						<input type="checkbox" id="autoGeneratorCheck" class="autoCheck">
-					</div>
-					<div class="autobuyer" id="autoAllMult">
-						<div>All Mult Autobuyer</div>
-						<input type="checkbox" id="autoAllMultCheck" class="autoCheck">
-					</div>
-					<div class="autobuyer" id="autoExpand">
-						<div>Expansion Autobuyer</div>
-						<input type="checkbox" id="autoExpansionCheck" class="autoCheck">
-						<input type="text" id="autoExpansionText">
-					</div>
-					<div class="autobuyer" id="autoABG">
-						<div>Alpha Beta Gamma Autobuyer</div>
-						<input type="checkbox" id="autoABGCheck" class="autoCheck">
-					</div>
-					<div class="autobuyer" id="autoExpansionGenerator">
-						<div>Expansion Generator Autobuyer</div>
-						<input type="checkbox" id="autoExpansionGeneratorCheck" class="autoCheck">
-					</div>
-					<div class="autobuyer" id="autoExpansionPointMult">
-						<div>Expansion Point Multiplier Autobuyer</div>
-						<input type="checkbox" id="autoExpansionPointMultCheck" class="autoCheck">
-					</div>
-					<div class="autobuyer" id="autoABGUpgrade5">
-						<div>A/B/G Upgrade 5 Autobuyer</div>
-						<input type="checkbox" id="autoABGUpgrade5Check" class="autoCheck">
-					</div>
-					<div class="autobuyer" id="autoSimulationHero">
-						<div>Simulation Hero Autobuyer</div>
-						<input type="checkbox" id="autoSimulationHeroCheck" class="autoCheck">
-					</div>
-					<div class="autobuyer" id="autoFight">
-						<div>Automatically Fight</div>
-						<input type="checkbox" id="autoFightCheck" class="autoCheck">
-					</div>
-					<div class="autobuyer" id="autoBattleTower">
-						<div>Automatically Battle</div>
-						<input type="checkbox" id="autoBattleTowerCheck" class="autoCheck">
-					</div>
-					<div class="autobuyer" id="autoBuild">
-						<div>Automatically Load Builds</div>
-						<div id="autoBuildInputs">
-							<div class="buildCheckBoxes">
-								<div>1</div>
-								<div>
-									<input type="checkbox" id="autoBuild1Check" class="autoCheck buildCheck" onclick="buildCheckSync(1, 1)">
-								</div>
-							</div>
-							<div class="buildCheckBoxes">
-								<div>2</div>
-								<div>
-									<input type="checkbox" id="autoBuild2Check" class="autoCheck buildCheck" onclick="buildCheckSync(1, 2)">
-								</div>
-							</div>
-							<div class="buildCheckBoxes">
-								<div>3</div>
-								<div>
-									<input type="checkbox" id="autoBuild3Check" class="autoCheck buildCheck" onclick="buildCheckSync(1, 3)">
-								</div>
-							</div>
-							<div class="buildCheckBoxes">
-								<div>4</div>
-								<div>
-									<input type="checkbox" id="autoBuild4Check" class="autoCheck buildCheck" onclick="buildCheckSync(1, 4)">
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="autobuyer" id="autoElectronUpgrades">
-						<div>Electron Upgrades Autobuyer</div>
-						<input type="checkbox" id="autoElectronUpgradesCheck" class="autoCheck">
-					</div>
-					<div class="autobuyer" id="autoOmegaGenerator">
-						<div>Omega Generator Autobuyer</div>
-						<input type="checkbox" id="autoOmegaGeneratorCheck" class="autoCheck">
-					</div>
-				</div>
-			</div>
-			
-			
-			<div class="tabPanel" id="abgTab">
+
+			<div class="pagePanel" id="abgTab">
 				<div id="abgContainer">
 					<div id="alpha">
 						<div class="abgUpgrades" id="alphaBuy" onclick="buyAlpha()">
@@ -275,7 +223,11 @@
 					</div>
 				</div>
 			</div>
-			<div class="tabPanel" id="omegaTab">
+
+			<!-- END OF EXPANSION PAGES -->
+			<!-- START OF OMEGA PAGES -->
+
+			<div class="tabPanel pagePanel" id="omegaTab">
 				<div class="grid-container-omega" id="omegaGenerators">
 					<div class="grid-item-omega" id="omegaTextContainer">
 						<div id="omegaText">
@@ -295,8 +247,8 @@
 					<div class="grid-item-omega" id="eighthOmegaGenerator" onclick="buyOmegaGenerator(8)"></div>
 				</div>
 			</div>
-			
-			<div class="tabPanel" id="omegaUpTab">
+
+			<div class="pagePanel" id="omegaUpTab">
 				<div id="omegaUpgradeResetContainer">
 					<div id="omegaUpgradeReset" onclick="omegaUpgradeReset()">
 						<div id="omegaUpgradeResetText">RESET OMEGA UPGRADES<br>ON NEXT EXPANSION OR<br>WHEN YOU BECOME OMEGA</div>
@@ -354,24 +306,8 @@
 					</div>
 				</div>
 			</div>
-			
-			<div class="tabPanel" id="infoTab">
-				<a href="https://discord.gg/6JHHQAQCGn" target="_blank">
-					<img src="assets/discordLogo.svg" id="discordLogo">
-				</a>
-				<div id="infoText"></div>
-			</div>
-			
-			<div class="tabPanel" id="exportImportTab">
-				<textarea id="importExportText"></textarea>
-				<div id="exportImportContainer">
-					<div id="exportSave" class="exportImport" onclick="exportSave()">EXPORT SAVEFILE</div>
-					<div id="importSave" class="exportImport" onclick="importSave()">IMPORT SAVEFILE</div>
-				</div>
-				<div id="hardReset" onclick="trueHardReset()">HARD RESET SAVE FILE</div>
-			</div>
-			
-			<div class="tabPanel" id="simulationTab">
+
+			<div class="pagePanel" id="simulationTab">
 				<div id="simText">
 					<div id="simGold">
 						<div id="simGoldTotal">Gold: x</div>
@@ -399,8 +335,8 @@
 					<div id="resimulate" onclick="resimulate()">test</div>
 				</div>
 			</div>
-			
-			<div class="tabPanel" id="simulationUpgradesTab">
+
+			<div class="pagePanel" id="simulationUpgradesTab">
 				<div id="simUpgradeGoldText">Gold: 1000</div>
 				<div id="simUpgradesContainer">
 					<div class="simUpgrade" id="simUpgrade1" onclick="buySimUpgrade(1)"></div>
@@ -413,8 +349,8 @@
 					<div class="simUpgrade" id="simUpgrade8" onclick="buySimUpgrade(8)"></div>
 				</div>
 			</div>
-			
-			<div class="tabPanel" id="electronTab">
+
+			<div class="pagePanel" id="electronTab">
 				<div id="electronTextContainer">
 					<div class="electronText" id="electrons">You have X Electrons</div>
 					<div class="electronText" id="electronEffect">They increase something by 2x</div>
@@ -431,7 +367,11 @@
 					<div class="atomUpgrade" id="atomUpgrade3" onclick="buyAtomUpgrades(3)"></div>
 				</div>
 			</div>
-			<div class="tabPanel" id="realityGeneratorTab">
+
+			<!-- END OF OMEGA PAGES -->
+			<!-- START OF REALITY PAGES -->
+
+			<div class="tabPanel pagePanel" id="realityGeneratorTab">
 				<div class="grid-container-reality" id="realityGenerators">
 					<div class="grid-item-reality" id="realityTextContainer">
 						<div id="realityText">
@@ -462,6 +402,10 @@
 									<div id="realityBonus6">1000x to DPS and GPS</div>
 									<input type="checkbox" id="realityBonus6Check" class="realityBonusCheck" onclick="realityBonusCheck()">
 								</div>
+								<div class="realityBonusContainer" id="realityBonus7Container">
+									<div id="realityBonus7">2x to Reality Points</div>
+									<input type="checkbox" id="realityBonus7Check" class="realityBonusCheck" onclick="realityBonusCheck()">
+								</div>
 							</div>
 						</div>
 					</div>
@@ -475,7 +419,8 @@
 					<div class="grid-item-reality" id="eighthRealityGenerator" onclick="buyRealityGenerator(8)"></div>
 				</div>
 			</div>
-			<div class="tabPanel" id="battleTowerTab">
+
+			<div class="pagePanel" id="battleTowerTab">
 				<div id="battleTextContainer" class="battleTowerContainers">
 					<div id="levelTexts">
 						<div id="friendlyLevel" class="battleTowerFloatLeft">
@@ -644,7 +589,8 @@
 					<div id="retire" onclick="retire()">Retire</div>
 				</div>
 			</div>
-			<div class="tabPanel" id="talentsTab">
+
+			<div class="pagePanel" id="talentsTab">
 				<div class="talentRow">
 					<div class="talent" id="talent1" onclick="selectTalent(1)"></div>
 					<div class="talent" id="talent2" onclick="selectTalent(2)"></div>
@@ -671,7 +617,8 @@
 					<div class="talent" id="talent15" onclick="selectTalent(15)"></div>
 				</div>
 			</div>
-			<div class="tabPanel" id="atomShopTab">
+
+			<div class="pagePanel" id="atomShopTab">
 				<div id="atomShopTextContainer">
 					<div id="atomShopText">You have x Atoms</div>
 				</div>
@@ -698,6 +645,300 @@
 					<div id="atomShopItem20" class="atomShopItem" onclick="buyAtomShopItem(20)"></div>
 				</div>
 			</div>
+
+			<div class="pagePanel" id="fillBarTab">
+				<div id="fillBarTextContainer">
+					<div id="fillBarGold">You have XXX Particles</div>
+					<div id="fillBarTotalMult">Particles per fill = 1 * 2 * 3 * 4 * 5 * 6 * 7 * 8 = 50</div>
+				</div>
+				<div id="fillBarContainer">
+					<div id="fillBar1" class="fillBar" style="--width: 100" data-label="" onclick="buyFillBar(1)">
+						<div id="fillBar1Text" class="fillBarTextContainer">
+							<div id="fillBar1Name" class="fillBarText"></div>
+							<div id="fillBar1Level" class="fillBarText"></div>
+							<div id="fillBar1Ascension" class="fillBarText"></div>
+							<div id="fillBar1Speed" class="fillBarText"></div>
+							<div id="fillBar1Mult" class="fillBarText"></div>
+							<div id="fillBar1MultPerFill" class="fillBarText"></div>
+							<div id="fillBar1Cost" class="fillBarText"></div>
+						</div>
+					</div>
+					<div id="fillBar2" class="fillBar" style="--width: 100" data-label="" onclick="buyFillBar(2)">
+						<div id="fillBar2Text" class="fillBarTextContainer">
+							<div id="fillBar2Name" class="fillBarText"></div>
+							<div id="fillBar2Level" class="fillBarText"></div>
+							<div id="fillBar2Ascension" class="fillBarText"></div>
+							<div id="fillBar2Speed" class="fillBarText"></div>
+							<div id="fillBar2Mult" class="fillBarText"></div>
+							<div id="fillBar2MultPerFill" class="fillBarText"></div>
+							<div id="fillBar2Cost" class="fillBarText"></div>
+						</div>
+					</div>
+					<div id="fillBar3" class="fillBar" style="--width: 100" data-label="" onclick="buyFillBar(3)">
+						<div id="fillBar3Text" class="fillBarTextContainer">
+							<div id="fillBar3Name" class="fillBarText"></div>
+							<div id="fillBar3Level" class="fillBarText"></div>
+							<div id="fillBar3Ascension" class="fillBarText"></div>
+							<div id="fillBar3Speed" class="fillBarText"></div>
+							<div id="fillBar3Mult" class="fillBarText"></div>
+							<div id="fillBar3MultPerFill" class="fillBarText"></div>
+							<div id="fillBar3Cost" class="fillBarText"></div>
+						</div>
+					</div>
+					<div id="fillBar4" class="fillBar" style="--width: 100" data-label="" onclick="buyFillBar(4)">
+						<div id="fillBar4Text" class="fillBarTextContainer">
+							<div id="fillBar4Name" class="fillBarText"></div>
+							<div id="fillBar4Level" class="fillBarText"></div>
+							<div id="fillBar4Ascension" class="fillBarText"></div>
+							<div id="fillBar4Speed" class="fillBarText"></div>
+							<div id="fillBar4Mult" class="fillBarText"></div>
+							<div id="fillBar4MultPerFill" class="fillBarText"></div>
+							<div id="fillBar4Cost" class="fillBarText"></div>
+						</div>
+					</div>
+					<div id="fillBar5" class="fillBar" style="--width: 100" data-label="" onclick="buyFillBar(5)">
+						<div id="fillBar5Text" class="fillBarTextContainer">
+							<div id="fillBar5Name" class="fillBarText"></div>
+							<div id="fillBar5Level" class="fillBarText"></div>
+							<div id="fillBar5Ascension" class="fillBarText"></div>
+							<div id="fillBar5Speed" class="fillBarText"></div>
+							<div id="fillBar5Mult" class="fillBarText"></div>
+							<div id="fillBar5MultPerFill" class="fillBarText"></div>
+							<div id="fillBar5Cost" class="fillBarText"></div>
+						</div>
+					</div>
+					<div id="fillBar6" class="fillBar" style="--width: 100" data-label="" onclick="buyFillBar(6)">
+						<div id="fillBar6Text" class="fillBarTextContainer">
+							<div id="fillBar6Name" class="fillBarText"></div>
+							<div id="fillBar6Level" class="fillBarText"></div>
+							<div id="fillBar6Ascension" class="fillBarText"></div>
+							<div id="fillBar6Speed" class="fillBarText"></div>
+							<div id="fillBar6Mult" class="fillBarText"></div>
+							<div id="fillBar6MultPerFill" class="fillBarText"></div>
+							<div id="fillBar6Cost" class="fillBarText"></div>
+						</div>
+					</div>
+					<div id="fillBar7" class="fillBar" style="--width: 100" data-label="" onclick="buyFillBar(7)">
+						<div id="fillBar7Text" class="fillBarTextContainer">
+							<div id="fillBar7Name" class="fillBarText"></div>
+							<div id="fillBar7Level" class="fillBarText"></div>
+							<div id="fillBar7Ascension" class="fillBarText"></div>
+							<div id="fillBar7Speed" class="fillBarText"></div>
+							<div id="fillBar7Mult" class="fillBarText"></div>
+							<div id="fillBar7MultPerFill" class="fillBarText"></div>
+							<div id="fillBar7Cost" class="fillBarText"></div>
+						</div>
+					</div>
+					<div id="fillBar8" class="fillBar" style="--width: 100" data-label="" onclick="buyFillBar(8)">
+						<div id="fillBar8Text" class="fillBarTextContainer">
+							<div id="fillBar8Name" class="fillBarText"></div>
+							<div id="fillBar8Level" class="fillBarText"></div>
+							<div id="fillBar8Ascension" class="fillBarText"></div>
+							<div id="fillBar8Speed" class="fillBarText"></div>
+							<div id="fillBar8Mult" class="fillBarText"></div>
+							<div id="fillBar8MultPerFill" class="fillBarText"></div>
+							<div id="fillBar8Cost" class="fillBarText"></div>
+						</div>
+					</div>
+					<div id="fillBarPrestigeContainer">
+						<div id="fillBarPrestige1" class="fillBarPrestige" onclick="recreate()">Text text</div>
+						<div id="fillBarPrestige2" class="fillBarPrestige" onclick="trancend()">Text text</div>
+						<div id="fillBarPrestige3" class="fillBarPrestige" onclick="hypercend()">Text text</div>
+						<div id="fillBarPrestigePlaceholder" class="fillBarPrestige"></div>
+					</div>
+				</div>
+			</div>
+
+			<div class="pagePanel" id="milestones">
+				<div id="milestoneContainer">
+					<div id="milestone1" class="milestone">Blablabla</div>
+					<div id="milestone2" class="milestone">Blablabla</div>
+					<div id="milestone3" class="milestone">Blablabla</div>
+					<div id="milestone4" class="milestone">Blablabla</div>
+					<div id="milestone5" class="milestone">Blablabla</div>
+					<div id="milestone6" class="milestone">Blablabla</div>
+					<div id="milestone7" class="milestone">Blablabla</div>
+					<div id="milestone8" class="milestone">Blablabla</div>
+					<div id="milestone9" class="milestone">Blablabla</div>
+					<div id="milestone10" class="milestone">Blablabla</div>
+					<div id="milestone11" class="milestone">Blablabla</div>
+					<div id="milestone12" class="milestone">Blablabla</div>
+					<div id="milestone13" class="milestone">Blablabla</div>
+					<div id="milestone14" class="milestone">Blablabla</div>
+					<div id="milestone15" class="milestone">Blablabla</div>
+					<div id="milestone16" class="milestone">Blablabla</div>
+					<div id="milestone17" class="milestone">Blablabla</div>
+					<div id="milestone18" class="milestone">Blablabla</div>
+					<div id="milestone19" class="milestone">Blablabla</div>
+					<div id="milestone20" class="milestone">Blablabla</div>
+					<div id="milestone21" class="milestone">Blablabla</div>
+					<div id="milestone22" class="milestone">Blablabla</div>
+					<div id="milestone23" class="milestone">Blablabla</div>
+					<div id="milestone24" class="milestone">Blablabla</div>
+				</div>
+			</div>
+
+			<div class="pagePanel" id="transcensionTab">
+				<div id="transcensionText">You have X Transcension Points</div>
+				<div id="transcensionUpgradeContainer">
+					<div id="transcensionUpgrade1" class="transcensionUpgrade" onclick="buyTranscensionUpgrade(1)">TEXT TEXT TEXT</div>
+					<div id="transcensionUpgrade2" class="transcensionUpgrade" onclick="buyTranscensionUpgrade(2)">TEXT TEXT TEXT</div>
+					<div id="transcensionUpgrade3" class="transcensionUpgrade" onclick="buyTranscensionUpgrade(3)">TEXT TEXT TEXT</div>
+					<div id="transcensionUpgrade4" class="transcensionUpgrade" onclick="buyTranscensionUpgrade(4)">TEXT TEXT TEXT</div>
+					<div id="transcensionUpgrade5" class="transcensionUpgrade" onclick="buyTranscensionUpgrade(5)">TEXT TEXT TEXT</div>
+					<div id="transcensionUpgrade6" class="transcensionUpgrade" onclick="buyTranscensionUpgrade(6)">TEXT TEXT TEXT</div>
+					<div id="transcensionUpgrade7" class="transcensionUpgrade" onclick="buyTranscensionUpgrade(7)">TEXT TEXT TEXT</div>
+					<div id="transcensionUpgrade8" class="transcensionUpgrade" onclick="buyTranscensionUpgrade(8)">TEXT TEXT TEXT</div>
+				</div>
+			</div>
+
+			<div class="pagePanel" id="hypercensionTab">
+				<div id="hypercensionText">You have X Hyper Points</div>
+				<div id="hypercensionUpgradeContainer">
+					<div id="hypercensionUpgrade1" class="hypercensionUpgrade" onclick="buyHypercensionUpgrade(1)">TEXT TEXT TEXT</div>
+					<div id="hypercensionUpgrade2" class="hypercensionUpgrade" onclick="buyHypercensionUpgrade(2)">TEXT TEXT TEXT</div>
+					<div id="hypercensionUpgrade3" class="hypercensionUpgrade" onclick="buyHypercensionUpgrade(3)">TEXT TEXT TEXT</div>
+					<div id="hypercensionUpgrade4" class="hypercensionUpgrade" onclick="buyHypercensionUpgrade(4)">TEXT TEXT TEXT</div>
+					<div id="hypercensionUpgrade5" class="hypercensionUpgrade" onclick="buyHypercensionUpgrade(5)">TEXT TEXT TEXT</div>
+					<div id="hypercensionUpgrade6" class="hypercensionUpgrade" onclick="buyHypercensionUpgrade(6)">TEXT TEXT TEXT</div>
+					<div id="hypercensionUpgrade7" class="hypercensionUpgrade" onclick="buyHypercensionUpgrade(7)">TEXT TEXT TEXT</div>
+					<div id="hypercensionUpgrade8" class="hypercensionUpgrade" onclick="buyHypercensionUpgrade(8)">TEXT TEXT TEXT</div>
+				</div>
+			</div>
+
+			<!-- END OF REALITY PAGES -->
+			<!-- START OF AUTOBUYER PAGES -->
+
+			<div class="tabPanel pagePanel" id="autobuyers">
+				<div id="autobuyerContainer">
+					<div class="autobuyer" id="autoPrestige">
+						<div>Prestige Autobuyer</div>
+						<input type="checkbox" id="autoPrestigeCheck" class="autoCheck">				
+					</div>
+					<div class="autobuyer" id="autoGenerator">
+						<div>Generator Autobuyer</div>
+						<input type="checkbox" id="autoGeneratorCheck" class="autoCheck">
+					</div>
+					<div class="autobuyer" id="autoAllMult">
+						<div>All Mult Autobuyer</div>
+						<input type="checkbox" id="autoAllMultCheck" class="autoCheck">
+					</div>
+					<div class="autobuyer" id="autoExpand">
+						<div>Expansion Autobuyer</div>
+						<input type="checkbox" id="autoExpansionCheck" class="autoCheck">
+						<input type="text" id="autoExpansionText">
+					</div>
+					<div class="autobuyer" id="autoABG">
+						<div>Alpha Beta Gamma Autobuyer</div>
+						<input type="checkbox" id="autoABGCheck" class="autoCheck">
+					</div>
+					<div class="autobuyer" id="autoExpansionGenerator">
+						<div>Expansion Generator Autobuyer</div>
+						<input type="checkbox" id="autoExpansionGeneratorCheck" class="autoCheck">
+					</div>
+					<div class="autobuyer" id="autoExpansionPointMult">
+						<div>Expansion Point Multiplier Autobuyer</div>
+						<input type="checkbox" id="autoExpansionPointMultCheck" class="autoCheck">
+					</div>
+					<div class="autobuyer" id="autoABGUpgrade5">
+						<div>A/B/G Upgrade 5 Autobuyer</div>
+						<input type="checkbox" id="autoABGUpgrade5Check" class="autoCheck">
+					</div>
+					<div class="autobuyer" id="autoSimulationHero">
+						<div>Simulation Hero Autobuyer</div>
+						<input type="checkbox" id="autoSimulationHeroCheck" class="autoCheck">
+					</div>
+					<div class="autobuyer" id="autoFight">
+						<div>Automatically Fight</div>
+						<input type="checkbox" id="autoFightCheck" class="autoCheck">
+					</div>
+					<div class="autobuyer" id="autoBattleTower">
+						<div>Automatically Battle</div>
+						<input type="checkbox" id="autoBattleTowerCheck" class="autoCheck">
+					</div>
+					<div class="autobuyer" id="autoBuild">
+						<div>Automatically Load Builds</div>
+						<div id="autoBuildInputs">
+							<div class="buildCheckBoxes">
+								<div>1</div>
+								<div>
+									<input type="checkbox" id="autoBuild1Check" class="autoCheck buildCheck" onclick="buildCheckSync(1, 1)">
+								</div>
+							</div>
+							<div class="buildCheckBoxes">
+								<div>2</div>
+								<div>
+									<input type="checkbox" id="autoBuild2Check" class="autoCheck buildCheck" onclick="buildCheckSync(1, 2)">
+								</div>
+							</div>
+							<div class="buildCheckBoxes">
+								<div>3</div>
+								<div>
+									<input type="checkbox" id="autoBuild3Check" class="autoCheck buildCheck" onclick="buildCheckSync(1, 3)">
+								</div>
+							</div>
+							<div class="buildCheckBoxes">
+								<div>4</div>
+								<div>
+									<input type="checkbox" id="autoBuild4Check" class="autoCheck buildCheck" onclick="buildCheckSync(1, 4)">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="autobuyer" id="autoElectronUpgrades">
+						<div>Electron Upgrades Autobuyer</div>
+						<input type="checkbox" id="autoElectronUpgradesCheck" class="autoCheck">
+					</div>
+					<div class="autobuyer" id="autoOmegaGenerator">
+						<div>Omega Generator Autobuyer</div>
+						<input type="checkbox" id="autoOmegaGeneratorCheck" class="autoCheck">
+					</div>
+					<div class="autobuyer" id="autoFillBar">
+						<div>Particle Assimilator Autobuyer</div>
+						<input type="checkbox" id="autoFillBarCheck" class="autoCheck">
+					</div>
+					<div class="autobuyer" id="autoAscension">
+						<div>Ascension Autobuyer</div>
+						<input type="checkbox" id="autoAscensionCheck" class="autoCheck">
+						<input type="text" id="autoAscensionText">
+					</div>
+					<div class="autobuyer" id="autoTranscensionUpgrades">
+						<div>Transcension Upgrades Autobuyer</div>
+						<input type="checkbox" id="autoTranscensionUpgradesCheck" class="autoCheck">
+					</div>
+					<div class="autobuyer" id="autoHypercension">
+						<div>Hypercension Autobuyer</div>
+						<input type="checkbox" id="autoHypercensionCheck" class="autoCheck">
+						<input type="text" id="autoHypercensionText">
+					</div>
+					<div class="autobuyer" id="autoRealityGenerator">
+						<div>Reality Generator Autobuyer</div>
+						<input type="checkbox" id="autoRealityGeneratorCheck" class="autoCheck">
+					</div>
+				</div>
+			</div>
+
+			<!-- END OF AUTOBUYER PAGES -->
+			<!-- START OF EXTRA PAGES -->
+
+			<div class="tabPanel pagePanel" id="infoTab">
+				<a href="https://discord.gg/6JHHQAQCGn" target="_blank">
+					<img src="assets/discordLogo.svg" id="discordLogo">
+				</a>
+				<div id="infoText"></div>
+			</div>
+			
+			<div class="pagePanel" id="exportImportTab">
+				<textarea id="importExportText"></textarea>
+				<div id="exportImportContainer">
+					<div id="exportSave" class="exportImport" onclick="exportSave()">EXPORT SAVEFILE</div>
+					<div id="importSave" class="exportImport" onclick="importSave()">IMPORT SAVEFILE</div>
+				</div>
+				<div id="hardReset" onclick="trueHardReset()">HARD RESET SAVE FILE</div>
+			</div>
+
+			<!-- END OF EXTRA PAGES -->
+
 		</div>
 
 			
@@ -709,6 +950,7 @@
 		<button onclick="maxAll()">Max</button>
 		<button onclick="hardReset()">Reset</button>
 		-->
+		
 		
 	</body>
 	<script type="text/javascript" src="scripts/break_eternity.js"></script>
