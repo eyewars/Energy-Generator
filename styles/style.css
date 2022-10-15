@@ -97,11 +97,14 @@ html{
 	padding: 10px;
 	margin: 0px 3px;
 	font-family: Tahoma;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .baseTabs{
 	background-color: #5A7E6F;
-	color: #B8B8B8;
+	color: #000000;
 }
 
 .baseTabs:hover{
@@ -133,6 +136,28 @@ html{
 
 .realityTabs:hover{
 	background-color: #547dc9;
+}
+
+.autoTabs{
+	background-color: #cf50b4;
+	color: black;
+}
+
+.autoTabs:hover{
+	background-color: #b33d99;
+}
+
+.extraTabs{
+	background-color: #7c50cf;
+	color: black;
+}
+
+.extraTabs:hover{
+	background-color: #754bc4;
+}
+
+.tabButton.locked{
+	display: none;
 }
 
 #tab3.preExpand{
@@ -180,6 +205,22 @@ html{
 }
 
 #tab15.locked{
+	display: none;
+}
+
+#tab16.locked{
+	display: none;
+}
+
+#tab17.locked{
+	display: none;
+}
+
+#tab18.locked{
+	display: none;
+}
+
+#tab19.locked{
 	display: none;
 }
 
@@ -555,6 +596,11 @@ html{
 #autoExpansionText{
 	float: left;
 	margin: 38px 20px;
+
+	-moz-user-select: text;
+	-webkit-user-select: text;
+	-ms-user-select: text;
+	user-select: text;
 }
 
 #autoBuildInputs{
@@ -1149,7 +1195,7 @@ html{
 }
 
 #realityTextContainer{
-	height: 150px;
+	height: 170px;
 	background-color: #252B31;
 	padding: 0;
 	padding-bottom: 80px;
@@ -1189,6 +1235,10 @@ html{
 	display: flex;
 	justify-content: center;
 	margin-top: 5px;
+}
+
+#realityBonus7Container.locked{
+	display: none;
 }
 
 .realityBonusCheck.locked{
@@ -1690,7 +1740,253 @@ html{
 	background-color: #268853;
 }
 
+#fillBarTab{
+	width: 1250px;
+}
 
+#fillBarTextContainer{
+	width: 100%;
 
+	display: flex;
+	flex-wrap: wrap;
+}
 
+#fillBarGold{
+	width: 100%;
+	text-align: center;
+	font-size: 35px;
+	margin-top: 15px;
+}
 
+#fillBarTotalMult{
+	width: 100%;
+	text-align: center;
+	font-size: 18px;
+}
+
+#fillBarContainer{
+	width: 100%;
+	
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	
+}
+
+.fillBar{
+	width: 250px;
+	height: 200px;
+	background-color: #667583;
+	margin: 15px 5px -5px 5px;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.fillBar::before{
+	content: attr(data-label);
+	display: flex;
+	align-items: center;
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: calc(var(--width, 0) * 1%);
+	min-width: 0;
+	max-width: 100%;
+	background-color: #325252;
+}
+
+.fillBarTextContainer{
+	display: flex;
+	flex-direction: column;
+}
+
+.fillBarText{
+	font-size: 16px;
+	position: relative;
+	color: lightgray;
+	width: 100%;
+	z-index: 2;
+	margin: 2px 0 2px 0;
+	text-align: center;
+}
+
+#fillBarPrestigeContainer{
+	display: flex;
+	justify-content: space-between;
+	width: 1030px;
+}
+
+.fillBarPrestige{
+	width: 250px;
+	height: 150px;
+	margin-top: 15px;
+}
+
+#fillBarPrestige1{
+	background-color: #f1c58a;
+	color: black;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	font-size: 18px;
+}
+
+#fillBarPrestige1.locked{
+	display: none;
+}
+
+#fillBarPrestige2{
+	background-color: #f076bd;
+	color: black;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	font-size: 18px;
+}
+
+#fillBarPrestige2.locked{
+	display: none;
+}
+
+#fillBarPrestige3{
+	background-color: #7198ec;
+	color: black;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	font-size: 18px;
+}
+
+#fillBarPrestige3.locked{
+	display: none;
+}
+
+#fillBarPrestigePlaceholder.locked{
+	display: none;
+}
+
+#transcensionTab{
+	width: 850px;
+}
+
+#transcensionText{
+	text-align: center;
+	font-size: 35px;
+	margin: 15px 0 0 0;
+}
+
+#transcensionUpgradeContainer{
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.transcensionUpgrade{
+	width: 400px;
+	height: 150px;
+	background-color: #7dbff5;
+	color: black;
+	font-size: 20px;
+	margin: 5px 5px 0 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+
+.transcensionUpgrade.locked{
+	background-color: #f57d8d;
+}
+
+#autoAscensionText{
+	float: left;
+	margin: 38px 20px;
+
+	-moz-user-select: text;
+	-webkit-user-select: text;
+	-ms-user-select: text;
+	user-select: text;
+}
+
+#milestones{
+	width: 1100px;
+}
+
+#milestoneContainer{
+	display: flex;
+	width: 100%;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin-top: 15px;
+}
+
+.milestone{
+	height: 150px;
+	width: 250px;
+	margin: 0 5px 10px 5px;
+	background-color: #e4dea9;
+	color: black;
+	text-align: center;
+	font-size: 16px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.milestone.unlocked{
+	background-color: #d4cb75;
+}
+
+#hypercensionTab{
+	width: 1200px;
+}
+
+#hypercensionText{
+	text-align: center;
+	font-size: 35px;
+	margin: 15px 0 0 0;
+}
+
+#hypercensionUpgradeContainer{
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.hypercensionUpgrade{
+	width: 285px;
+	height: 150px;
+	background-color: #897df5;
+	color: black;
+	font-size: 20px;
+	margin: 5px 5px 5px 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+
+.hypercensionUpgrade.locked{
+	background-color: #6e62d8;
+}
+
+.hypercensionUpgrade.bought{
+	background-color: #6958ff;
+}
+
+#autoHypercensionText{
+	float: left;
+	margin: 38px 20px;
+
+	-moz-user-select: text;
+	-webkit-user-select: text;
+	-ms-user-select: text;
+	user-select: text;
+}
