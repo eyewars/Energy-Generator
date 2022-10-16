@@ -593,6 +593,12 @@ html{
 	margin: 40px 20px;
 }
 
+.autoTextExplain{
+	font-size: 16px;
+	float: left;
+	margin: 38px -15px;
+}
+
 #autoExpansionText{
 	float: left;
 	margin: 38px 20px;
