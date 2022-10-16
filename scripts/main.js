@@ -61,8 +61,8 @@ function hardReset(){
 		seventhBought: new Decimal(0),
 		eighthBought: new Decimal(0),
 
-		firstMult: new Decimal(4),
-		secondMult: new Decimal(2),
+		firstMult: new Decimal(8),
+		secondMult: new Decimal(4),
 		thirdMult: new Decimal(1),
 		fourthMult: new Decimal(1),
 		fifthMult: new Decimal(1),
@@ -1409,8 +1409,8 @@ function prestige(tier){
 		player.seventhBought = new Decimal(0);
 		player.eighthBought = new Decimal(0);
 
-		player.firstMult = new Decimal(4);
-		player.secondMult = new Decimal(2);
+		player.firstMult = new Decimal(8);
+		player.secondMult = new Decimal(4);
 		player.thirdMult = new Decimal(1);
 		player.fourthMult = new Decimal(1);
 		player.fifthMult = new Decimal(1);
@@ -1657,8 +1657,8 @@ function expand(){
 			player.seventhBought = new Decimal(0);
 			player.eighthBought = new Decimal(0);
 
-			player.firstMult = new Decimal(4);
-			player.secondMult = new Decimal(2);
+			player.firstMult = new Decimal(8);
+			player.secondMult = new Decimal(4);
 			player.thirdMult = new Decimal(1);
 			player.fourthMult = new Decimal(1);
 			player.fifthMult = new Decimal(1);
@@ -2949,8 +2949,8 @@ function becomeOmega(){
 		player.seventhBought = new Decimal(0);
 		player.eighthBought = new Decimal(0);
 
-		player.firstMult = new Decimal(4);
-		player.secondMult = new Decimal(2);
+		player.firstMult = new Decimal(8);
+		player.secondMult = new Decimal(4);
 		player.thirdMult = new Decimal(1);
 		player.fourthMult = new Decimal(1);
 		player.fifthMult = new Decimal(1);
@@ -3792,8 +3792,8 @@ function reachReality(){
 		player.seventhBought = new Decimal(0);
 		player.eighthBought = new Decimal(0);
 
-		player.firstMult = new Decimal(4);
-		player.secondMult = new Decimal(2);
+		player.firstMult = new Decimal(8);
+		player.secondMult = new Decimal(4);
 		player.thirdMult = new Decimal(1);
 		player.fourthMult = new Decimal(1);
 		player.fifthMult = new Decimal(1);
