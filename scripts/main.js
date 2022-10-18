@@ -1305,7 +1305,7 @@ function getFinalMultPerBuy(){
 }
 
 function getFinalAllMultCost(){
-	if ((Decimal.log10(Decimal.log10(player.omega))).gt(1)){
+	if ((player.omega).gt(1)){
 		if (player.milestone22){
 			player.omegaEffect = new Decimal(1).plus(Decimal.log2(Decimal.log2(player.omega)));
 		}
@@ -1313,6 +1313,7 @@ function getFinalAllMultCost(){
 			player.omegaEffect = new Decimal(1).plus(Decimal.log10(Decimal.log10(player.omega)));
 		}
 	}
+	else player.omegaEffect = new Decimal(1);
 	player.allMultFinalCost = player.allMultCost.div(player.electricity.plus(1).pow(15).pow(player.electricityEffectFromThirdBetaUpgrade).pow(player.omegaEffect));
 }
 
