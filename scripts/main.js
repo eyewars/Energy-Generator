@@ -1045,6 +1045,8 @@ function hardReset(){
 
 	};
 	checkUncheckAutobuyers();
+	checkUncheckRealityBonus();
+	realityBonusCheck();
 	lastPanel();
 }
 hardReset();
@@ -4337,10 +4339,7 @@ function getRealityBonus(){
 	else player.realityBonus6 = new Decimal(1);
 
 	if (document.getElementById("realityBonus7Check").checked == true){
-		if (player.milestone12){
-			player.realityBonus7 = new Decimal(1).plus(Decimal.log10(player.realityEnergy.plus(1)));
-		}
-		else player.realityBonus7 = new Decimal(1);
+		player.realityBonus7 = new Decimal(1).plus(Decimal.log10(player.realityEnergy.plus(1)));
 	}
 	else player.realityBonus7 = new Decimal(1);
 }
@@ -4351,42 +4350,50 @@ for (let i = 1; i < 7; i++){
 	}
 }
 
-function realityBonusCheck(){
-	for (let i = 1; i < 8; i++){
-		if (document.getElementById("realityBonus" + i + "Check").checked == true){
-			player["realityBonus" + i + "Checked"] = true;
-		}
-		else player["realityBonus" + i + "Checked"] = false;
-	}	
-	
+function realityBonusCheck(){	
 	player.checkedRealityBonus = new Decimal(0);
+
 	if (document.getElementById("realityBonus1Check").checked == true){
 		player.checkedRealityBonus = player.checkedRealityBonus.plus(1);
+		player.realityBonus1Checked = true;
 	}
+	else player.realityBonus1Checked = false;
 	
 	if (document.getElementById("realityBonus2Check").checked == true){
 		player.checkedRealityBonus = player.checkedRealityBonus.plus(1);
+		player.realityBonus2Checked = true;
 	}
+	else player.realityBonus2Checked = false;
 	
 	if (document.getElementById("realityBonus3Check").checked == true){
 		player.checkedRealityBonus = player.checkedRealityBonus.plus(1);
+		player.realityBonus3Checked = true;
 	}
+	else player.realityBonus3Checked = false;
 	
 	if (document.getElementById("realityBonus4Check").checked == true){
 		player.checkedRealityBonus = player.checkedRealityBonus.plus(1);
+		player.realityBonus4Checked = true;
 	}
+	else player.realityBonus4Checked = false;
 	
 	if (document.getElementById("realityBonus5Check").checked == true){
 		player.checkedRealityBonus = player.checkedRealityBonus.plus(1);
+		player.realityBonus5Checked = true;
 	}
+	else player.realityBonus5Checked = false;
 	
 	if (document.getElementById("realityBonus6Check").checked == true){
 		player.checkedRealityBonus = player.checkedRealityBonus.plus(1);
+		player.realityBonus6Checked = true;
 	}
+	else player.realityBonus6Checked = false;
 
 	if (document.getElementById("realityBonus7Check").checked == true){
 		player.checkedRealityBonus = player.checkedRealityBonus.plus(1);
+		player.realityBonus7Checked = true;
 	}
+	else player.realityBonus7Checked = false;
 	
 	if (player.checkedRealityBonus.gte(player.maxRealityBonus)){
 		if (document.getElementById("realityBonus1Check").checked == false){
@@ -4436,6 +4443,17 @@ function realityBonusCheck(){
 	
 }
 
+function checkUncheckRealityBonus(){
+	for (let i = 1; i < 8; i++){
+		if (player["realityBonus" + i + "Checked"] == true){
+			document.getElementById("realityBonus" + i + "Check").checked = true;
+		}
+		else {
+			document.getElementById("realityBonus" + i + "Check").checked = false;
+		}
+	}
+}
+checkUncheckRealityBonus();
 realityBonusCheck();
 
 function generateEnemy(level){
@@ -5015,6 +5033,7 @@ function buyAtomShopItem(i){
 		player.atomShopItem3Bought = true;
 		player.maxRealityBonus = new Decimal(3);
 		player.atomShopItemsBought = player.atomShopItemsBought.plus(1);
+		realityBonusCheck();
 	}
 
 	if (i == 4 && player.atoms.gte(1e5) && player.atomShopItem4Bought == false){
@@ -5040,6 +5059,7 @@ function buyAtomShopItem(i){
 		player.atomShopItem7Bought = true;
 		player.maxRealityBonus = new Decimal(100);
 		player.atomShopItemsBought = player.atomShopItemsBought.plus(1);
+		realityBonusCheck();
 	}
 
 	if (i == 8 && player.atoms.gte(5e7) && player.atomShopItem8Bought == false){
@@ -5738,7 +5758,7 @@ function updateGUI(){
 	document.getElementById("realityAmountText").textContent = "You have " + format(player.realityPoints) + " Reality Points";
 	getOmegaUpgradeText();
 	
-	if (player.milestone12){
+	if (player.milestone14){
 		document.getElementById("realityBonus1").textContent = format(new Decimal(1).plus(player.realityEnergy.pow(Decimal.log(player.realityEnergy, 1.5))), 2) + "x to all Generators";
 		document.getElementById("realityBonus2").textContent = format(new Decimal(1).plus(player.realityEnergy.pow(100)), 2) + "x to all Expansion Generators";
 		document.getElementById("realityBonus3").textContent = format(new Decimal(1).plus(player.realityEnergy), 2) + "x to all Omega Generators";
@@ -5746,8 +5766,18 @@ function updateGUI(){
 		document.getElementById("realityBonus5").textContent = format(new Decimal(1).plus(Decimal.root(player.realityEnergy, 2)), 2) + "x to Omega Points";
 		document.getElementById("realityBonus6").textContent = format(new Decimal(1).plus(player.realityEnergy.pow(5)), 2) + "x to DPS and GPS";
 		document.getElementById("realityBonus7").textContent = format(new Decimal(1).plus(Decimal.log10(player.realityEnergy.plus(1))), 2) + "x to Reality Points";	
-
+	
 		document.getElementById("realityBonus7Container").classList.remove("locked");
+	}
+	else if (player.milestone12){
+		document.getElementById("realityBonus1").textContent = format(new Decimal(1).plus(player.realityEnergy.pow(Decimal.log(player.realityEnergy, 1.5))), 2) + "x to all Generators";
+		document.getElementById("realityBonus2").textContent = format(new Decimal(1).plus(player.realityEnergy.pow(100)), 2) + "x to all Expansion Generators";
+		document.getElementById("realityBonus3").textContent = format(new Decimal(1).plus(player.realityEnergy), 2) + "x to all Omega Generators";
+		document.getElementById("realityBonus4").textContent = format(new Decimal(1).plus(player.realityEnergy.pow(10)), 2) + "x to Expansion Points";
+		document.getElementById("realityBonus5").textContent = format(new Decimal(1).plus(Decimal.root(player.realityEnergy, 2)), 2) + "x to Omega Points";
+		document.getElementById("realityBonus6").textContent = format(new Decimal(1).plus(player.realityEnergy.pow(5)), 2) + "x to DPS and GPS";
+
+		document.getElementById("realityBonus7Container").classList.add("locked");
 	}
 	else {
 		document.getElementById("realityBonus1").textContent = format(new Decimal(1).plus(player.realityEnergy.pow(2)), 2) + "x to all Generators";
