@@ -1595,6 +1595,18 @@ function hotkeys(e){
 	if (e.which == 39){
 		prevNext(2);
 	}
+
+	if (e.which == 89){
+		recreate();
+	}
+
+	if (e.which == 84){
+		trancend();
+	}
+
+	if (e.which == 72){
+		hypercend();
+	}
 }
 document.addEventListener("keydown", hotkeys);
 
@@ -6231,6 +6243,8 @@ function updateGUI(){
 	let hotkeyTextReality = "<p><b>HOTKEYS:</b><br>M: Buys all generators and all mult<br>P: Prestige<br>E: Buys all Expansion Generators and 2x EP<br>X: Expand<br>O: Become Omega<br>R: Reach Reality</p>";
 
 	let hotkeyTextBattleTower = "<p><b>HOTKEYS:</b><br>M: Buys all generators and all mult<br>P: Prestige<br>E: Buys all Expansion Generators and 2x EP<br>X: Expand<br>O: Become Omega<br>R: Reach Reality<br>CTRL: 10 Stats or 100 Enemy Levels<br>SHIFT: 10% Stats or 10 Enemy Levels<br>ALT: 100% Stats or 1000 Enemy Levels<br>←: Previous Enemy<br>→: Next Enemy</p>";
+
+	let hotkeyParticleAssimilator = "<p><b>HOTKEYS:</b><br>M: Buys all generators and all mult<br>P: Prestige<br>E: Buys all Expansion Generators and 2x EP<br>X: Expand<br>O: Become Omega<br>R: Reach Reality<br>CTRL: 10 Stats or 100 Enemy Levels<br>SHIFT: 10% Stats or 10 Enemy Levels<br>ALT: 100% Stats or 1000 Enemy Levels<br>←: Previous Enemy<br>→: Next Enemy<br>Y: Recreate<br>T: Transcend<br>H: Hypercend</p>";
 	
 	let generatorText = "<p><b>GENERATORS:</b><br>The first generator makes energy. Energy is the main currency you use to upgrade your generators <br>and your all mult. The second generator creates the first, the third creates the second and so on.</p>";
 	
@@ -6257,7 +6271,7 @@ function updateGUI(){
 	let particleText = "<p><b>PARTICLE ASSIMILATOR:</b><br>You have 8 Particle Assimilators. When they fill up, you gain Particles and the amount of Particles you get in the future is multiplied.<br>When you level a Particle Assimilator up, it gets a little faster. After reaching level 100, you can Ascend them.<br>After Ascending them, their level is set back to 1 and the Speed is reset, but in return, it now significantly increases how much it increases your multiplier when it fills up.<br>It's not always best to Ascend as soon as you can, so you'll have to figure out when it's most efficient.<br>Later on you will unlock different new Prestige layers that lets you reset your previous progress for a bonus.";
 	
 	if (player.hasUnlockedFillBar == true){
-		document.getElementById("infoText").innerHTML = baseText + hotkeyTextBattleTower + generatorText + prestigeText + expansionText + autobuyerText + ABGText + omegaText + simulationText + electronText + realityText + battleTowerText + retireText + particleText;
+		document.getElementById("infoText").innerHTML = baseText + hotkeyParticleAssimilator + generatorText + prestigeText + expansionText + autobuyerText + ABGText + omegaText + simulationText + electronText + realityText + battleTowerText + retireText + particleText;
 	}
 	else if (player.hasUnlockedTraining == true){
 		document.getElementById("infoText").innerHTML = baseText + hotkeyTextBattleTower + generatorText + prestigeText + expansionText + autobuyerText + ABGText + omegaText + simulationText + electronText + realityText + battleTowerText + retireText;
@@ -7035,7 +7049,7 @@ function updateGUI(){
 		document.getElementById("autoFillBar").classList.remove("locked");
 	}
 	else {
-		document.getElementById("milestone1").innerHTML = "Unlock at 1e10 Particles:<br>XXX";
+		document.getElementById("milestone1").innerHTML = "Unlock at 1e10 Particles:<br>Unlock the Particle Assimilator Autobuyer, it can buy the <br>First Particle Assimilator";
 		document.getElementById("milestone1").classList.remove("unlocked");
 		document.getElementById("autoFillBar").classList.add("locked");
 	}
@@ -7043,6 +7057,10 @@ function updateGUI(){
 	if (player.milestone2){
 		document.getElementById("milestone2").innerHTML = "UNLOCKED:<br>The Particle Assimilator Autobuyer can now buy the Second Particle Assimilator";
 		document.getElementById("milestone2").classList.add("unlocked");
+	}
+	else if (player.milestone1){
+		document.getElementById("milestone2").innerHTML = "Unlock at 1e20 Particles:<br>The Particle Assimilator Autobuyer can now buy the Second Particle Assimilator";
+		document.getElementById("milestone2").classList.remove("unlocked");
 	}
 	else {
 		document.getElementById("milestone2").innerHTML = "Unlock at 1e20 Particles:<br>XXX";
@@ -7053,6 +7071,10 @@ function updateGUI(){
 		document.getElementById("milestone3").innerHTML = "UNLOCKED:<br>The Particle Assimilator Autobuyer can now buy the Third Particle Assimilator";
 		document.getElementById("milestone3").classList.add("unlocked");
 	}
+	else if (player.milestone2){
+		document.getElementById("milestone3").innerHTML = "Unlock at 1e30 Particles:<br>The Particle Assimilator Autobuyer can now buy the Third Particle Assimilator";
+		document.getElementById("milestone3").classList.remove("unlocked");
+	}
 	else {
 		document.getElementById("milestone3").innerHTML = "Unlock at 1e30 Particles:<br>XXX";
 		document.getElementById("milestone3").classList.remove("unlocked");
@@ -7061,6 +7083,10 @@ function updateGUI(){
 	if (player.milestone4){
 		document.getElementById("milestone4").innerHTML = "UNLOCKED:<br>The Particle Assimilator Autobuyer can now buy the Fourth Particle Assimilator";
 		document.getElementById("milestone4").classList.add("unlocked");
+	}
+	else if (player.milestone3){
+		document.getElementById("milestone4").innerHTML = "Unlock at 1e40 Particles:<br>The Particle Assimilator Autobuyer can now buy the Fourth Particle Assimilator";
+		document.getElementById("milestone4").classList.remove("unlocked");
 	}
 	else {
 		document.getElementById("milestone4").innerHTML = "Unlock at 1e40 Particles:<br>XXX";
@@ -7071,6 +7097,10 @@ function updateGUI(){
 		document.getElementById("milestone5").innerHTML = "UNLOCKED:<br>The Particle Assimilator Autobuyer can now buy the Fifth Particle Assimilator";
 		document.getElementById("milestone5").classList.add("unlocked");
 	}
+	else if (player.milestone4){
+		document.getElementById("milestone5").innerHTML = "Unlock at 1e50 Particles:<br>The Particle Assimilator Autobuyer can now buy the Fifth Particle Assimilator";
+		document.getElementById("milestone5").classList.remove("unlocked");
+	}
 	else {
 		document.getElementById("milestone5").innerHTML = "Unlock at 1e50 Particles:<br>XXX";
 		document.getElementById("milestone5").classList.remove("unlocked");
@@ -7079,6 +7109,10 @@ function updateGUI(){
 	if (player.milestone6){
 		document.getElementById("milestone6").innerHTML = "UNLOCKED:<br>The Particle Assimilator Autobuyer can now buy the Sixth Particle Assimilator";
 		document.getElementById("milestone6").classList.add("unlocked");
+	}
+	else if (player.milestone5){
+		document.getElementById("milestone6").innerHTML = "Unlock at 1e60 Particles:<br>The Particle Assimilator Autobuyer can now buy the Sixth Particle Assimilator";
+		document.getElementById("milestone6").classList.remove("unlocked");
 	}
 	else {
 		document.getElementById("milestone6").innerHTML = "Unlock at 1e60 Particles:<br>XXX";
@@ -7089,6 +7123,10 @@ function updateGUI(){
 		document.getElementById("milestone7").innerHTML = "UNLOCKED:<br>The Particle Assimilator Autobuyer can now buy the Seventh Particle Assimilator";
 		document.getElementById("milestone7").classList.add("unlocked");
 	}
+	else if (player.milestone6){
+		document.getElementById("milestone7").innerHTML = "Unlock at 1e70 Particles:<br>The Particle Assimilator Autobuyer can now buy the Seventh Particle Assimilator";
+		document.getElementById("milestone7").classList.remove("unlocked");
+	}
 	else {
 		document.getElementById("milestone7").innerHTML = "Unlock at 1e70 Particles:<br>XXX";
 		document.getElementById("milestone7").classList.remove("unlocked");
@@ -7097,6 +7135,10 @@ function updateGUI(){
 	if (player.milestone8){
 		document.getElementById("milestone8").innerHTML = "UNLOCKED:<br>The Particle Assimilator Autobuyer can now buy the Eighth Particle Assimilator";
 		document.getElementById("milestone8").classList.add("unlocked");
+	}
+	else if (player.milestone7){
+		document.getElementById("milestone8").innerHTML = "Unlock at 1e80 Particles:<br>The Particle Assimilator Autobuyer can now buy the Eighth Particle Assimilator";
+		document.getElementById("milestone8").classList.remove("unlocked");
 	}
 	else {
 		document.getElementById("milestone8").innerHTML = "Unlock at 1e80 Particles:<br>XXX";
@@ -7108,6 +7150,11 @@ function updateGUI(){
 		document.getElementById("milestone9").classList.add("unlocked");
 		document.getElementById("autoAscension").classList.remove("locked");
 	}
+	else if (player.milestone8){
+		document.getElementById("milestone9").innerHTML = "Unlock at 1e100 Particles:<br>Unlock the Ascension Autobuyer";
+		document.getElementById("milestone9").classList.remove("unlocked");
+		document.getElementById("autoAscension").classList.add("locked");
+	}
 	else {
 		document.getElementById("milestone9").innerHTML = "Unlock at 1e100 Particles:<br>XXX";
 		document.getElementById("milestone9").classList.remove("unlocked");
@@ -7118,14 +7165,22 @@ function updateGUI(){
 		document.getElementById("milestone10").innerHTML = "UNLOCKED:<br>You always have max Electrons";
 		document.getElementById("milestone10").classList.add("unlocked");
 	}
+	else if (player.milestone9){
+		document.getElementById("milestone10").innerHTML = "Unlock at 1 TP:<br>You always have max Electrons";
+		document.getElementById("milestone10").classList.remove("unlocked");
+	}
 	else {
 		document.getElementById("milestone10").innerHTML = "Unlock at 1 TP:<br>XXX";
 		document.getElementById("milestone10").classList.remove("unlocked");
 	}
 
 	if (player.milestone11){
-		document.getElementById("milestone11").innerHTML = "UNLOCKED:<br>The Particle Assimilator Autobuyer buys max instead of 1.";
+		document.getElementById("milestone11").innerHTML = "UNLOCKED:<br>The Particle Assimilator Autobuyer buys max instead of 1";
 		document.getElementById("milestone11").classList.add("unlocked");
+	}
+	else if (player.milestone10){
+		document.getElementById("milestone11").innerHTML = "Unlock at 10 TP:<br>The Particle Assimilator Autobuyer buys max instead of 1";
+		document.getElementById("milestone11").classList.remove("unlocked");
 	}
 	else {
 		document.getElementById("milestone11").innerHTML = "Unlock at 10 TP:<br>XXX";
@@ -7136,14 +7191,22 @@ function updateGUI(){
 		document.getElementById("milestone12").innerHTML = "UNLOCKED:<br>Improve all Reality Bonuses";
 		document.getElementById("milestone12").classList.add("unlocked");
 	}
+	else if (player.milestone11){
+		document.getElementById("milestone12").innerHTML = "Unlock at 100 TP:<br>Improve all Reality Bonuses";
+		document.getElementById("milestone12").classList.remove("unlocked");
+	}
 	else {
 		document.getElementById("milestone12").innerHTML = "Unlock at 100 TP:<br>XXX";
 		document.getElementById("milestone12").classList.remove("unlocked");
 	}
 
 	if (player.milestone13){
-		document.getElementById("milestone13").innerHTML = "UNLOCKED:<br>The Particle Assimilator Autobuyer and the Ascension Autobuyer are faster.";
+		document.getElementById("milestone13").innerHTML = "UNLOCKED:<br>The Particle Assimilator Autobuyer and the Ascension Autobuyer are faster";
 		document.getElementById("milestone13").classList.add("unlocked");
+	}
+	else if (player.milestone12){
+		document.getElementById("milestone13").innerHTML = "Unlock at 1000 TP:<br>The Particle Assimilator Autobuyer and the Ascension Autobuyer are faster";
+		document.getElementById("milestone13").classList.remove("unlocked");
 	}
 	else {
 		document.getElementById("milestone13").innerHTML = "Unlock at 1000 TP:<br>XXX";
@@ -7154,14 +7217,22 @@ function updateGUI(){
 		document.getElementById("milestone14").innerHTML = "UNLOCKED:<br>Unlock a new Reality Bonus";
 		document.getElementById("milestone14").classList.add("unlocked");
 	}
+	else if (player.milestone13){
+		document.getElementById("milestone14").innerHTML = "Unlock at 1e4 TP:<br>Unlock a new Reality Bonus";
+		document.getElementById("milestone14").classList.remove("unlocked");
+	}
 	else {
 		document.getElementById("milestone14").innerHTML = "Unlock at 1e4 TP:<br>XXX";
 		document.getElementById("milestone14").classList.remove("unlocked");
 	}
 
 	if (player.milestone15){
-		document.getElementById("milestone15").innerHTML = "UNLOCKED:<br>Gain 1% of the multiplier you would get on Recreation per second.";
+		document.getElementById("milestone15").innerHTML = "UNLOCKED:<br>Gain 1% of the multiplier you would get on Recreation per second";
 		document.getElementById("milestone15").classList.add("unlocked");
+	}
+	else if (player.milestone14){
+		document.getElementById("milestone15").innerHTML = "Unlock at 1 HP:<br>Gain 1% of the multiplier you would get on Recreation per second";
+		document.getElementById("milestone15").classList.remove("unlocked");
 	}
 	else {
 		document.getElementById("milestone15").innerHTML = "Unlock at 1 HP:<br>XXX";
@@ -7173,6 +7244,11 @@ function updateGUI(){
 		document.getElementById("milestone16").classList.add("unlocked");
 		document.getElementById("autoTranscensionUpgrades").classList.remove("locked");
 	}
+	else if (player.milestone15){
+		document.getElementById("milestone16").innerHTML = "Unlock at 10 HP:<br>Unlock the Transcension Upgrades Autobuyer";
+		document.getElementById("milestone16").classList.remove("unlocked");
+		document.getElementById("autoTranscensionUpgrades").classList.add("locked");
+	}
 	else {
 		document.getElementById("milestone16").innerHTML = "Unlock at 10 HP:<br>XXX";
 		document.getElementById("milestone16").classList.remove("unlocked");
@@ -7182,6 +7258,10 @@ function updateGUI(){
 	if (player.milestone17){
 		document.getElementById("milestone17").innerHTML = "UNLOCKED:<br>Gain 100% the TP you would get on Transcension per second";
 		document.getElementById("milestone17").classList.add("unlocked");
+	}
+	else if (player.milestone16){
+		document.getElementById("milestone17").innerHTML = "Unlock at 100 HP:<br>Gain 100% the TP you would get on Transcension per second";
+		document.getElementById("milestone17").classList.remove("unlocked");
 	}
 	else {
 		document.getElementById("milestone17").innerHTML = "Unlock at 100 HP:<br>XXX";
@@ -7193,6 +7273,11 @@ function updateGUI(){
 		document.getElementById("milestone18").classList.add("unlocked");
 		document.getElementById("autoHypercension").classList.remove("locked");
 	}
+	else if (player.milestone17){
+		document.getElementById("milestone18").innerHTML = "Unlock at 1000 HP:<br>Unlock the Hypercension Autobuyer";
+		document.getElementById("milestone18").classList.remove("unlocked");
+		document.getElementById("autoHypercension").classList.add("locked");
+	}
 	else {
 		document.getElementById("milestone18").innerHTML = "Unlock at 1000 HP:<br>XXX";
 		document.getElementById("milestone18").classList.remove("unlocked");
@@ -7203,14 +7288,22 @@ function updateGUI(){
 		document.getElementById("milestone19").innerHTML = "UNLOCKED:<br>Automatically gain max SSP";
 		document.getElementById("milestone19").classList.add("unlocked");
 	}
+	else if (player.milestone18){
+		document.getElementById("milestone19").innerHTML = "Unlock at 1e4 HP:<br>Automatically gain max SSP";
+		document.getElementById("milestone19").classList.remove("unlocked");
+	}
 	else {
 		document.getElementById("milestone19").innerHTML = "Unlock at 1e4 HP:<br>XXX";
 		document.getElementById("milestone19").classList.remove("unlocked");
 	}
 
 	if (player.milestone20){
-		document.getElementById("milestone20").innerHTML = "UNLOCKED:<br>Passively gain 100% of the OP you would get every second";
+		document.getElementById("milestone20").innerHTML = "UNLOCKED:<br>Passively gain 100% of the OP you would get on Omega every second";
 		document.getElementById("milestone20").classList.add("unlocked");
+	}
+	else if (player.milestone19){
+		document.getElementById("milestone20").innerHTML = "Unlock at 1e5 HP:<br>Passively gain 100% of the OP you would get on Omega every second";
+		document.getElementById("milestone20").classList.remove("unlocked");
 	}
 	else {
 		document.getElementById("milestone20").innerHTML = "Unlock at 1e5 HP:<br>XXX";
@@ -7222,6 +7315,11 @@ function updateGUI(){
 		document.getElementById("milestone21").classList.add("unlocked");
 		document.getElementById("autoRealityGenerator").classList.remove("locked");
 	}
+	else if (player.milestone20){
+		document.getElementById("milestone21").innerHTML = "Unlock at 1e6 HP:<br>Unlock the Reality Generator Autobuyer";
+		document.getElementById("milestone21").classList.remove("unlocked");
+		document.getElementById("autoRealityGenerator").classList.add("locked");
+	}
 	else {
 		document.getElementById("milestone21").innerHTML = "Unlock at 1e6 HP:<br>XXX";
 		document.getElementById("milestone21").classList.remove("unlocked");
@@ -7232,6 +7330,10 @@ function updateGUI(){
 		document.getElementById("milestone22").innerHTML = "UNLOCKED:<br>Improve Omega Effect";
 		document.getElementById("milestone22").classList.add("unlocked");
 	}
+	else if (player.milestone21){
+		document.getElementById("milestone22").innerHTML = "Unlock at 1e7 HP:<br>Improve Omega Effect";
+		document.getElementById("milestone22").classList.remove("unlocked");
+	}
 	else {
 		document.getElementById("milestone22").innerHTML = "Unlock at 1e7 HP:<br>XXX";
 		document.getElementById("milestone22").classList.remove("unlocked");
@@ -7241,6 +7343,10 @@ function updateGUI(){
 		document.getElementById("milestone23").innerHTML = "UNLOCKED:<br>Improve TU3 and TU7";
 		document.getElementById("milestone23").classList.add("unlocked");
 	}
+	else if (player.milestone22){
+		document.getElementById("milestone23").innerHTML = "Unlock at 1e8 HP:<br>Improve TU3 and TU7";
+		document.getElementById("milestone23").classList.remove("unlocked");
+	}
 	else {
 		document.getElementById("milestone23").innerHTML = "Unlock at 1e8 HP:<br>XXX";
 		document.getElementById("milestone23").classList.remove("unlocked");
@@ -7249,6 +7355,10 @@ function updateGUI(){
 	if (player.milestone24){
 		document.getElementById("milestone24").innerHTML = "UNLOCKED:<br>Improve Omega Generators based on HP and unlock ??? (not implemented yet)<br>Current: " + format(player.milestone24Mult, 2) + "x";
 		document.getElementById("milestone24").classList.add("unlocked");
+	}
+	else if (player.milestone23){
+		document.getElementById("milestone24").innerHTML = "Unlock at 1e10 HP:<br>Improve Omega Generators based on HP and unlock ??? (not implemented yet)";
+		document.getElementById("milestone24").classList.remove("unlocked");
 	}
 	else {
 		document.getElementById("milestone24").innerHTML = "Unlock at 1e10 HP:<br>XXX";
